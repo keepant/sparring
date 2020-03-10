@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sparring/i18n.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -8,7 +9,9 @@ class Home extends StatelessWidget {
         title: Text('Sparring'),
       ),
       body: Center(
-        child: Text('Hello, World!'),
+        child: Text(
+          I18n.of(context).hello,
+        ),
       ),
     );
   }
