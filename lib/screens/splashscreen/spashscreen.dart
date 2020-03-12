@@ -1,6 +1,7 @@
 import 'package:custom_splash/custom_splash.dart';
 import 'package:flutter/material.dart';
 import 'package:sparring/home.dart';
+import 'package:sparring/screens/onboarding/onboarding.dart';
 
 class Splashscreen extends StatelessWidget {
   @override
@@ -8,7 +9,7 @@ class Splashscreen extends StatelessWidget {
     return CustomSplash(
       imagePath: 'assets/img/soccer-player.png',
       backGroundColor: Theme.of(context).primaryColor,
-      home: Home(),
+      home: OnboardingScreen(),
       duration: 2500,
       type: CustomSplashType.StaticDuration,
       //animationEffect: 'zoom-in',      

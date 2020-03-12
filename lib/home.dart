@@ -6,7 +6,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sparring'),
+        title: Text(I18n.of(context).title),
       ),
       body: Center(
         child: Text(
