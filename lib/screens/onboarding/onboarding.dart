@@ -43,13 +43,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         PageViewModel(
           title: "Booking Futsal Court",
           body: "easiest way to book futsal court without worry",
-          image: _buildImage('soccer-player'),
+          image: _buildImage('field'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Find Opponents",
           body: "easiest way to book futsal opponents without worry",
-          image: _buildImage('field'),
+          image: _buildImage('soccer-player'),
           decoration: pageDecoration,
         ),
         PageViewModel(
@@ -78,6 +78,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         )
       ],
       onDone: () => _onIntroEnd(context),
+      showSkipButton: true,
       skip: const Text('Skip'),
       next: const Text('Next'),
       done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
