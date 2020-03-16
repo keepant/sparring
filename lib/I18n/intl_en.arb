@@ -1,0 +1,16 @@
+{
+  "@@locale": "en",
+  "@@last_modified": "2020-03-10T14:52:42.861349",
+  "hello": "Hello, World",
+  "@hello": {
+    "description": "Hello world text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "title": "Sparring",
+  "@title": {
+    "description": "Title application",
+    "type": "text",
+    "placeholders": {}
+  }
+}
