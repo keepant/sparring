@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/screens/home.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -66,8 +67,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               );
             },
-            child: const Text(
-              'Get Started',
+            child: Text(
+              I18n.of(context).getStarted,
               style: TextStyle(color: Colors.white),
             ),
             color: Colors.lightBlue,
@@ -79,9 +80,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ],
       onDone: () => _onIntroEnd(context),
       showSkipButton: true,
-      skip: const Text('Skip'),
-      next: const Text('Next'),
-      done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
+      skip: Text(I18n.of(context).skipText),
+      next: Text(I18n.of(context).nextText),
+      done: Text(I18n.of(context).doneText, style: TextStyle(fontWeight: FontWeight.w600)),
       dotsDecorator: const DotsDecorator(
         size: Size(10.0, 10.0),
         color: Color(0xFFBDBDBD),

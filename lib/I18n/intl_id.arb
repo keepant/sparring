@@ -7,9 +7,63 @@
     "type": "text",
     "placeholders": {}
   },
-  "title": "Sparr",
+  "title": "Sparring",
   "@title": {
     "description": "Title application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "court": "Lapangan",
+  "@court": {
+    "description": "court text on bottom nav bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "opponent": "Lawan",
+  "@opponent": {
+    "description": "opponent text on bottom nav bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "booking": "Pesanan",
+  "@booking": {
+    "description": "booking text on bottom nav bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "notification": "Notifikasi",
+  "@notification": {
+    "description": "notification text on bottom nav bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "account": "Akun",
+  "@account": {
+    "description": "account text on bottom nav bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "getStarted": "Ayo Mulai",
+  "@getStarted": {
+    "description": "getStarted text button onboarding page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "skipText": "Lewati",
+  "@skipText": {
+    "description": "skip text button onboarding page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nextText": "Selanjutnya",
+  "@nextText": {
+    "description": "next text button onboarding page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "doneText": "Selesai",
+  "@doneText": {
+    "description": "done text button onboarding page",
     "type": "text",
     "placeholders": {}
   }

@@ -12,5 +12,59 @@
     "description": "Title application",
     "type": "text",
     "placeholders": {}
+  },
+  "court": "Court",
+  "@court": {
+    "description": "court text on bottom nav bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "opponent": "Opponents",
+  "@opponent": {
+    "description": "opponent text on bottom nav bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "booking": "Bookings",
+  "@booking": {
+    "description": "booking text on bottom nav bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "notification": "Notification",
+  "@notification": {
+    "description": "notification text on bottom nav bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "account": "Account",
+  "@account": {
+    "description": "account text on bottom nav bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "getStarted text button onboarding page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "skipText": "Skip",
+  "@skipText": {
+    "description": "skip text button onboarding page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nextText": "Next",
+  "@nextText": {
+    "description": "next text button onboarding page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "doneText": "Done",
+  "@doneText": {
+    "description": "done text button onboarding page",
+    "type": "text",
+    "placeholders": {}
   }
 }

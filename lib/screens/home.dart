@@ -10,21 +10,21 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
     Text(
       'Court Page',
     ),
     Text(
-      'Opponents',
+      'Opponents Page',
     ),
     Text(
-      'Bookings',
+      'Bookings Page',
     ),
     Text(
-      'Notifications',
+      'Notifications Page',
     ),
     Text(
-      'Account',
+      'Account Page',
     ),
   ];
 
@@ -44,26 +44,26 @@ class _HomeState extends State<Home> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.futbol),
-            title: Text('Court'),
+            title: Text(I18n.of(context).court),
           ),
           BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.running),
-            title: Text('Opponents'),
+            title: Text(I18n.of(context).opponent),
           ),
           BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.calendarAlt),
-            title: Text('Bookings'),
+            title: Text(I18n.of(context).booking),
           ),
           BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.bell),
-            title: Text('Notifications'),
+            title: Text(I18n.of(context).notification),
           ),
           BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.userAlt),
-            title: Text('Account'),
+            title: Text(I18n.of(context).account),
           ),
         ],
         selectedItemColor: Theme.of(context).primaryColor,
