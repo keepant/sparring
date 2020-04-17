@@ -1,6 +1,6 @@
 import 'package:custom_splash/custom_splash.dart';
 import 'package:flutter/material.dart';
-import 'package:sparring/screens/onboarding/onboarding.dart';
+import 'package:sparring/pages/onboarding/onboarding.dart';
 
 class Splashscreen extends StatelessWidget {
   @override

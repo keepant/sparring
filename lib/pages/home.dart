@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sparring/i18n.dart';
-import 'package:sparring/screens/court_screen.dart';
+import 'package:sparring/pages/court_screen.dart';
 
 class Home extends StatefulWidget {
   @override

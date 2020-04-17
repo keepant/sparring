@@ -28,7 +28,6 @@ dependencies:
   custom_splash: ^0.0.2
   introduction_screen: ^1.0.8
   font_awesome_flutter: ^8.7.0
-  flutter_launcher_icons: ^0.7.4
 
 dev_dependencies:
   flutter_test:

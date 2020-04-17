@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sparring/i18n.dart';
 import 'package:sparring/router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sparring/pages/home.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      routes: routes,
+      home: Home(),
     );
   }
 }
