@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/court/court_page.dart';
-import 'package:sparring/pages/onboarding/opponents_page.dart';
+import 'package:sparring/pages/opponents/opponents_page.dart';
 
 class Home extends StatefulWidget {
   @override
