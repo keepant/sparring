@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sparring/i18n.dart';
-import 'package:sparring/pages/court_screen.dart';
+import 'package:sparring/pages/court/court_page.dart';
+import 'package:sparring/pages/onboarding/opponents_page.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,10 +13,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
-    CourtScreen(),
-    Text(
-      'Opponents Page',
-    ),
+    CourtPage(),
+    OpponentsPage(),
     Text(
       'Bookings Page',
     ),

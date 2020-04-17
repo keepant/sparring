@@ -4,20 +4,21 @@ import 'package:sparring/components/input_datetime.dart';
 import 'package:sparring/components/input_text.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:sparring/pages/court/court_page.dart';
 
-class CourtScreen extends StatefulWidget {
+class OpponentsPage extends StatefulWidget {
   @override
-  _CourtScreenState createState() => _CourtScreenState();
+  _OpponentsPageState createState() => _OpponentsPageState();
 }
 
-class _CourtScreenState extends State<CourtScreen> {
+class _OpponentsPageState extends State<OpponentsPage> {
   final TextEditingController _locationControl = new TextEditingController();
   final TextEditingController _dateControl = new TextEditingController();
   final TextEditingController _timeControl = new TextEditingController();
 
   final dateFormat = DateFormat("dd MMMM");
   final timeFormat = DateFormat("h:mm");
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +35,7 @@ class _CourtScreenState extends State<CourtScreen> {
                 padding: EdgeInsets.only(
                     left: 20.0, right: 20.0, bottom: 20.0, top: 50.0),
                 child: Text(
-                  "Book futsal court \nand opponents",
+                  "Book futsal court \nand find opponents",
                   style: TextStyle(
                     fontSize: 30,
                     color: Colors.white,
@@ -50,18 +51,24 @@ class _CourtScreenState extends State<CourtScreen> {
                     FlatButton.icon(
                       icon: FaIcon(
                         FontAwesomeIcons.futbol,
-                        color: Colors.white,
+                        color: Colors.white70,
                         size: 18.0,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => CourtPage(),
+                        //   ),
+                        // );
+                      },
                       label: Text(
                         "Court",
                         style: TextStyle(
                           fontSize: 17,
-                          color: Colors.white,
+                          color: Colors.white70,
                         ),
                       ),
-                      color: Theme.of(context).primaryColor,
                       padding:
                           EdgeInsets.symmetric(horizontal: 50, vertical: 13.0),
                       autofocus: true,
@@ -70,9 +77,10 @@ class _CourtScreenState extends State<CourtScreen> {
                       width: 8.0,
                     ),
                     FlatButton.icon(
+                      color: Theme.of(context).primaryColor,
                       icon: FaIcon(
                         FontAwesomeIcons.running,
-                        color: Colors.white70,
+                        color: Colors.white,
                         size: 18.0,
                       ),
                       onPressed: () {},
@@ -80,7 +88,7 @@ class _CourtScreenState extends State<CourtScreen> {
                         "Opponents",
                         style: TextStyle(
                           fontSize: 17,
-                          color: Colors.white70,
+                          color: Colors.white,
                         ),
                       ),
                       padding:
