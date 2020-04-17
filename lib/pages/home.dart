@@ -20,9 +20,6 @@ class _HomeState extends State<Home> {
       'Bookings Page',
     ),
     Text(
-      'Notifications Page',
-    ),
-    Text(
       'Account Page',
     ),
   ];
@@ -36,9 +33,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(I18n.of(context).title),
-      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -55,10 +49,6 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.calendarAlt),
             title: Text(I18n.of(context).booking),
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.bell),
-            title: Text(I18n.of(context).notification),
           ),
           BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.userAlt),

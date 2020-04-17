@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sparring/i18n.dart';
 import 'package:sparring/router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:sparring/pages/home.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,12 +19,11 @@ class MyApp extends StatelessWidget {
         const Locale('en', 'US'), // English
         const Locale('id', 'ID'), // Bahasa
       ],
-      title: 'Sparring',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
-      home: Home(),
+      routes: routes
     );
   }
 }
