@@ -4,7 +4,6 @@ import 'package:sparring/components/input_datetime.dart';
 import 'package:sparring/components/input_text.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:sparring/pages/court/court_page.dart';
 
 class OpponentsPage extends StatefulWidget {
   @override

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sparring/components/booking_card.dart';
-import 'package:sparring/pages/bookings/cencelled_booking.dart';
+import 'package:sparring/pages/bookings/cancelled_booking.dart';
 import 'package:sparring/pages/bookings/completed_booking.dart';
 import 'package:sparring/pages/bookings/upcoming_booking.dart';
 

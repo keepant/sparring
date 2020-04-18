@@ -17,7 +17,7 @@ class UpcomingBooking extends StatelessWidget {
           date: "26 Juni",
           time: "5 PM",
           icon: FaIcon(
-            FontAwesomeIcons.solidCheckCircle,
+            FontAwesomeIcons.calendarDay,
             color: Colors.blue,
           ),
           status: "Upcoming",
