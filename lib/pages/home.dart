@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sparring/i18n.dart';
+import 'package:sparring/pages/bookings/bookings.dart';
 import 'package:sparring/pages/court/court_page.dart';
 import 'package:sparring/pages/opponents/opponents_page.dart';
 
@@ -15,9 +16,7 @@ class _HomeState extends State<Home> {
   static List<Widget> _widgetOptions = <Widget>[
     CourtPage(),
     OpponentsPage(),
-    Text(
-      'Bookings Page',
-    ),
+    BookingsPage(),
     Text(
       'Account Page',
     ),
