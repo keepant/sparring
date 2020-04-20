@@ -23,6 +23,9 @@ class CompletedBooking extends StatelessWidget {
           ),
           status: "Completed",
           color: Colors.green,
+          onTap: () {
+            print("tap completed");
+          },
         );
       },
     );

@@ -22,6 +22,9 @@ class CancelledBooking extends StatelessWidget {
           ),
           status: "Cancelled",
           color: Colors.red,
+          onTap: () {
+            print("tap cancelled");
+          },
         );
       },
     );

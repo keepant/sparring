@@ -22,6 +22,9 @@ class UpcomingBooking extends StatelessWidget {
           ),
           status: "Upcoming",
           color: Colors.blue,
+          onTap: () {
+            print("tap upcoming");
+          },
         );
       },
     );
