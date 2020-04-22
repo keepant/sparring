@@ -1,31 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sparring/components/booking_card.dart';
+import 'package:sparring/components/loading.dart';
+import 'package:sparring/models/booking.dart';
+import 'package:sparring/pages/bookings/booking_detail.dart';
+import 'package:sparring/api/client.dart' as apiClient;
 
 class CompletedBooking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 5,
-      shrinkWrap: true,
-      controller: ScrollController(keepScrollOffset: true),
-      itemBuilder: (context, index) {
-        return BookingCard(
-          imgUrl:
-              "https://ecs7.tokopedia.net/img/cache/700/product-1/2019/3/17/2905360/2905360_bc8d6026-bb5c-4920-bacd-a7b4bb1f9f6b_576_576.jpg",
-          title: "Lapangan Baru Jadi",
-          location: "Surakarta, Indonesia",
-          date: "26 Juni",
-          time: "5 PM",
-          icon: FaIcon(
-            FontAwesomeIcons.solidCalendarCheck,
-            color: Colors.green,
-          ),
-          status: "Completed",
-          color: Colors.green,
-          onTap: () {
-            print("tap completed");
-          },
+    return FutureBuilder<List<Booking>>(
+      future: apiClient.bookings(),
+      builder: (BuildContext context, AsyncSnapshot<List<Booking>> snapshot) {
+        if (snapshot.hasError) {
+          return Container(
+            child: Center(
+              child: Text(snapshot.error.toString()),
+            ),
+          );
+        }
+
+        if (snapshot.hasData) {
+          return ListView.builder(
+            itemCount: snapshot.data.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              var booking = snapshot.data[index];
+
+              return BookingCard(
+                imgUrl: booking.imgUrl,
+                title: booking.title,
+                location: booking.location,
+                date: booking.date,
+                timeStart: booking.timeStart,
+                timeEnd: booking.timeEnd,
+                icon: FontAwesomeIcons.solidCalendarCheck,
+                status: booking.status.toUpperCase(),
+                color: Colors.green,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BookingDetail(),
+                    ),
+                  );
+                },
+              );
+            },
+          );
+        }
+
+        return Container(
+          child: Loading(),
         );
       },
     );

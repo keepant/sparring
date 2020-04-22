@@ -7,8 +7,9 @@ class BookingCard extends StatelessWidget {
   final String title;
   final String location;
   final String date;
-  final String time;
-  final Widget icon;
+  final String timeStart;
+  final String timeEnd;
+  final IconData icon;
   final Color color;
   final String status;
   final GestureTapCallback onTap;
@@ -18,7 +19,8 @@ class BookingCard extends StatelessWidget {
     this.title,
     this.location,
     this.date,
-    this.time,
+    this.timeStart,
+    this.timeEnd,
     this.icon,
     this.color,
     this.status,
@@ -69,6 +71,7 @@ class BookingCard extends StatelessWidget {
                               fontSize: 15.0,
                               fontWeight: FontWeight.w700,
                             ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         Padding(
@@ -79,6 +82,7 @@ class BookingCard extends StatelessWidget {
                               fontSize: 12.0,
                               fontWeight: FontWeight.normal,
                             ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
@@ -90,7 +94,7 @@ class BookingCard extends StatelessWidget {
                   thickness: 1.0,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(2.0),
+                  padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
@@ -122,7 +126,7 @@ class BookingCard extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsets.all(4.0),
-                            child: Text(time),
+                            child: Text(timeStart + " - " + timeEnd),
                           ),
                         ],
                       )
@@ -140,7 +144,10 @@ class BookingCard extends StatelessWidget {
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.all(4.0),
-                        child: icon,
+                        child: Icon(
+                          icon,
+                          color: color,
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.all(4.0),
@@ -148,6 +155,7 @@ class BookingCard extends StatelessWidget {
                           status,
                           style: TextStyle(
                             color: color,
+                            fontStyle: FontStyle.italic
                           ),
                         ),
                       ),
