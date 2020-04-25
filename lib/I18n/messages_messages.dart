@@ -23,14 +23,24 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "account" : MessageLookupByLibrary.simpleMessage("Account"),
     "booking" : MessageLookupByLibrary.simpleMessage("Bookings"),
+    "bookingDetailsTitle" : MessageLookupByLibrary.simpleMessage("Booking Details"),
+    "cancelledText" : MessageLookupByLibrary.simpleMessage("Cancelled"),
+    "completedText" : MessageLookupByLibrary.simpleMessage("Completed"),
     "court" : MessageLookupByLibrary.simpleMessage("Court"),
     "doneText" : MessageLookupByLibrary.simpleMessage("Done"),
     "getStarted" : MessageLookupByLibrary.simpleMessage("Get Started"),
+    "headerTextPage" : MessageLookupByLibrary.simpleMessage("Book futsal court\nand find opponents"),
     "hello" : MessageLookupByLibrary.simpleMessage("Hello, World"),
+    "hintDateTextField" : MessageLookupByLibrary.simpleMessage("Play date"),
+    "hintLocationCourtTextField" : MessageLookupByLibrary.simpleMessage("Location or name futsal court"),
+    "hintTimeTextField" : MessageLookupByLibrary.simpleMessage("Play time"),
+    "myBookingTitle" : MessageLookupByLibrary.simpleMessage("My Bookings"),
     "nextText" : MessageLookupByLibrary.simpleMessage("Next"),
     "notification" : MessageLookupByLibrary.simpleMessage("Notification"),
     "opponent" : MessageLookupByLibrary.simpleMessage("Opponents"),
+    "searchText" : MessageLookupByLibrary.simpleMessage("Search"),
     "skipText" : MessageLookupByLibrary.simpleMessage("Skip"),
-    "title" : MessageLookupByLibrary.simpleMessage("Sparring")
+    "title" : MessageLookupByLibrary.simpleMessage("Sparring"),
+    "upcomingText" : MessageLookupByLibrary.simpleMessage("Upcoming")
   };
 }

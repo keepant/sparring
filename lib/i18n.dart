@@ -119,6 +119,96 @@ class I18n {
       locale: localeName,
     );
   }
+
+  String get bookingDetailsTitle {
+    return Intl.message(
+      'Booking Details',
+      name: 'bookingDetailsTitle',
+      desc: 'booking details text title app bar',
+      locale: localeName,
+    );
+  }
+
+  String get myBookingTitle {
+    return Intl.message(
+      'My Bookings',
+      name: 'myBookingTitle',
+      desc: 'my booking text on app bar',
+      locale: localeName,
+    );
+  }
+
+  String get upcomingText {
+    return Intl.message(
+      'Upcoming',
+      name: 'upcomingText',
+      desc: 'upcoming text on tab bar',
+      locale: localeName,
+    );
+  }
+
+  String get completedText {
+    return Intl.message(
+      'Completed',
+      name: 'completedText',
+      desc: 'competed text on tab bar',
+      locale: localeName,
+    );
+  }
+
+  String get cancelledText {
+    return Intl.message(
+      'Cancelled',
+      name: 'cancelledText',
+      desc: 'cancelled text on tab bar',
+      locale: localeName,
+    );
+  }
+
+  String get headerTextPage {
+    return Intl.message(
+      'Book futsal court\nand find opponents',
+      name: 'headerTextPage',
+      desc: 'header text on main page',
+      locale: localeName,
+    );
+  }
+
+  String get hintLocationCourtTextField {
+    return Intl.message(
+      'Location or name futsal court',
+      name: 'hintLocationCourtTextField',
+      desc: 'hint for text field location or name futsal court',
+      locale: localeName,
+    );
+  }
+
+  String get hintDateTextField {
+    return Intl.message(
+      'Play date',
+      name: 'hintDateTextField',
+      desc: 'hint for text field play date',
+      locale: localeName,
+    );
+  }
+
+  String get hintTimeTextField {
+    return Intl.message(
+      'Play time',
+      name: 'hintTimeTextField',
+      desc: 'hint for text field play time',
+      locale: localeName,
+    );
+  }
+
+  String get searchText {
+    return Intl.message(
+      'Search',
+      name: 'searchText',
+      desc: 'search text',
+      locale: localeName,
+    );
+  }
 }
 
 class I18nDelegate extends LocalizationsDelegate<I18n> {

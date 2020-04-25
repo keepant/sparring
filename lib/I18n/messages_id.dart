@@ -23,14 +23,24 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "account" : MessageLookupByLibrary.simpleMessage("Akun"),
     "booking" : MessageLookupByLibrary.simpleMessage("Pesanan"),
+    "bookingDetailsTitle" : MessageLookupByLibrary.simpleMessage("Detail Pesanan"),
+    "cancelledText" : MessageLookupByLibrary.simpleMessage("Dibatalkan"),
+    "completedText" : MessageLookupByLibrary.simpleMessage("Selesai"),
     "court" : MessageLookupByLibrary.simpleMessage("Lapangan"),
     "doneText" : MessageLookupByLibrary.simpleMessage("Selesai"),
     "getStarted" : MessageLookupByLibrary.simpleMessage("Ayo Mulai"),
+    "headerTextPage" : MessageLookupByLibrary.simpleMessage("Pesan lapangan futsal\ndan cari lawan bermain"),
     "hello" : MessageLookupByLibrary.simpleMessage("Halo, Dunia"),
+    "hintDateTextField" : MessageLookupByLibrary.simpleMessage("Tanggal bermain"),
+    "hintLocationCourtTextField" : MessageLookupByLibrary.simpleMessage("Lokasi atau nama lapangan futsal"),
+    "hintTimeTextField" : MessageLookupByLibrary.simpleMessage("Jam bermain"),
+    "myBookingTitle" : MessageLookupByLibrary.simpleMessage("Pesanan Saya"),
     "nextText" : MessageLookupByLibrary.simpleMessage("Selanjutnya"),
     "notification" : MessageLookupByLibrary.simpleMessage("Notifikasi"),
     "opponent" : MessageLookupByLibrary.simpleMessage("Lawan"),
+    "searchText" : MessageLookupByLibrary.simpleMessage("Cari"),
     "skipText" : MessageLookupByLibrary.simpleMessage("Lewati"),
-    "title" : MessageLookupByLibrary.simpleMessage("Sparring")
+    "title" : MessageLookupByLibrary.simpleMessage("Sparring"),
+    "upcomingText" : MessageLookupByLibrary.simpleMessage("Akan datang")
   };
 }

@@ -13,7 +13,6 @@ class FetchException implements Exception {
   }
 }
 
-
 Future<List<Booking>> bookings() async {
   try {
     Response response = await httpClient.bookings();

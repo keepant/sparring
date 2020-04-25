@@ -4,6 +4,7 @@ import 'package:sparring/components/input_datetime.dart';
 import 'package:sparring/components/input_text.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:sparring/i18n.dart';
 
 class CourtPage extends StatefulWidget {
   @override
@@ -34,7 +35,7 @@ class _CourtPageState extends State<CourtPage> {
                 padding: EdgeInsets.only(
                     left: 20.0, right: 20.0, bottom: 20.0, top: 50.0),
                 child: Text(
-                  "Book futsal court \nand find opponents",
+                  I18n.of(context).headerTextPage,
                   style: TextStyle(
                     fontSize: 30,
                     color: Colors.white,
@@ -55,7 +56,7 @@ class _CourtPageState extends State<CourtPage> {
                       ),
                       onPressed: () {},
                       label: Text(
-                        "Court",
+                        I18n.of(context).court,
                         style: TextStyle(
                           fontSize: 17,
                           color: Colors.white,
@@ -84,7 +85,7 @@ class _CourtPageState extends State<CourtPage> {
                         // );
                       },
                       label: Text(
-                        "Opponents",
+                        I18n.of(context).opponent,
                         style: TextStyle(
                           fontSize: 17,
                           color: Colors.white70,
@@ -107,7 +108,7 @@ class _CourtPageState extends State<CourtPage> {
                 padding: EdgeInsets.only(
                     top: 20.0, left: 20.0, right: 20.0, bottom: 10.0),
                 child: InputText(
-                  hintText: "E.g: Solo or Sritex",
+                  hintText: I18n.of(context).hintLocationCourtTextField,
                   icon: FontAwesomeIcons.mapMarkerAlt,
                   textEditingController: _locationControl,
                 ),
@@ -117,7 +118,7 @@ class _CourtPageState extends State<CourtPage> {
                 child: InputDateTime(
                   textEditingController: _dateControl,
                   format: dateFormat,
-                  hintText: "Date",
+                  hintText: I18n.of(context).hintDateTextField,
                   icon: FontAwesomeIcons.calendarAlt,
                   onShowPicker: (context, currentValue) {
                     return showDatePicker(
@@ -134,7 +135,7 @@ class _CourtPageState extends State<CourtPage> {
                 child: InputDateTime(
                   textEditingController: _timeControl,
                   format: timeFormat,
-                  hintText: "Time",
+                  hintText: I18n.of(context).hintTimeTextField,
                   icon: FontAwesomeIcons.clock,
                   onShowPicker: (context, currentValue) async {
                     final time = await showTimePicker(
@@ -157,7 +158,7 @@ class _CourtPageState extends State<CourtPage> {
                   padding: EdgeInsets.symmetric(vertical: 15.0),
                   color: Theme.of(context).primaryColor,
                   child: Text(
-                    "Search",
+                    I18n.of(context).searchText,
                     style: TextStyle(color: Colors.white, fontSize: 20.0),
                   ),
                 ),

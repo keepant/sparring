@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/bookings/cancelled_booking.dart';
 import 'package:sparring/pages/bookings/completed_booking.dart';
 import 'package:sparring/pages/bookings/upcoming_booking.dart';
@@ -12,7 +13,7 @@ class BookingsPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("My Bookings"),
+          title: Text(I18n.of(context).myBookingTitle),
           actions: <Widget>[
             IconButton(
               icon: FaIcon(
@@ -25,13 +26,13 @@ class BookingsPage extends StatelessWidget {
           bottom: TabBar(
             tabs: [
               Tab(
-                text: "Upcoming",
+                text: I18n.of(context).upcomingText,
               ),
               Tab(
-                text: "Completed",
+                text: I18n.of(context).completedText,
               ),
               Tab(
-                text: "Cancelled",
+                text: I18n.of(context).cancelledText,
               ),
             ],
           ),

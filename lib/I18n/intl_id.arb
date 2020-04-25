@@ -66,5 +66,65 @@
     "description": "done text button onboarding page",
     "type": "text",
     "placeholders": {}
+  },
+  "bookingDetailsTitle": "Detail Pesanan",
+  "@bookingDetailsTitle": {
+    "description": "booking details text title app bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "myBookingTitle": "Pesanan Saya",
+  "@myBookingTitle": {
+    "description": "my booking text on app bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "upcomingText": "Akan datang",
+  "@upcomingText": {
+    "description": "upcoming text on tab bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "completedText": "Selesai",
+  "@completedText": {
+    "description": "competed text on tab bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancelledText": "Dibatalkan",
+  "@cancelledText": {
+    "description": "cancelled text on tab bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "headerTextPage": "Pesan lapangan futsal\ndan cari lawan bermain",
+  "@headerTextPage": {
+    "description": "header text on main page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hintLocationCourtTextField": "Lokasi atau nama lapangan futsal",
+  "@hintLocationCourtTextField": {
+    "description": "hint for text field location or name futsal court",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hintDateTextField": "Tanggal bermain",
+  "@hintDateTextField": {
+    "description": "hint for text field play date",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hintTimeTextField": "Jam bermain",
+  "@hintTimeTextField": {
+    "description": "hint for text field play time",
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchText": "Cari",
+  "@searchText": {
+    "description": "search text",
+    "type": "text",
+    "placeholders": {}
   }
 }

@@ -66,5 +66,65 @@
     "description": "done text button onboarding page",
     "type": "text",
     "placeholders": {}
+  },
+  "bookingDetailsTitle": "Booking Details",
+  "@bookingDetailsTitle": {
+    "description": "booking details text title app bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "myBookingTitle": "My Bookings",
+  "@myBookingTitle": {
+    "description": "my booking text on app bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "upcomingText": "Upcoming",
+  "@upcomingText": {
+    "description": "upcoming text on tab bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "completedText": "Completed",
+  "@completedText": {
+    "description": "competed text on tab bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancelledText": "Cancelled",
+  "@cancelledText": {
+    "description": "cancelled text on tab bar",
+    "type": "text",
+    "placeholders": {}
+  },
+  "headerTextPage": "Book futsal court\nand find opponents",
+  "@headerTextPage": {
+    "description": "header text on main page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hintLocationCourtTextField": "Location or name futsal court",
+  "@hintLocationCourtTextField": {
+    "description": "hint for text field location or name futsal court",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hintDateTextField": "Play date",
+  "@hintDateTextField": {
+    "description": "hint for text field play date",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hintTimeTextField": "Play time",
+  "@hintTimeTextField": {
+    "description": "hint for text field play time",
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchText": "Search",
+  "@searchText": {
+    "description": "search text",
+    "type": "text",
+    "placeholders": {}
   }
 }
