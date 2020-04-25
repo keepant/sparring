@@ -29,7 +29,7 @@ class CancelledBooking extends StatelessWidget {
 
               return BookingCard(
                 imgUrl: booking.imgUrl,
-                title: "LAPANGAN BARU JADI BARU BISA DIPAKE BESOK PAGI SAJA ",
+                title: booking.title,
                 location: booking.location,
                 date: booking.date,
                 timeStart: booking.timeStart,
