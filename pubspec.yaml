@@ -38,6 +38,7 @@ dependencies:
   sentry: ^3.0.1
   json_annotation: ^3.0.1
   flutter_spinkit: ^4.1.2+1
+  hexcolor: ^1.0.1
 
 dev_dependencies:
   flutter_test:
