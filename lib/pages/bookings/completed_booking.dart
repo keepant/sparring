@@ -41,7 +41,9 @@ class CompletedBooking extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BookingDetail(),
+                      builder: (context) => BookingDetail(
+                        booking: booking,
+                      ),
                     ),
                   );
                 },

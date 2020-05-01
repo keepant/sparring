@@ -3,8 +3,53 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sparring/i18n.dart';
+import 'package:sparring/models/booking.dart';
 
 class BookingDetail extends StatelessWidget {
+  final Booking booking;
+
+  BookingDetail({Key key, this.booking}) : super(key: key);
+
+  Color getColorStatus(String status) {
+    if(status == 'completed') {
+      return Colors.green;
+    } else if(status == 'upcoming') {
+      return Colors.blue;
+    }
+
+    return Colors.red;
+  } 
+
+  Color getColorPayment(String status) {
+    if(status == 'completed') {
+      return Colors.green;
+    } else if(status == 'pending') {
+      return Colors.blue;
+    }
+
+    return Colors.red;
+  } 
+
+  IconData getIconStatus(String status) {
+    if(status == 'completed') {
+      return FontAwesomeIcons.solidCalendarCheck;
+    } else if(status == 'upcoming') {
+      return FontAwesomeIcons.calendarDay;
+    }
+
+    return FontAwesomeIcons.solidCalendarTimes;
+  } 
+
+  IconData getIconPayment(String status) {
+    if(status == 'completed') {
+      return FontAwesomeIcons.solidCheckCircle;
+    } else if(status == 'pending') {
+      return FontAwesomeIcons.solidQuestionCircle;
+    }
+
+    return FontAwesomeIcons.solidTimesCircle;
+  } 
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
@@ -23,22 +68,21 @@ class BookingDetail extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(
-                    'https://ecs7.tokopedia.net/img/cache/700/product-1/2019/3/17/2905360/2905360_bc8d6026-bb5c-4920-bacd-a7b4bb1f9f6b_576_576.jpg'),
+                image: NetworkImage(booking.imgUrl),
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 4.0),
             child: Text(
-              'Lapangan Anugrah Jaya',
+              booking.title,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 4.0),
             child: Text(
-                "Jl. Gajah Terbang Tinggi Sekall, Karanganyar, Jawa Tengah, Indonesia"),
+                booking.location),
           ),
           Divider(),
           Padding(
@@ -48,16 +92,16 @@ class BookingDetail extends StatelessWidget {
               children: <Widget>[
                 Container(
                   child: Icon(
-                    FontAwesomeIcons.solidCheckCircle,
-                    color: Colors.green,
+                    getIconStatus(booking.status),
+                    color: getColorStatus(booking.status),
                   ),
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 8.0),
                   child: Text(
-                    'Completed',
+                    booking.status.toUpperCase(),
                     style: TextStyle(
-                      color: Colors.green,
+                      color: getColorStatus(booking.status), 
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w600,
                     ),
@@ -83,7 +127,7 @@ class BookingDetail extends StatelessWidget {
                     ),
                     Container(
                       padding: EdgeInsets.only(left: 8.0),
-                      child: Text("25 June, 2020"),
+                      child: Text(booking.date),
                     ),
                   ],
                 ),
@@ -98,7 +142,7 @@ class BookingDetail extends StatelessWidget {
                     ),
                     Container(
                       padding: EdgeInsets.only(left: 8.0),
-                      child: Text("13.00 - 15.00"),
+                      child: Text(booking.timeStart+" - "+booking.timeEnd),
                     ),
                   ],
                 )
@@ -123,16 +167,16 @@ class BookingDetail extends StatelessWidget {
               children: <Widget>[
                 Container(
                   child: Icon(
-                    FontAwesomeIcons.solidCheckCircle,
-                    color: Colors.green,
+                    getIconPayment(booking.payementStatus),
+                    color: getColorPayment(booking.payementStatus),
                   ),
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 8.0),
                   child: Text(
-                    'Completed',
+                    booking.payementStatus.toUpperCase(),
                     style: TextStyle(
-                      color: Colors.green,
+                      color: getColorPayment(booking.payementStatus),
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w600,
                     ),
@@ -155,7 +199,7 @@ class BookingDetail extends StatelessWidget {
                 ),
                 Container(
                   child: Text(
-                    "Rp. 50.000",
+                    "Rp "+booking.total,
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -177,12 +221,12 @@ class BookingDetail extends StatelessWidget {
               children: <Widget>[
                 Container(
                   child: Text(
-                    "Cash On Delivery (COD)",
+                    booking.paymentMethod == 'cod' ? 'Cash on Delivery (COD)' : booking.paymentMethod,
                   ),
                 ),
                 Container(
                   child: Text(
-                    "Irfan Dwi Prasetyo",
+                    booking.paymentInfo,
                   ),
                 ),
               ],
