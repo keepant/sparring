@@ -10,7 +10,7 @@ class CompletedBooking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Booking>>(
-      future: apiClient.bookings(),
+      future: apiClient.bookings('completed'),
       builder: (BuildContext context, AsyncSnapshot<List<Booking>> snapshot) {
         if (snapshot.hasError) {
           return Container(

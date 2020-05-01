@@ -13,13 +13,15 @@ class FetchException implements Exception {
   }
 }
 
-Future<List<Booking>> bookings() async {
+Future<List<Booking>> bookings(String status) async {
   try {
     Response response = await httpClient.bookings();
     List<Booking> bookings = [];
 
     for (var i = 0; i < response.data.length; i++) {
-      bookings.add(Booking.fromJson(response.data[i]));
+      if (response.data[i]['status'] == status) {
+        bookings.add(Booking.fromJson(response.data[i]));
+      }
     }
 
     return bookings;

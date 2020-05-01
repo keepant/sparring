@@ -9,12 +9,12 @@ import 'package:sparring/api/client.dart' as apiClient;
 class UpcomingBooking extends StatelessWidget {
   final List<Booking> books;
 
-  UpcomingBooking({Key key, this.books}) : super (key: key);
+  UpcomingBooking({Key key, this.books}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Booking>>(
-      future: apiClient.bookings(),
+      future: apiClient.bookings('upcoming'),
       builder: (BuildContext context, AsyncSnapshot<List<Booking>> snapshot) {
         if (snapshot.hasError) {
           return Container(
@@ -45,7 +45,9 @@ class UpcomingBooking extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BookingDetail(booking: booking,),
+                      builder: (context) => BookingDetail(
+                        booking: booking,
+                      ),
                     ),
                   );
                 },
