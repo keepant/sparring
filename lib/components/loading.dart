@@ -10,7 +10,7 @@ class Loading extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          const SpinKitChasingDots(
+          SpinKitChasingDots(
             color: Colors.red,
             size: 40.0,
           )
