@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sparring/i18n.dart';
+import 'package:sparring/pages/accounts/me.dart';
 import 'package:sparring/pages/bookings/bookings.dart';
 import 'package:sparring/pages/court/court_page.dart';
 import 'package:sparring/pages/opponents/opponents_page.dart';
+import 'package:sparring/services/auth_check.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,10 +18,8 @@ class _HomeState extends State<Home> {
   static List<Widget> _widgetOptions = <Widget>[
     CourtPage(),
     OpponentsPage(),
-    BookingsPage(),
-    Text(
-      'Account Page',
-    ),
+    AuthCheck(),
+    Me(),
   ];
 
   void _onItemTapped(int index) {

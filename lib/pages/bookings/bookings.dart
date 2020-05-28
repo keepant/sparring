@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -7,13 +8,22 @@ import 'package:sparring/pages/bookings/completed_booking.dart';
 import 'package:sparring/pages/bookings/upcoming_booking.dart';
 
 class BookingsPage extends StatelessWidget {
+  final FirebaseUser user;
+  final token;
+
+  BookingsPage({
+    Key key,
+    this.user,
+    this.token,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(I18n.of(context).myBookingTitle),
+          title: Text("I18n.of(context).myBookingTitle"),
           actions: <Widget>[
             IconButton(
               icon: FaIcon(
@@ -26,13 +36,13 @@ class BookingsPage extends StatelessWidget {
           bottom: TabBar(
             tabs: [
               Tab(
-                text: I18n.of(context).upcomingText,
+                text: "I18n.of(context).upcomingText",
               ),
               Tab(
-                text: I18n.of(context).completedText,
+                text: "I18n.of(context).completedText",
               ),
               Tab(
-                text: I18n.of(context).cancelledText,
+                text: "I18n.of(context).cancelledText",
               ),
             ],
           ),

@@ -1,7 +1,10 @@
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sparring/components/bezier.dart';
 import 'package:sparring/pages/login/login.dart';
+import 'package:sparring/services/auth_check.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -65,8 +68,28 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _submitButton() {
     return InkWell(
-      onTap: () {
+      onTap: () async {
         print(_fullNameControl.text + _emailControl.text + _passwdControl.text);
+        final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
+          functionName: 'registerUser',
+        );
+
+        try {
+          await callable.call(<String, dynamic>{
+            'email': _emailControl.text,
+            'displayName': _fullNameControl.text,
+            'password': _passwdControl.text
+          });
+
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+              email: _emailControl.text, password: _passwdControl.text);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => AuthCheck()),
+          );
+        } catch (e) {
+          print(e);
+        }
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -157,6 +180,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         height: height,
         child: Stack(
