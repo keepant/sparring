@@ -51,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
           SizedBox(
             height: 10,
           ),
-          TextField(
+          TextFormField(
             controller: controller,
             obscureText: isPassword,
             decoration: InputDecoration(

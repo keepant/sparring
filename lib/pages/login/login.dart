@@ -1,9 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sparring/components/bezier.dart';
+import 'package:sparring/pages/bookings/bookings.dart';
 import 'package:sparring/pages/login/register.dart';
+import 'package:sparring/services/auth.dart';
+import 'package:sparring/services/prefs.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -69,8 +75,35 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _submitButton() {
     return InkWell(
-      onTap: () {
+      onTap: () async {
         print(_emailControl.text + _passwdControl.text);
+
+        final auth = new Auth();
+        String _token = "";
+        
+        //login
+        _token =
+            await auth.signInWithEmail(_emailControl.text, _passwdControl.text);
+
+        if (_token != null) {
+          await prefs.setToken(_token);
+          print("token: " + _token);
+          Navigator.pushReplacementNamed(
+            context,
+            '/booking',
+          );
+
+          // Fluttertoast.showToast(
+          //   msg: "Login Success!",
+          //   toastLength: Toast.LENGTH_SHORT,
+          // );
+        } else {
+          // Fluttertoast.showToast(
+          //   msg: "Login Failed!",
+          //   toastLength: Toast.LENGTH_SHORT,
+          // );
+          FocusScope.of(context).requestFocus(new FocusNode());
+        }
       },
       child: Container(
         width: MediaQuery.of(context).size.width,

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sparring/components/loading.dart';
 import 'package:sparring/pages/bookings/bookings.dart';
 import 'package:sparring/pages/login/welcome_login.dart';
 
@@ -32,9 +33,8 @@ class _AuthCheckState extends State<AuthCheck> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.red),
-      home: FutureBuilder<FirebaseUser>(
+    return Scaffold(
+      body: FutureBuilder<FirebaseUser>(
         future: checkCurrentUser(),
         builder: (BuildContext context, AsyncSnapshot<FirebaseUser> snapshot) {
           switch (snapshot.connectionState) {
@@ -43,9 +43,25 @@ class _AuthCheckState extends State<AuthCheck> {
             case ConnectionState.waiting:
               return Scaffold(
                 body: Container(
-                  color: Color.fromARGB(255, 244, 194, 87),
+                  //color: Color.fromARGB(255, 244, 194, 87),
                   child: Center(
-                    child: CircularProgressIndicator(),
+                    child: Loading(),
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: Colors.grey.shade200,
+                        offset: Offset(2, 4),
+                        blurRadius: 5,
+                        spreadRadius: 2,
+                      )
+                    ],
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Color(0xfffbb448), Color(0xffe46b10)],
+                    ),
                   ),
                 ),
               );

@@ -6,6 +6,8 @@ import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/bookings/cancelled_booking.dart';
 import 'package:sparring/pages/bookings/completed_booking.dart';
 import 'package:sparring/pages/bookings/upcoming_booking.dart';
+import 'package:sparring/pages/login/welcome_login.dart';
+import 'package:sparring/services/prefs.dart';
 
 class BookingsPage extends StatelessWidget {
   final FirebaseUser user;
@@ -19,11 +21,11 @@ class BookingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return prefs.getToken() == null ? WelcomeLoginPage() : DefaultTabController(
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("I18n.of(context).myBookingTitle"),
+          title: Text(I18n.of(context).myBookingTitle),
           actions: <Widget>[
             IconButton(
               icon: FaIcon(
@@ -36,13 +38,13 @@ class BookingsPage extends StatelessWidget {
           bottom: TabBar(
             tabs: [
               Tab(
-                text: "I18n.of(context).upcomingText",
+                text: I18n.of(context).upcomingText,
               ),
               Tab(
-                text: "I18n.of(context).completedText",
+                text: I18n.of(context).completedText,
               ),
               Tab(
-                text: "I18n.of(context).cancelledText",
+                text: I18n.of(context).cancelledText,
               ),
             ],
           ),
@@ -57,4 +59,6 @@ class BookingsPage extends StatelessWidget {
       ),
     );
   }
+
+  Prefs() {}
 }
