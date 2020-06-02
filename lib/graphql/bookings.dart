@@ -1,6 +1,6 @@
 final String getBookings = """ 
     query GetBookings(\$status: String!){
-      bookings (where: {status: {_eq: \$status}}){
+      bookings (where: {status: {_eq: \$status}} order_by: {created_at: desc}){
         id
         date
         time_start

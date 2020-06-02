@@ -19,9 +19,12 @@ class UpcomingBooking extends StatelessWidget {
     return GraphQLProvider(
       client: API.client,
       child: Query(
-        options: QueryOptions(documentNode: gql(getBookings), variables: {
-          'status': 'upcoming',
-        }),
+        options: QueryOptions(
+            documentNode: gql(getBookings),
+            pollInterval: 1,
+            variables: {
+              'status': 'upcoming',
+            }),
         builder: (QueryResult result,
             {FetchMore fetchMore, VoidCallback refetch}) {
           return result.loading
@@ -44,8 +47,15 @@ class UpcomingBooking extends StatelessWidget {
                           date: new DateFormat.yMMMMd('en_US')
                               .format(DateTime.parse(booking['date']))
                               .toString(),
-                          timeStart: booking['time_start'],
-                          timeEnd: booking['time_end'],
+                          timeStart: new DateFormat.Hm()
+                              .format(DateTime.parse(booking['date'] +
+                                  ' ' +
+                                  booking['time_start']))
+                              .toString(),
+                          timeEnd: new DateFormat.Hm()
+                              .format(DateTime.parse(
+                                  booking['date'] + ' ' + booking['time_end']))
+                              .toString(),
                           icon: FontAwesomeIcons.calendarAlt,
                           status: booking['status'].toUpperCase(),
                           color: Colors.blue,

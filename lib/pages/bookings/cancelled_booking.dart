@@ -40,8 +40,15 @@ class CancelledBooking extends StatelessWidget {
                           date: new DateFormat.yMMMMd('en_US')
                               .format(DateTime.parse(booking['date']))
                               .toString(),
-                          timeStart: booking['time_start'],
-                          timeEnd: booking['time_end'],
+                          timeStart: new DateFormat.Hm()
+                              .format(DateTime.parse(booking['date'] +
+                                  ' ' +
+                                  booking['time_start']))
+                              .toString(),
+                          timeEnd: new DateFormat.Hm()
+                              .format(DateTime.parse(
+                                  booking['date'] + ' ' + booking['time_end']))
+                              .toString(),
                           icon: FontAwesomeIcons.solidCalendarTimes,
                           status: booking['status'].toUpperCase(),
                           color: Colors.red,
