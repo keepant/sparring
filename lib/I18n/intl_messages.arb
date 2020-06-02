@@ -1,12 +1,12 @@
 {
-  "@@last_modified": "2020-04-25T22:05:36.213607",
+  "@@last_modified": "2020-06-02T18:39:54.079983",
   "hello": "Hello, World",
   "@hello": {
     "description": "Hello world text",
     "type": "text",
     "placeholders": {}
   },
-  "title": "Sparring",
+  "title": "sparring",
   "@title": {
     "description": "Title application",
     "type": "text",
@@ -123,6 +123,84 @@
   "searchText": "Search",
   "@searchText": {
     "description": "search text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginText": "Login",
+  "@loginText": {
+    "description": "login text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerText": "Register now",
+  "@registerText": {
+    "description": "register text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginDesc": "Login for faster booking and to easily access your booking details",
+  "@loginDesc": {
+    "description": "login page description",
+    "type": "text",
+    "placeholders": {}
+  },
+  "backText": "Back",
+  "@backText": {
+    "description": "back text button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailEmptyWarningText": "Email can't be empty!",
+  "@emailEmptyWarningText": {
+    "description": "email empty warning text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "orText": "or",
+  "@orText": {
+    "description": "or text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginWithFacebookText": "Login with Facebook",
+  "@loginWithFacebookText": {
+    "description": "login with facebook text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginWithGoogleText": "Login with Google",
+  "@loginWithGoogleText": {
+    "description": "login with google text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionAccountText": "Don't have an account?",
+  "@questionAccountText": {
+    "description": "question account text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailText": "Email",
+  "@emailText": {
+    "description": "email label text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "passwordText": "Password",
+  "@passwordText": {
+    "description": "password text text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionHaveAccountText": "Already have an account?",
+  "@questionHaveAccountText": {
+    "description": "question have account text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fullNameText": "Full name",
+  "@fullNameText": {
+    "description": "full name text label",
     "type": "text",
     "placeholders": {}
   }

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sparring/components/bezier.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/login/register.dart';
 import 'package:sparring/services/auth.dart';
 import 'package:sparring/services/prefs.dart';
@@ -29,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
               child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
             ),
-            Text('Back',
+            Text(I18n.of(context).backText,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
           ],
         ),
@@ -56,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
             controller: controller,
             obscureText: isPassword,
             validator: (value) =>
-                value.isEmpty ? 'Email can\'t be empty!' : null,
+                value.isEmpty ? I18n.of(context).emailEmptyWarningText : null,
             decoration: InputDecoration(
               hintText: hint,
               border: InputBorder.none,
@@ -76,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
 
         final auth = new Auth();
         String _token = "";
-        
+
         //login
         _token =
             await auth.signInWithEmail(_emailControl.text, _passwdControl.text);
@@ -106,20 +107,22 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.symmetric(vertical: 15),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: Colors.grey.shade200,
-                  offset: Offset(2, 4),
-                  blurRadius: 5,
-                  spreadRadius: 2)
-            ],
-            gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [Color(0xfffbb448), Color(0xfff7892b)])),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.grey.shade200,
+                offset: Offset(2, 4),
+                blurRadius: 5,
+                spreadRadius: 2)
+          ],
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [Color(0xfffbb448), Color(0xfff7892b)],
+          ),
+        ),
         child: Text(
-          'Login',
+          I18n.of(context).loginText,
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
@@ -142,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Text('or'),
+          Text(I18n.of(context).orText),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -199,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  'Log in with Facebook',
+                  I18n.of(context).loginWithFacebookText,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -249,16 +252,18 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: BoxDecoration(
                   color: Hexcolor('#4285F4'),
                   borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(5),
-                      topRight: Radius.circular(5)),
+                    bottomRight: Radius.circular(5),
+                    topRight: Radius.circular(5),
+                  ),
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  'Log in with Google',
+                  I18n.of(context).loginWithGoogleText,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400),
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
             ),
@@ -277,7 +282,7 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Don\'t have an account ?',
+            I18n.of(context).questionAccountText,
             style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
           ),
           SizedBox(
@@ -289,7 +294,7 @@ class _LoginPageState extends State<LoginPage> {
                   MaterialPageRoute(builder: (context) => RegisterPage()));
             },
             child: Text(
-              'Register',
+              I18n.of(context).registerText,
               style: TextStyle(
                   color: Color(0xfff79c4f),
                   fontSize: 13,
@@ -305,7 +310,7 @@ class _LoginPageState extends State<LoginPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: 'sparring',
+        text: I18n.of(context).title,
         style: GoogleFonts.portLligatSans(
           //textStyle: Theme.of(context).textTheme.display1,
           fontSize: 30,
@@ -319,8 +324,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Email", _emailControl, hint: "john@mayer.me"),
-        _entryField("Password", _passwdControl, isPassword: true),
+        _entryField(I18n.of(context).emailText, _emailControl, hint: "john@mayer.me"),
+        _entryField(I18n.of(context).passwordText, _passwdControl, isPassword: true),
       ],
     );
   }

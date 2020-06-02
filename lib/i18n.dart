@@ -236,6 +236,96 @@ class I18n {
       locale: localeName,
     );
   }
+
+  String get backText {
+    return Intl.message(
+      'Back',
+      name: 'backText',
+      desc: 'back text button',
+      locale: localeName,
+    );
+  }
+
+  String get emailEmptyWarningText {
+    return Intl.message(
+      'Email can\'t be empty!',
+      name: 'emailEmptyWarningText',
+      desc: 'email empty warning text',
+      locale: localeName,
+    );
+  }
+
+  String get orText {
+    return Intl.message(
+      'or',
+      name: 'orText',
+      desc: 'or text',
+      locale: localeName,
+    );
+  }
+
+  String get loginWithFacebookText {
+    return Intl.message(
+      'Login with Facebook',
+      name: 'loginWithFacebookText',
+      desc: 'login with facebook text',
+      locale: localeName,
+    );
+  }
+
+  String get loginWithGoogleText {
+    return Intl.message(
+      'Login with Google',
+      name: 'loginWithGoogleText',
+      desc: 'login with google text',
+      locale: localeName,
+    );
+  }
+
+  String get questionAccountText {
+    return Intl.message(
+      'Don\'t have an account?',
+      name: 'questionAccountText',
+      desc: 'question account text',
+      locale: localeName,
+    );
+  }
+
+  String get emailText {
+    return Intl.message(
+      'Email',
+      name: 'emailText',
+      desc: 'email label text',
+      locale: localeName,
+    );
+  }
+
+  String get passwordText {
+    return Intl.message(
+      'Password',
+      name: 'passwordText',
+      desc: 'password text text',
+      locale: localeName,
+    );
+  }
+
+  String get questionHaveAccountText {
+    return Intl.message(
+      'Already have an account?',
+      name: 'questionHaveAccountText',
+      desc: 'question have account text',
+      locale: localeName,
+    );
+  }
+
+  String get fullNameText {
+    return Intl.message(
+      'Full name',
+      name: 'fullNameText',
+      desc: 'full name text label',
+      locale: localeName,
+    );
+  }
 }
 
 class I18nDelegate extends LocalizationsDelegate<I18n> {

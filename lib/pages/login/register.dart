@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sparring/components/bezier.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/login/login.dart';
 import 'package:sparring/services/auth_check.dart';
 
@@ -29,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
               padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
               child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
             ),
-            Text('Back',
+            Text(I18n.of(context).backText,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
           ],
         ),
@@ -110,7 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 end: Alignment.centerRight,
                 colors: [Color(0xfffbb448), Color(0xfff7892b)])),
         child: Text(
-          'Register Now',
+          I18n.of(context).registerText,
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
@@ -126,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Already have an account ?',
+            I18n.of(context).questionHaveAccountText,
             style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
           ),
           SizedBox(
@@ -138,7 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   MaterialPageRoute(builder: (context) => LoginPage()));
             },
             child: Text(
-              'Login',
+              I18n.of(context).loginText,
               style: TextStyle(
                 color: Color(0xfff79c4f),
                 fontSize: 13,
@@ -155,7 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: 'sparring',
+        text: I18n.of(context).title,
         style: GoogleFonts.portLligatSans(
           //textStyle: Theme.of(context).textTheme.display1,
           fontSize: 30,
@@ -169,9 +170,9 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Full name", _fullNameControl, hint: "John Mayer"),
-        _entryField("Email", _emailControl, hint: "John@mayer.me"),
-        _entryField("Password", _passwdControl, isPassword: true),
+        _entryField(I18n.of(context).fullNameText, _fullNameControl, hint: "John Mayer"),
+        _entryField(I18n.of(context).emailText, _emailControl, hint: "John@mayer.me"),
+        _entryField(I18n.of(context).passwordText, _passwdControl, isPassword: true),
       ],
     );
   }

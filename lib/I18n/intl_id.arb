@@ -126,5 +126,83 @@
     "description": "search text",
     "type": "text",
     "placeholders": {}
+  },
+  "loginText": "Masuk",
+  "@loginText": {
+    "description": "login text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerText": "Daftar sekarang",
+  "@registerText": {
+    "description": "register text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginDesc": "Masuk untuk mengakses pesananmu lebih cepat",
+  "@loginDesc": {
+    "description": "login page description",
+    "type": "text",
+    "placeholders": {}
+  },
+  "backText": "Kembali",
+  "@backText": {
+    "description": "back text button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailEmptyWarningText": "Email tidak boleh kosong!",
+  "@emailEmptyWarningText": {
+    "description": "email empty warning text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "orText": "atau",
+  "@orText": {
+    "description": "or text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginWithFacebookText": "Masuk dengan Facebook",
+  "@loginWithFacebookText": {
+    "description": "login with facebook text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginWithGoogleText": "Masuk dengan Google",
+  "@loginWithGoogleText": {
+    "description": "login with google text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionAccountText": "Belum punya akun?",
+  "@questionAccountText": {
+    "description": "question account text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailText": "Email",
+  "@emailText": {
+    "description": "email label text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "passwordText": "Password",
+  "@passwordText": {
+    "description": "password text text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionHaveAccountText": "Sudah punya akun?",
+  "@questionHaveAccountText": {
+    "description": "question have account text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fullNameText": "Nama lengkap",
+  "@fullNameText": {
+    "description": "full name text label",
+    "type": "text",
+    "placeholders": {}
   }
 }
