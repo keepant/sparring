@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/login/login.dart';
 import 'package:sparring/pages/login/register.dart';
 
@@ -32,7 +33,7 @@ class _WelcomeLoginPageState extends State<WelcomeLoginPage> {
             ],
             color: Colors.white),
         child: Text(
-          'Login',
+          I18n.of(context).loginText,
           style: TextStyle(fontSize: 20, color: Color(0xfff7892b)),
         ),
       ),
@@ -54,7 +55,7 @@ class _WelcomeLoginPageState extends State<WelcomeLoginPage> {
           border: Border.all(color: Colors.white, width: 2),
         ),
         child: Text(
-          'Register now',
+          I18n.of(context).registerText,
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
@@ -65,7 +66,7 @@ class _WelcomeLoginPageState extends State<WelcomeLoginPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: 'sparring',
+        text: I18n.of(context).title,
         style: GoogleFonts.portLligatSans(
           // textStyle: Theme.of(context).textTheme.display1,
           fontSize: 30,
@@ -80,20 +81,19 @@ class _WelcomeLoginPageState extends State<WelcomeLoginPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text:
-              'Login for faster booking and to easily access your booking details',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          )),
+        text: I18n.of(context).loginDesc,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -102,10 +102,11 @@ class _WelcomeLoginPageState extends State<WelcomeLoginPage> {
             borderRadius: BorderRadius.all(Radius.circular(5)),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: Colors.grey.shade200,
-                  offset: Offset(2, 4),
-                  blurRadius: 5,
-                  spreadRadius: 2)
+                color: Colors.grey.shade200,
+                offset: Offset(2, 4),
+                blurRadius: 5,
+                spreadRadius: 2,
+              )
             ],
             gradient: LinearGradient(
               begin: Alignment.topCenter,

@@ -32,7 +32,7 @@ class I18n {
 
   String get title {
     return Intl.message(
-      'Sparring',
+      'sparring',
       name: 'title',
       desc: 'Title application',
       locale: localeName,
@@ -206,6 +206,33 @@ class I18n {
       'Search',
       name: 'searchText',
       desc: 'search text',
+      locale: localeName,
+    );
+  }
+
+  String get loginText {
+    return Intl.message(
+      'Login',
+      name: 'loginText',
+      desc: 'login text',
+      locale: localeName,
+    );
+  }
+
+  String get registerText {
+    return Intl.message(
+      'Register now',
+      name: 'registerText',
+      desc: 'register text',
+      locale: localeName,
+    );
+  }
+
+  String get loginDesc {
+    return Intl.message(
+      'Login for faster booking and to easily access your booking details',
+      name: 'loginDesc',
+      desc: 'login page description',
       locale: localeName,
     );
   }
