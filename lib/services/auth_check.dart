@@ -66,11 +66,7 @@ class _AuthCheckState extends State<AuthCheck> {
                 ),
               );
             case ConnectionState.done:
-              if (snapshot.data != null)
-                return BookingsPage(
-                  token: token,
-                  user: user,
-                );
+              if (snapshot.data != null) return BookingsPage();
               return WelcomeLoginPage();
           }
           return null;

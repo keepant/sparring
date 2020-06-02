@@ -1,12 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sparring/components/bezier.dart';
-import 'package:sparring/pages/bookings/bookings.dart';
 import 'package:sparring/pages/login/register.dart';
 import 'package:sparring/services/auth.dart';
 import 'package:sparring/services/prefs.dart';

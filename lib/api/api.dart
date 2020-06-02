@@ -1,14 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import "package:graphql_flutter/graphql_flutter.dart";
+import 'package:sparring/services/prefs.dart';
 
 class API {
-  
-  
-  final HttpLink httpLink = HttpLink(
+  static final HttpLink httpLink = HttpLink(
     uri: 'https://sparring-api.herokuapp.com/v1/graphql',
   );
 
-  final WebSocketLink websocketLink = WebSocketLink(
+  static final WebSocketLink websocketLink = WebSocketLink(
     url: 'wss://https://sparring-api.herokuapp.com/v1/graphql',
     config: SocketClientConfig(
       autoReconnect: true,
@@ -16,7 +15,16 @@ class API {
     ),
   );
 
-  // final AuthLink authLink = AuthLink(
-  //   getToken: () async => 'Bearer ' + token,
-  // );
+  static final AuthLink authLink = AuthLink(
+    getToken: () async => 'Bearer ' + await prefs.getToken(),
+  );
+
+  static final Link link = authLink.concat(httpLink).concat(websocketLink);
+
+  static ValueNotifier<GraphQLClient> client = ValueNotifier(
+    GraphQLClient(
+      cache: OptimisticCache(dataIdFromObject: typenameDataIdFromObject),
+      link: link,
+    ),
+  );
 }
