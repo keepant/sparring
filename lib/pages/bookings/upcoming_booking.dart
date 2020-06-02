@@ -5,14 +5,13 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/booking_card.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
-import 'package:sparring/models/booking.dart';
 import 'package:sparring/pages/bookings/booking_detail.dart';
 import 'package:intl/intl.dart';
 
 class UpcomingBooking extends StatelessWidget {
-  final List<Booking> books;
+  final int id;
 
-  UpcomingBooking({Key key, this.books}) : super(key: key);
+  UpcomingBooking({Key key, this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class UpcomingBooking extends StatelessWidget {
       client: API.client,
       child: Query(
         options: QueryOptions(
-            documentNode: gql(getBookings),
+            documentNode: gql(getAllBookings),
             pollInterval: 1,
             variables: {
               'status': 'upcoming',
@@ -64,7 +63,7 @@ class UpcomingBooking extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => BookingDetail(
-                                  booking: booking,
+                                  id: booking['id'],
                                 ),
                               ),
                             );

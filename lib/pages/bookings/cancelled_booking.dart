@@ -5,17 +5,20 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/booking_card.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
-import 'package:sparring/models/booking.dart';
 import 'package:sparring/pages/bookings/booking_detail.dart';
 import 'package:intl/intl.dart';
 
 class CancelledBooking extends StatelessWidget {
+  final int id;
+
+  CancelledBooking({Key key, this.id}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GraphQLProvider(
       client: API.client,
       child: Query(
-        options: QueryOptions(documentNode: gql(getBookings), variables: {
+        options: QueryOptions(documentNode: gql(getAllBookings), variables: {
           'status': 'cancelled',
         }),
         builder: (QueryResult result,
@@ -57,7 +60,7 @@ class CancelledBooking extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => BookingDetail(
-                                  booking: booking,
+                                  id: booking['id'],
                                 ),
                               ),
                             );
