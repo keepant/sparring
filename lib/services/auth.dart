@@ -13,7 +13,7 @@ class Auth implements BaseAuth {
     await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
     FirebaseUser user = await _firebaseAuth.currentUser();
-    return await user.getIdToken();
+    return await user.getIdToken(refresh: true);
   }
 
   Future<void> signOut() async {

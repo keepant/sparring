@@ -7,6 +7,7 @@ import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
 import 'package:sparring/models/booking.dart';
 import 'package:sparring/pages/bookings/booking_detail.dart';
+import 'package:intl/intl.dart';
 
 class UpcomingBooking extends StatelessWidget {
   final List<Booking> books;
@@ -18,9 +19,9 @@ class UpcomingBooking extends StatelessWidget {
     return GraphQLProvider(
       client: API.client,
       child: Query(
-        options: QueryOptions(
-          documentNode: gql(getBookings),
-        ),
+        options: QueryOptions(documentNode: gql(getBookings), variables: {
+          'status': 'upcoming',
+        }),
         builder: (QueryResult result,
             {FetchMore fetchMore, VoidCallback refetch}) {
           return result.loading
@@ -31,9 +32,34 @@ class UpcomingBooking extends StatelessWidget {
                       itemCount: result.data['bookings'].length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        var booking = result.data["bookings"][index];
-                        print(booking);
-                        return Text(result.data['bookings'][index]['date']);
+                        var booking = result.data['bookings'][index];
+                        //var user = result.data['bookings'][index]['user'];
+                        var court = result.data['bookings'][index]['court'];
+                        var img = result.data['bookings'][index]['court']
+                            ['court_images'][0];
+                        return BookingCard(
+                          imgUrl: img['name'],
+                          title: court['name'],
+                          location: court['address'],
+                          date: new DateFormat.yMMMMd('en_US')
+                              .format(DateTime.parse(booking['date']))
+                              .toString(),
+                          timeStart: booking['time_start'],
+                          timeEnd: booking['time_end'],
+                          icon: FontAwesomeIcons.calendarAlt,
+                          status: booking['status'].toUpperCase(),
+                          color: Colors.blue,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BookingDetail(
+                                  booking: booking,
+                                ),
+                              ),
+                            );
+                          },
+                        );
                       },
                     );
         },

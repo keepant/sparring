@@ -1,6 +1,6 @@
 final String getBookings = """ 
-    query {
-      bookings {
+    query GetBookings(\$status: String!){
+      bookings (where: {status: {_eq: \$status}}){
         id
         date
         time_start
@@ -21,11 +21,16 @@ final String getBookings = """
         }
     		court{
           id
+          name
           address
  					phone_number
           latitude
           longitude
           price_per_hour
+          court_images {
+            id
+            name
+          }
         }
       }
     }
