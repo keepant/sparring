@@ -41,11 +41,14 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _entryField(String title, TextEditingController controller,
-      {bool isPassword = false,
-      String hint = "",
-      TextInputType keyboardType,
-      String warningText}) {
+  Widget _entryField(
+    String title,
+    TextEditingController controller, {
+    bool isPassword = false,
+    String hint = "",
+    TextInputType keyboardType,
+    String warningText,
+  }) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(

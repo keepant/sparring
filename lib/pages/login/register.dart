@@ -1,11 +1,10 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sparring/components/bezier.dart';
 import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/login/login.dart';
-import 'package:sparring/services/auth_check.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -16,6 +15,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailControl = new TextEditingController();
   final TextEditingController _passwdControl = new TextEditingController();
   final TextEditingController _fullNameControl = new TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   Widget _backButton() {
     return InkWell(
@@ -38,8 +39,14 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _entryField(String title, TextEditingController controller,
-      {bool isPassword = false, String hint = "", TextInputType keyboardType}) {
+  Widget _entryField(
+    String title,
+    TextEditingController controller, {
+    bool isPassword = false,
+    String hint = "",
+    TextInputType keyboardType,
+    String warningText,
+  }) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -56,6 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
             keyboardType: keyboardType,
             controller: controller,
             obscureText: isPassword,
+            validator: (value) => value.isEmpty ? warningText : null,
             decoration: InputDecoration(
               hintText: hint,
               border: InputBorder.none,
@@ -71,26 +79,45 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget _submitButton() {
     return InkWell(
       onTap: () async {
-        print(_fullNameControl.text + _emailControl.text + _passwdControl.text);
-        final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
-          functionName: 'registerUser',
-        );
+        FocusScope.of(context).unfocus();
+        if (_formKey.currentState.validate()) {
+          Flushbar(
+            message: "Loading...",
+            showProgressIndicator: true,
+            margin: EdgeInsets.all(8),
+            borderRadius: 8,
+          )..show(context);
 
-        try {
-          await callable.call(<String, dynamic>{
-            'email': _emailControl.text,
-            'displayName': _fullNameControl.text,
-            'password': _passwdControl.text
-          });
+          print(
+              _fullNameControl.text + _emailControl.text + _passwdControl.text);
 
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
-              email: _emailControl.text, password: _passwdControl.text);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => AuthCheck()),
+          final HttpsCallable callable =
+              CloudFunctions.instance.getHttpsCallable(
+            functionName: 'registerUser',
           );
-        } catch (e) {
-          print(e);
+
+          try {
+            await callable.call(<String, dynamic>{
+              'email': _emailControl.text,
+              'displayName': _fullNameControl.text,
+              'password': _passwdControl.text
+            });
+
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
+
+            Flushbar(
+              title: "Register successfully!",
+              message: "Please login to access your account.",
+              margin: EdgeInsets.all(8),
+              duration: Duration(seconds: 3),
+              borderRadius: 8,
+            )..show(context);
+          } catch (e) {
+            print(e);
+          }
         }
       },
       child: Container(
@@ -98,19 +125,21 @@ class _RegisterPageState extends State<RegisterPage> {
         padding: EdgeInsets.symmetric(vertical: 15),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2,
-              )
-            ],
-            gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [Color(0xfffbb448), Color(0xfff7892b)])),
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.grey.shade200,
+              offset: Offset(2, 4),
+              blurRadius: 5,
+              spreadRadius: 2,
+            )
+          ],
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [Color(0xfffbb448), Color(0xfff7892b)],
+          ),
+        ),
         child: Text(
           I18n.of(context).registerText,
           style: TextStyle(fontSize: 20, color: Colors.white),
@@ -168,13 +197,37 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _emailPasswordWidget() {
-    return Column(
-      children: <Widget>[
-        _entryField(I18n.of(context).fullNameText, _fullNameControl, hint: "John Mayer", keyboardType: TextInputType.text),
-        _entryField(I18n.of(context).emailText, _emailControl, hint: "John@mayer.me", keyboardType: TextInputType.emailAddress),
-        _entryField(I18n.of(context).passwordText, _passwdControl, isPassword: true),
-      ],
+  Widget _formWidget() {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
+          _entryField(
+            I18n.of(context).fullNameText,
+            _fullNameControl,
+            hint: "John Mayer",
+            keyboardType: TextInputType.text,
+            warningText: "Full name can\'t be empty!",
+          ),
+          _entryField(
+            I18n.of(context).emailText,
+            _emailControl,
+            hint: "John@mayer.me",
+            keyboardType: TextInputType.emailAddress,
+            warningText: I18n.of(context).emailEmptyWarningText,
+          ),
+          _entryField(
+            I18n.of(context).passwordText,
+            _passwdControl,
+            isPassword: true,
+            warningText: "Password can\'t be empty!",
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          _submitButton(),
+        ],
+      ),
     );
   }
 
@@ -204,11 +257,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     SizedBox(
                       height: 50,
                     ),
-                    _emailPasswordWidget(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _submitButton(),
+                    _formWidget(),
                     SizedBox(height: height * .14),
                     _loginAccountLabel(),
                   ],
