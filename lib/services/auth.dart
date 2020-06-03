@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 abstract class BaseAuth {
   Future<String> signInWithEmail(String email, String password);
   Future<void> signOut();
+  Future<void> sendEmailVerification();
+  Future<bool> isEmailVerified();
 }
 
 class Auth implements BaseAuth {
@@ -18,5 +20,15 @@ class Auth implements BaseAuth {
 
   Future<void> signOut() async {
     return _firebaseAuth.signOut();
+  }
+
+  Future<void> sendEmailVerification() async {
+    FirebaseUser user = await _firebaseAuth.currentUser();
+    user.sendEmailVerification();
+  }
+
+  Future<bool> isEmailVerified() async {
+    FirebaseUser user = await _firebaseAuth.currentUser();
+    return user.isEmailVerified;
   }
 }
