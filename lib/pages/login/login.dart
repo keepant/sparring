@@ -281,9 +281,9 @@ class _LoginPageState extends State<LoginPage> {
                       topLeft: Radius.circular(5)),
                 ),
                 alignment: Alignment.center,
-                child: Icon(
-                  FontAwesomeIcons.google,
-                  color: Hexcolor('#4285F4'),
+                child: Image(
+                  image: AssetImage("assets/icon/google_logo.png"),
+                  height: 25.0,
                 ),
               ),
             ),
