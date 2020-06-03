@@ -110,10 +110,11 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.all(Radius.circular(5)),
           boxShadow: <BoxShadow>[
             BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2)
+              color: Colors.grey.shade200,
+              offset: Offset(2, 4),
+              blurRadius: 5,
+              spreadRadius: 2,
+            )
           ],
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
@@ -181,8 +182,9 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: BoxDecoration(
                   color: Color(0xff1959a9),
                   borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(5),
-                      topLeft: Radius.circular(5)),
+                    bottomLeft: Radius.circular(5),
+                    topLeft: Radius.circular(5),
+                  ),
                 ),
                 alignment: Alignment.center,
                 child: Icon(
@@ -197,16 +199,18 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: BoxDecoration(
                   color: Color(0xff2872ba),
                   borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(5),
-                      topRight: Radius.circular(5)),
+                    bottomRight: Radius.circular(5),
+                    topRight: Radius.circular(5),
+                  ),
                 ),
                 alignment: Alignment.center,
                 child: Text(
                   I18n.of(context).loginWithFacebookText,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400),
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
             ),
@@ -324,8 +328,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField(I18n.of(context).emailText, _emailControl, hint: "john@mayer.me"),
-        _entryField(I18n.of(context).passwordText, _passwdControl, isPassword: true),
+        _entryField(I18n.of(context).emailText, _emailControl,
+            hint: "john@mayer.me", keyboardType: TextInputType.emailAddress),
+        _entryField(I18n.of(context).passwordText, _passwdControl,
+            isPassword: true),
       ],
     );
   }

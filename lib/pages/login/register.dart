@@ -39,7 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget _entryField(String title, TextEditingController controller,
-      {bool isPassword = false, String hint = ""}) {
+      {bool isPassword = false, String hint = "", TextInputType keyboardType}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -53,6 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
             height: 10,
           ),
           TextFormField(
+            keyboardType: keyboardType,
             controller: controller,
             obscureText: isPassword,
             decoration: InputDecoration(
@@ -170,8 +171,8 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField(I18n.of(context).fullNameText, _fullNameControl, hint: "John Mayer"),
-        _entryField(I18n.of(context).emailText, _emailControl, hint: "John@mayer.me"),
+        _entryField(I18n.of(context).fullNameText, _fullNameControl, hint: "John Mayer", keyboardType: TextInputType.text),
+        _entryField(I18n.of(context).emailText, _emailControl, hint: "John@mayer.me", keyboardType: TextInputType.emailAddress),
         _entryField(I18n.of(context).passwordText, _passwdControl, isPassword: true),
       ],
     );
