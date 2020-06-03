@@ -1,3 +1,4 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,6 +17,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailControl = new TextEditingController();
   final TextEditingController _passwdControl = new TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   Widget _backButton() {
     return InkWell(
@@ -39,7 +42,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _entryField(String title, TextEditingController controller,
-      {bool isPassword = false, String hint = "", TextInputType keyboardType}) {
+      {bool isPassword = false,
+      String hint = "",
+      TextInputType keyboardType,
+      String warningText}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -56,8 +62,7 @@ class _LoginPageState extends State<LoginPage> {
             keyboardType: keyboardType,
             controller: controller,
             obscureText: isPassword,
-            validator: (value) =>
-                value.isEmpty ? I18n.of(context).emailEmptyWarningText : null,
+            validator: (value) => value.isEmpty ? warningText : null,
             decoration: InputDecoration(
               hintText: hint,
               border: InputBorder.none,
@@ -73,33 +78,52 @@ class _LoginPageState extends State<LoginPage> {
   Widget _submitButton() {
     return InkWell(
       onTap: () async {
-        print(_emailControl.text + _passwdControl.text);
+        FocusScope.of(context).unfocus();
+        if (_formKey.currentState.validate()) {
+          Flushbar(
+            message: "Loading...",
+            showProgressIndicator: true,
+            margin: EdgeInsets.all(8),
+            borderRadius: 8,
+            duration: Duration(seconds: 3),
+          )..show(context);
 
-        final auth = new Auth();
-        String _token = "";
+          //auth
+          final auth = new Auth();
+          String _token;
 
-        //login
-        _token =
-            await auth.signInWithEmail(_emailControl.text, _passwdControl.text);
+          try {
+            _token = await auth.signInWithEmail(
+                _emailControl.text, _passwdControl.text);
+          } catch (e) {
+            Flushbar(
+              message: e,
+              margin: EdgeInsets.all(8),
+              borderRadius: 8,
+              duration: Duration(seconds: 4),
+            )..show(context);
+            FocusScope.of(context).requestFocus(new FocusNode());
+          }
 
-        if (_token != null) {
-          await prefs.setToken(_token);
-          print("token: " + _token);
-          Navigator.pushReplacementNamed(
-            context,
-            '/booking',
-          );
+          if (_token != null) {
+            print(_emailControl.text + _passwdControl.text);
 
-          // Fluttertoast.showToast(
-          //   msg: "Login Success!",
-          //   toastLength: Toast.LENGTH_SHORT,
-          // );
-        } else {
-          // Fluttertoast.showToast(
-          //   msg: "Login Failed!",
-          //   toastLength: Toast.LENGTH_SHORT,
-          // );
-          FocusScope.of(context).requestFocus(new FocusNode());
+            await prefs.setToken(_token);
+            print("token: " + _token);
+            Navigator.pushReplacementNamed(
+              context,
+              '/booking',
+            );
+            FocusScope.of(context).unfocus();
+            Flushbar(
+              message: "Login successfully!",
+              margin: EdgeInsets.all(8),
+              borderRadius: 8,
+              duration: Duration(seconds: 3),
+            )..show(context);
+          } else {
+            FocusScope.of(context).requestFocus(new FocusNode());
+          }
         }
       },
       child: Container(
@@ -325,14 +349,28 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _emailPasswordWidget() {
-    return Column(
-      children: <Widget>[
-        _entryField(I18n.of(context).emailText, _emailControl,
-            hint: "john@mayer.me", keyboardType: TextInputType.emailAddress),
-        _entryField(I18n.of(context).passwordText, _passwdControl,
-            isPassword: true),
-      ],
+  Widget _formWidget() {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
+          _entryField(
+            I18n.of(context).emailText,
+            _emailControl,
+            hint: "john@mayer.me",
+            keyboardType: TextInputType.emailAddress,
+            warningText: I18n.of(context).emailEmptyWarningText,
+          ),
+          _entryField(
+            I18n.of(context).passwordText,
+            _passwdControl,
+            isPassword: true,
+            warningText: "Password can\'t be empty!",
+          ),
+          SizedBox(height: 20),
+          _submitButton(),
+        ],
+      ),
     );
   }
 
@@ -359,9 +397,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: height * .2),
                     _title(),
                     SizedBox(height: 50),
-                    _emailPasswordWidget(),
-                    SizedBox(height: 20),
-                    _submitButton(),
+                    _formWidget(),
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 10),
                       alignment: Alignment.centerRight,
