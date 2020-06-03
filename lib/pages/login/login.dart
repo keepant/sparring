@@ -20,6 +20,14 @@ class _LoginPageState extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
 
+  bool _isHidePassword = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isHidePassword = !_isHidePassword;
+    });
+  }
+
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -48,6 +56,7 @@ class _LoginPageState extends State<LoginPage> {
     String hint = "",
     TextInputType keyboardType,
     String warningText,
+    Widget suffixIcon,
   }) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -67,6 +76,7 @@ class _LoginPageState extends State<LoginPage> {
             obscureText: isPassword,
             validator: (value) => value.isEmpty ? warningText : null,
             decoration: InputDecoration(
+              suffixIcon: suffixIcon,
               hintText: hint,
               border: InputBorder.none,
               fillColor: Color(0xfff3f3f4),
@@ -367,8 +377,17 @@ class _LoginPageState extends State<LoginPage> {
           _entryField(
             I18n.of(context).passwordText,
             _passwdControl,
-            isPassword: true,
+            isPassword: _isHidePassword,
             warningText: "Password can\'t be empty!",
+            suffixIcon: GestureDetector(
+              onTap: () {
+                _togglePasswordVisibility();
+              },
+              child: Icon(
+                _isHidePassword ? Icons.visibility_off : Icons.visibility,
+                color: _isHidePassword ? Colors.grey : Colors.blue,
+              ),
+            ),
           ),
           SizedBox(height: 20),
           _submitButton(),
