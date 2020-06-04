@@ -277,7 +277,7 @@ class _LoginPageState extends State<LoginPage> {
             },
           ),
         );
-        
+
         Flushbar(
           message: "Login successfully!",
           margin: EdgeInsets.all(8),
@@ -361,9 +361,10 @@ class _LoginPageState extends State<LoginPage> {
             child: Text(
               I18n.of(context).registerText,
               style: TextStyle(
-                  color: Color(0xfff79c4f),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
+                color: Color(0xfff79c4f),
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],
@@ -452,7 +453,8 @@ class _LoginPageState extends State<LoginPage> {
                       //         fontSize: 14, fontWeight: FontWeight.w500)),
                     ),
                     _divider(),
-                    _facebookButton(),
+                    SizedBox(height: 20),
+                    //_facebookButton(),
                     _googleButton(),
                     SizedBox(height: height * .055),
                     _createAccountLabel(),
