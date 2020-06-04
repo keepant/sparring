@@ -20,7 +20,7 @@ class UpcomingBooking extends StatelessWidget {
       child: Query(
         options: QueryOptions(
             documentNode: gql(getAllBookings),
-            pollInterval: 1,
+            //pollInterval: 1,
             variables: {
               'status': 'upcoming',
             }),

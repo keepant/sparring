@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sparring/components/bezier.dart';
 import 'package:sparring/i18n.dart';
+import 'package:sparring/pages/bookings/bookings.dart';
 import 'package:sparring/pages/login/register.dart';
 import 'package:sparring/services/auth.dart';
 import 'package:sparring/services/prefs.dart';
@@ -259,8 +260,23 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _googleButton() {
     return InkWell(
-      onTap: () {
+      onTap: () async {
         print('tap google login button');
+
+        final auth = new Auth();
+        String _token;
+
+        _token = await auth.signInWithGoogle();
+        print("token: " + _token);
+        await prefs.setToken(_token);
+
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return BookingsPage();
+            },
+          ),
+        );
       },
       child: Container(
         height: 50,
@@ -277,8 +293,9 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.white,
                   border: Border.all(color: Hexcolor('#4285F4')),
                   borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(5),
-                      topLeft: Radius.circular(5)),
+                    bottomLeft: Radius.circular(5),
+                    topLeft: Radius.circular(5),
+                  ),
                 ),
                 alignment: Alignment.center,
                 child: Image(
