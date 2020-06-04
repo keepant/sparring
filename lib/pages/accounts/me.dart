@@ -1,5 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:sparring/services/auth.dart';
 
 class Me extends StatelessWidget {
   @override
@@ -7,8 +9,15 @@ class Me extends StatelessWidget {
     return Container(
       child: Center(
         child: RaisedButton(
-          onPressed: () {
-            FirebaseAuth.instance.signOut();
+          onPressed: () async {
+            final auth = new Auth();
+            await auth.signOut();
+            Flushbar(
+              message: "Logout successfully!",
+              margin: EdgeInsets.all(8),
+              borderRadius: 8,
+              duration: Duration(seconds: 4),
+            )..show(context);
           },
           child: Text("Logout"),
         ),

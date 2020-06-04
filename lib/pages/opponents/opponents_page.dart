@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sparring/components/input_datetime.dart';
 import 'package:sparring/components/input_text.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:sparring/i18n.dart';
+import 'package:sparring/pages/court/court_page.dart';
 
 class OpponentsPage extends StatefulWidget {
   @override
@@ -55,12 +57,12 @@ class _OpponentsPageState extends State<OpponentsPage> {
                         size: 18.0,
                       ),
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => CourtPage(),
-                        //   ),
-                        // );
+                        pushNewScreen(
+                          context,
+                          screen: CourtPage(),
+                          platformSpecific: false,
+                          withNavBar: true, 
+                        );
                       },
                       label: Text(
                         I18n.of(context).court,

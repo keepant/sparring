@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sparring/components/bezier.dart';
 import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/bookings/bookings.dart';
@@ -124,9 +125,11 @@ class _LoginPageState extends State<LoginPage> {
 
             await prefs.setToken(_token);
             print("token: " + _token);
-            Navigator.pushReplacementNamed(
+            pushNewScreen(
               context,
-              '/booking',
+              screen: BookingsPage(),
+              platformSpecific: false,
+              withNavBar: true,
             );
             FocusScope.of(context).unfocus();
             Flushbar(

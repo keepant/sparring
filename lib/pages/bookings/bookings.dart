@@ -17,16 +17,8 @@ class BookingsPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(I18n.of(context).myBookingTitle),
-          actions: <Widget>[
-            IconButton(
-              icon: FaIcon(
-                FontAwesomeIcons.running,
-                color: Colors.white,
-              ),
-              onPressed: () {},
-            )
-          ],
           bottom: TabBar(
             tabs: [
               Tab(
