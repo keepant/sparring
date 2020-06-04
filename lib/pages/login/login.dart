@@ -277,6 +277,13 @@ class _LoginPageState extends State<LoginPage> {
             },
           ),
         );
+        
+        Flushbar(
+          message: "Login successfully!",
+          margin: EdgeInsets.all(8),
+          borderRadius: 8,
+          duration: Duration(seconds: 3),
+        )..show(context);
       },
       child: Container(
         height: 50,
