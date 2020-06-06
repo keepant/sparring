@@ -204,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _facebookButton() {
+  Widget facebookButton() {
     return Container(
       height: 50,
       margin: EdgeInsets.symmetric(vertical: 20),

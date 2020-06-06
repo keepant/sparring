@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/accounts/me.dart';
-import 'package:sparring/pages/bookings/bookings.dart';
 import 'package:sparring/pages/court/court_page.dart';
 import 'package:sparring/services/auth_check.dart';
 
@@ -20,7 +19,7 @@ class _HomeState extends State<Home> {
   List<Widget> _buildScreens() {
     return [
       CourtPage(),
-      BookingsPage(),
+      AuthCheck(),
       AuthCheck(),
       Me(),
     ];

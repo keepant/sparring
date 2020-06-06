@@ -23,6 +23,6 @@ class Prefs {
     final SharedPreferences prefs = await _prefs;
     return prefs.containsKey('token') ?? false;
   }
-}
+ }
 
 Prefs prefs = Prefs();

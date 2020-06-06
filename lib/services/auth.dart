@@ -8,6 +8,7 @@ abstract class BaseAuth {
   Future<void> sendEmailVerification();
   Future<bool> isEmailVerified();
   Future<String> signInWithGoogle();
+  Future<FirebaseUser> getCurrentUser();
 }
 
 class Auth implements BaseAuth {
@@ -88,4 +89,10 @@ class Auth implements BaseAuth {
 
     return await user.getIdToken(refresh: true);
   }
+
+  Future<FirebaseUser> getCurrentUser() async {
+    return await _firebaseAuth.currentUser();
+  }
 }
+
+Auth auth = Auth();

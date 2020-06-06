@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/booking_card.dart';
 import 'package:sparring/components/loading.dart';
@@ -59,13 +60,13 @@ class UpcomingBooking extends StatelessWidget {
                           status: booking['status'].toUpperCase(),
                           color: Colors.blue,
                           onTap: () {
-                            Navigator.push(
+                            pushNewScreen(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => BookingDetail(
-                                  id: booking['id'],
-                                ),
+                              screen: BookingDetail(
+                                id: booking['id'],
                               ),
+                              platformSpecific: false,
+                              withNavBar: false,
                             );
                           },
                         );
