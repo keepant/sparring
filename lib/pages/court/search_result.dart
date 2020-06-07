@@ -1,0 +1,99 @@
+import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:sparring/pages/court/edit_search.dart';
+
+class SearchResult extends StatefulWidget {
+  @override
+  _SearchResultState createState() => _SearchResultState();
+}
+
+class _SearchResultState extends State<SearchResult>
+    with SingleTickerProviderStateMixin {
+  final List<Tab> tabs = <Tab>[
+    new Tab(text: "Best match"),
+    new Tab(text: "Lowest price"),
+    new Tab(text: "Highest price")
+  ];
+
+  TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = new TabController(vsync: this, length: tabs.length);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: InkWell(
+          onTap: () {
+            showCupertinoModalBottomSheet(
+              expand: true,
+              context: context,
+              backgroundColor: Colors.transparent,
+              builder: (context, scrollController) =>
+                  EditSearch(scrollController: scrollController),
+            );
+          },
+          child: Container(
+            height: 45,
+            decoration: new BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white,
+            ),
+            child: TextField(
+              decoration: InputDecoration(
+                enabled: false,
+                suffixIcon: Icon(Icons.search),
+                border: InputBorder.none,
+                filled: true,
+              ),
+            ),
+          ),
+        ),
+        bottom: TabBar(
+          isScrollable: false,
+          labelColor: Colors.redAccent,
+          unselectedLabelColor: Colors.white,
+          indicatorSize: TabBarIndicatorSize.tab,
+          indicator: BubbleTabIndicator(
+            indicatorRadius: 5,
+            indicatorHeight: 35.0,
+            indicatorColor: Colors.white,
+            tabBarIndicatorSize: TabBarIndicatorSize.tab,
+          ),
+          tabs: tabs,
+          controller: _tabController,
+        ),
+      ),
+      body: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: _tabController,
+        children: tabs.map((Tab tab) {
+          return Center(
+              child: Text(
+            tab.text,
+            style: TextStyle(fontSize: 20.0),
+          ));
+        }).toList(),
+      ),
+    );
+  }
+}

@@ -6,6 +6,7 @@ import 'package:sparring/components/input_text.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:sparring/i18n.dart';
+import 'package:sparring/pages/court/search_result.dart';
 import 'package:sparring/pages/opponents/opponents_page.dart';
 
 class CourtPage extends StatefulWidget {
@@ -18,8 +19,10 @@ class _CourtPageState extends State<CourtPage> {
   final TextEditingController _dateControl = new TextEditingController();
   final TextEditingController _timeControl = new TextEditingController();
 
-  final dateFormat = DateFormat("dd MMMM");
-  final timeFormat = DateFormat("h:mm");
+  static final dateFormat = DateFormat('dd MMMM');
+  static final timeFormat = DateFormat.Hm();
+
+  String initDate = dateFormat.format(DateTime.now()).toString();
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +86,7 @@ class _CourtPageState extends State<CourtPage> {
                           context,
                           screen: OpponentsPage(),
                           platformSpecific: false,
-                          withNavBar: true, 
+                          withNavBar: true,
                         );
                       },
                       label: Text(
@@ -117,15 +120,15 @@ class _CourtPageState extends State<CourtPage> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                child: InputDateTime(
+                child: InputDateTime  (
+                  initialValue: DateTime.now(),
                   textEditingController: _dateControl,
                   format: dateFormat,
-                  hintText: I18n.of(context).hintDateTextField,
                   icon: FontAwesomeIcons.calendarAlt,
                   onShowPicker: (context, currentValue) {
                     return showDatePicker(
                       context: context,
-                      firstDate: DateTime(1900),
+                      firstDate: DateTime.now(),
                       initialDate: currentValue ?? DateTime.now(),
                       lastDate: DateTime(2100),
                     );
@@ -135,9 +138,9 @@ class _CourtPageState extends State<CourtPage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 child: InputDateTime(
+                  initialValue: DateTime.now(),
                   textEditingController: _timeControl,
                   format: timeFormat,
-                  hintText: I18n.of(context).hintTimeTextField,
                   icon: FontAwesomeIcons.clock,
                   onShowPicker: (context, currentValue) async {
                     final time = await showTimePicker(
@@ -156,6 +159,13 @@ class _CourtPageState extends State<CourtPage> {
                     print("loc: " + _locationControl.text);
                     print("date: " + _dateControl.text);
                     print("time: " + _timeControl.text);
+
+                    pushNewScreen(
+                      context,
+                      screen: SearchResult(),
+                      platformSpecific: false,
+                      withNavBar: false,
+                    );
                   },
                   padding: EdgeInsets.symmetric(vertical: 15.0),
                   color: Theme.of(context).primaryColor,
