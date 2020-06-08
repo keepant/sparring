@@ -21,7 +21,7 @@ class EditSearch extends StatelessWidget {
     final TextEditingController _timeControl = new TextEditingController();
 
     final dateFormat = DateFormat("dd MMMM");
-    final timeFormat = DateFormat("h:mm");
+    final timeFormat = DateFormat.Hm();
     return Material(
       child: CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(

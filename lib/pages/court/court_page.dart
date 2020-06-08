@@ -22,8 +22,6 @@ class _CourtPageState extends State<CourtPage> {
   static final dateFormat = DateFormat('dd MMMM');
   static final timeFormat = DateFormat.Hm();
 
-  String initDate = dateFormat.format(DateTime.now()).toString();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,8 +119,7 @@ class _CourtPageState extends State<CourtPage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 child: InputDateTime  (
-                  initialValue: DateTime.now(),
-                  textEditingController: _dateControl,
+                  textEditingController: _dateControl..text = dateFormat.format(DateTime.now()).toString(),
                   format: dateFormat,
                   icon: FontAwesomeIcons.calendarAlt,
                   onShowPicker: (context, currentValue) {
@@ -138,8 +135,7 @@ class _CourtPageState extends State<CourtPage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 child: InputDateTime(
-                  initialValue: DateTime.now(),
-                  textEditingController: _timeControl,
+                  textEditingController: _timeControl..text = timeFormat.format(DateTime.now()).toString(),
                   format: timeFormat,
                   icon: FontAwesomeIcons.clock,
                   onShowPicker: (context, currentValue) async {
