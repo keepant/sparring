@@ -2,6 +2,7 @@ import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:sparring/pages/court/best_match.dart';
 import 'package:sparring/pages/court/edit_search.dart';
 
 class SearchResult extends StatefulWidget {
@@ -106,13 +107,11 @@ class _SearchResultState extends State<SearchResult>
       body: TabBarView(
         physics: NeverScrollableScrollPhysics(),
         controller: _tabController,
-        children: tabs.map((Tab tab) {
-          return Center(
-              child: Text(
-            tab.text,
-            style: TextStyle(fontSize: 20.0),
-          ));
-        }).toList(),
+        children: [
+          BestMatch(),
+          BestMatch(),
+          BestMatch()
+        ]
       ),
     );
   }
