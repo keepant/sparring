@@ -5,12 +5,21 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sparring/pages/court/edit_search.dart';
 
 class SearchResult extends StatefulWidget {
+  final String location;
+  final String time;
+  final String date;
+
+  SearchResult({Key key, this.location, this.time, this.date})
+      : super(key: key);
+
   @override
   _SearchResultState createState() => _SearchResultState();
 }
 
 class _SearchResultState extends State<SearchResult>
     with SingleTickerProviderStateMixin {
+  final TextEditingController _searchControl = new TextEditingController();
+
   final List<Tab> tabs = <Tab>[
     new Tab(text: "Best match"),
     new Tab(text: "Lowest price"),
@@ -38,7 +47,7 @@ class _SearchResultState extends State<SearchResult>
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/');
           },
         ),
         title: InkWell(
@@ -47,8 +56,12 @@ class _SearchResultState extends State<SearchResult>
               expand: true,
               context: context,
               backgroundColor: Colors.transparent,
-              builder: (context, scrollController) =>
-                  EditSearch(scrollController: scrollController),
+              builder: (context, scrollController) => EditSearch(
+                scrollController: scrollController,
+                location: widget.location,
+                date: widget.date,
+                time: widget.time,
+              ),
             );
           },
           child: Container(
@@ -59,12 +72,19 @@ class _SearchResultState extends State<SearchResult>
               color: Colors.white,
             ),
             child: TextField(
+              controller: _searchControl
+                ..text =
+                    widget.location + "\n" + widget.date + " at " + widget.time,
+              style: TextStyle(
+                  height: 1, fontSize: 13, fontWeight: FontWeight.w600),
+              maxLines: null,
               decoration: InputDecoration(
-                enabled: false,
-                suffixIcon: Icon(Icons.search),
-                border: InputBorder.none,
-                filled: true,
-              ),
+                  enabled: false,
+                  suffixIcon: Icon(Icons.search),
+                  border: InputBorder.none,
+                  filled: true,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 8, horizontal: 10)),
             ),
           ),
         ),

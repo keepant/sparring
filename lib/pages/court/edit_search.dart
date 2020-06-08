@@ -11,8 +11,11 @@ import 'package:sparring/pages/court/search_result.dart';
 
 class EditSearch extends StatelessWidget {
   final ScrollController scrollController;
+  final String location;
+  final String date;
+  final String time;
 
-  const EditSearch({Key key, this.scrollController}) : super(key: key);
+  const EditSearch({Key key, this.scrollController, this.location, this.date, this.time}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +46,13 @@ class EditSearch extends StatelessWidget {
                 child: InputText(
                   hintText: I18n.of(context).hintLocationCourtTextField,
                   icon: FontAwesomeIcons.mapMarkerAlt,
-                  textEditingController: _locationControl,
+                  textEditingController: _locationControl..text = location,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 child: InputDateTime(
-                  textEditingController: _dateControl,
+                  textEditingController: _dateControl..text = date,
                   format: dateFormat,
                   hintText: I18n.of(context).hintDateTextField,
                   icon: FontAwesomeIcons.calendarAlt,
@@ -66,7 +69,7 @@ class EditSearch extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 child: InputDateTime(
-                  textEditingController: _timeControl,
+                  textEditingController: _timeControl..text = time,
                   format: timeFormat,
                   hintText: I18n.of(context).hintTimeTextField,
                   icon: FontAwesomeIcons.clock,
@@ -88,9 +91,15 @@ class EditSearch extends StatelessWidget {
                     print("date: " + _dateControl.text);
                     print("time: " + _timeControl.text);
 
+                    FocusScope.of(context).unfocus();
+
                     pushNewScreen(
                       context,
-                      screen: SearchResult(),
+                      screen: SearchResult(
+                        location: _locationControl.text,
+                        date: _dateControl.text,
+                        time: _timeControl.text,
+                      ),
                       platformSpecific: false,
                       withNavBar: false,
                     );

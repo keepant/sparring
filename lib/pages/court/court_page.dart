@@ -156,9 +156,15 @@ class _CourtPageState extends State<CourtPage> {
                     print("date: " + _dateControl.text);
                     print("time: " + _timeControl.text);
 
+                    FocusScope.of(context).unfocus();
+
                     pushNewScreen(
                       context,
-                      screen: SearchResult(),
+                      screen: SearchResult(
+                        location: _locationControl.text,
+                        date: _dateControl.text,
+                        time: _timeControl.text,
+                      ),
                       platformSpecific: false,
                       withNavBar: false,
                     );
