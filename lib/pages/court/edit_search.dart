@@ -23,7 +23,7 @@ class EditSearch extends StatelessWidget {
     final TextEditingController _dateControl = new TextEditingController();
     final TextEditingController _timeControl = new TextEditingController();
 
-    final dateFormat = DateFormat("dd MMMM");
+    final dateFormat = DateFormat("yyyy-MM-dd");
     final timeFormat = DateFormat.Hm();
     return Material(
       child: CupertinoPageScaffold(
@@ -59,8 +59,8 @@ class EditSearch extends StatelessWidget {
                   onShowPicker: (context, currentValue) {
                     return showDatePicker(
                       context: context,
-                      firstDate: DateTime(1900),
-                      initialDate: currentValue ?? DateTime.now(),
+                      firstDate: DateTime.now(),
+                      initialDate: DateTime.now(),
                       lastDate: DateTime(2100),
                     );
                   },

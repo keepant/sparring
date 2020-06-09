@@ -54,7 +54,7 @@ class CourtCard extends StatelessWidget {
                           child: Text(
                             title,
                             style: TextStyle(
-                              fontSize: 17.0,
+                              fontSize: 15.0,
                               fontWeight: FontWeight.w700,
                             ),
                             overflow: TextOverflow.ellipsis,
@@ -77,7 +77,7 @@ class CourtCard extends StatelessWidget {
                               Text(
                                 location,
                                 style: TextStyle(
-                                  fontSize: 14.0,
+                                  fontSize: 11.0,
                                   fontWeight: FontWeight.normal,
                                 ),
                                 overflow: TextOverflow.ellipsis,

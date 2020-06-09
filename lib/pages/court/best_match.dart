@@ -1,28 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:sparring/api/api.dart';
 import 'package:sparring/components/court_card.dart';
+import 'package:intl/intl.dart';
+import 'package:sparring/components/loading.dart';
+import 'package:sparring/graphql/search_court.dart';
 
 class BestMatch extends StatelessWidget {
   final int id;
+  final String location;
+  final String date;
+  final String time;
 
-  BestMatch({Key key, this.id}) : super(key: key);
+  BestMatch({
+    Key key,
+    this.id,
+    this.location,
+    this.date,
+    this.time,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 5,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return CourtCard(
-          imgUrl:
-              "https://ecs7.tokopedia.net/img/cache/700/product-1/2019/3/17/2905360/2905360_bc8d6026-bb5c-4920-bacd-a7b4bb1f9f6b_576_576.jpg",
-          title: "Lapangan",
-          location: "Surakarta",
-          onTap: () {
+    String getTime =
+        DateFormat.H().format(DateTime.parse("2020-01-01 " + time)).toString();
+    String timeParam = getTime+":00";
 
+    DateTime tgl =  DateTime.parse(date);
+
+    print("date: " + tgl.toString() + " time: " + timeParam);
+
+    return GraphQLProvider(
+      client: API.client,
+      child: Query(
+        options: QueryOptions(
+          documentNode: gql(getAllCourt),
+          pollInterval: 1,
+          variables: {
+            'date': date,
+            'time': timeParam,
+            'name': '%'+location+'%'
           },
-        );
-      },
+        ),
+        builder: (QueryResult result,
+            {FetchMore fetchMore, VoidCallback refetch}) {
+          return result.loading
+              ? Loading()
+              : result.hasException
+                  ? Center(child: Text(result.exception.toString()))
+                  : ListView.builder(
+                      itemCount: result.data['court'].length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        var court = result.data['court'][index];
+                        var img = result.data['court'][index]['court_images'][0];
+
+                        return CourtCard(
+                          imgUrl: img['name'],
+                          title: court['name'],
+                          location: court['address'],
+                          onTap: () {},
+                        );
+                      },
+                    );
+        },
+      ),
     );
   }
 }

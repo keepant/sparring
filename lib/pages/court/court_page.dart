@@ -19,7 +19,7 @@ class _CourtPageState extends State<CourtPage> {
   final TextEditingController _dateControl = new TextEditingController();
   final TextEditingController _timeControl = new TextEditingController();
 
-  static final dateFormat = DateFormat('dd MMMM');
+  static final dateFormat = DateFormat('yyyy-MM-dd');
   static final timeFormat = DateFormat.Hm();
 
   @override
@@ -126,7 +126,7 @@ class _CourtPageState extends State<CourtPage> {
                     return showDatePicker(
                       context: context,
                       firstDate: DateTime.now(),
-                      initialDate: currentValue ?? DateTime.now(),
+                      initialDate: DateTime.now(),
                       lastDate: DateTime(2100),
                     );
                   },

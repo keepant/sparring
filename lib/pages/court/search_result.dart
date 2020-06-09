@@ -108,7 +108,11 @@ class _SearchResultState extends State<SearchResult>
         physics: NeverScrollableScrollPhysics(),
         controller: _tabController,
         children: [
-          BestMatch(),
+          BestMatch(
+            location: widget.location,
+            date: widget.date,
+            time: widget.time,
+          ),
           BestMatch(),
           BestMatch()
         ]
