@@ -4,12 +4,14 @@ class CourtCard extends StatelessWidget {
   final String imgUrl;
   final String title;
   final String location;
+  final String price;
   final GestureTapCallback onTap;
 
   CourtCard({
     this.imgUrl,
     this.title,
     this.location,
+    this.price,
     @required this.onTap,
   });
 
@@ -89,7 +91,7 @@ class CourtCard extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 8.0, top: 20),
                           child: Text(
-                            "Rp 25000" + "/hour",
+                            "Rp."+ price + " per hour",
                             style: TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 16.0),
                           ),

@@ -33,3 +33,30 @@ final String getAllCourt = """
       }
     }
   """;
+
+  final String getCourt = """ 
+    query GetCourt(\$id: Int!){
+      court(
+        where: {
+          id: {
+            _eq: \$id
+          }
+        }
+      ) {
+        id
+        name 
+        address
+        price_per_hour
+        latitude
+        longitude
+        open_day
+        closed_day
+        open_hour
+        closed_hour
+        court_images {
+          id
+          name
+        }
+      }
+    }
+  """;
