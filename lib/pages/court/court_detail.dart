@@ -62,7 +62,7 @@ class _CourtDetailState extends State<CourtDetail>
   @override
   Widget build(BuildContext context) {
     return GraphQLProvider(
-      client: API.client,
+      client: API.guestClient,
       child: Query(
         options: QueryOptions(
             documentNode: gql(getCourt),

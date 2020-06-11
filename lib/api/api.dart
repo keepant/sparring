@@ -27,4 +27,11 @@ class API {
       link: link,
     ),
   );
+
+  static ValueNotifier<GraphQLClient> guestClient = ValueNotifier(
+    GraphQLClient(
+      cache: OptimisticCache(dataIdFromObject: typenameDataIdFromObject),
+      link: httpLink,
+    ),
+  );
 }
