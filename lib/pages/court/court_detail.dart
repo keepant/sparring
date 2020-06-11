@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sparring/api/api.dart';
@@ -19,6 +20,12 @@ class CourtDetail extends StatefulWidget {
 class _CourtDetailState extends State<CourtDetail>
     with SingleTickerProviderStateMixin {
   TabController tabController;
+  GoogleMapController mapController;
+  final Set<Marker> _markers = {};
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
 
   IconData getIconFacilities(String text) {
     if (text == 'Parkir') {
@@ -49,6 +56,18 @@ class _CourtDetailState extends State<CourtDetail>
 
   @override
   void initState() {
+     _markers.add(
+      Marker(
+        markerId: MarkerId("courtLoc"),
+        position: LatLng(-7.6272944, 111.0478108),
+        icon: BitmapDescriptor.defaultMarker,
+        infoWindow: InfoWindow(
+          title: "Lapangan Mania Mantap",
+          snippet: "Jalan Gajah Tebang nomor 4646"
+        ),
+      ),
+    );
+
     super.initState();
     tabController = new TabController(length: 3, vsync: this);
   }
@@ -269,19 +288,15 @@ class _CourtDetailState extends State<CourtDetail>
                                       children: <Widget>[
                                         BoldText(
                                             "Location", 20.0, Colors.black),
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                          child: Image.network(
-                                            "https://i.ibb.co/Fs6N59X/plazamap.png",
-                                            fit: BoxFit.fill,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width -
-                                                90,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
+                                        Container(
+                                          height: MediaQuery.of(context).size.height - 400,
+                                          child: GoogleMap(
+                                            onMapCreated: _onMapCreated,
+                                            initialCameraPosition: CameraPosition(
+                                              target: LatLng(-7.6272944, 111.0478108),
+                                              zoom: 15.0,
+                                            ),
+                                            markers: _markers,
                                           ),
                                         ),
                                       ],

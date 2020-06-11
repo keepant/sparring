@@ -9,6 +9,11 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="Sparring"
         android:icon="@mipmap/launcher_icon">
+        
+        <!-- TODO: Add your API key here -->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyBO33PDWnPErmLw9IzjakDoyYsH8vl8UkI"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
