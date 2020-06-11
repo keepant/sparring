@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sparring/api/api.dart';
@@ -18,6 +19,45 @@ class CourtDetail extends StatefulWidget {
 class _CourtDetailState extends State<CourtDetail>
     with SingleTickerProviderStateMixin {
   TabController tabController;
+
+  IconData getIconFacilities(String text) {
+    if (text == 'Parkir') {
+      return FontAwesomeIcons.parking;
+    } else if (text == 'Wifi') {
+      return FontAwesomeIcons.wifi;
+    } else if (text == 'Air minum') {
+      return FontAwesomeIcons.cocktail;
+    } else if (text == 'Toilet') {
+      return FontAwesomeIcons.toilet;
+    }
+
+    return FontAwesomeIcons.smileBeam;
+  }
+
+  Column equipmentsItem(String text) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Icon(getIconFacilities(text), color: Colors.blue),
+        SizedBox(
+          height: 5,
+        ),
+        NormalText(text, Colors.blue, 12)
+      ],
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = new TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    tabController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +89,7 @@ class _CourtDetailState extends State<CourtDetail>
               itemBuilder: (context, index) {
                 var court = result.data['court'][index];
                 var img = result.data['court'][index]['court_images'][0];
+                var fasility = result.data['court'][index]['court_facilities'];
 
                 return Stack(
                   children: <Widget>[
@@ -56,7 +97,9 @@ class _CourtDetailState extends State<CourtDetail>
                       top: 0,
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        child: Image.network(img['name'],),
+                        child: Image.network(
+                          img['name'],
+                        ),
                       ),
                     ),
                     Positioned(
@@ -136,14 +179,56 @@ class _CourtDetailState extends State<CourtDetail>
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      BoldText("About", 20.0, Colors.black),
+                                      BoldText(
+                                          "Description", 20.0, Colors.black),
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      NormalText(
-                                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea. ",
-                                          Colors.black,
-                                          12.0),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              Container(
+                                                child: NormalText("Open day",
+                                                    Colors.black, 15.0),
+                                              ),
+                                              Container(
+                                                child: NormalText(
+                                                    court['open_day'] +
+                                                        " - " +
+                                                        court['closed_day'],
+                                                    Colors.black,
+                                                    15.0),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              Container(
+                                                child: NormalText("Open hours",
+                                                    Colors.black, 15.0),
+                                              ),
+                                              Container(
+                                                child: NormalText(
+                                                  court['open_hour'] +
+                                                      " - " +
+                                                      court['closed_hour'],
+                                                  Colors.black,
+                                                  15.0,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                       SizedBox(
                                         height: 10.0,
                                       ),
@@ -159,18 +244,19 @@ class _CourtDetailState extends State<CourtDetail>
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          equipmentsItem(Icons.wifi, "Wi-Fi"),
-                                          equipmentsItem(
-                                              Icons.local_parking, "Parking"),
-                                          equipmentsItem(Icons.pool, "Pool"),
-                                          equipmentsItem(
-                                              Icons.restaurant, "Restaurant"),
-                                        ],
-                                      )
+                                      Expanded(
+                                        child: ListView.builder(
+                                            itemCount: fasility.length,
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: equipmentsItem(
+                                                    fasility[index]['name']),
+                                              );
+                                            }),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -356,27 +442,5 @@ class _CourtDetailState extends State<CourtDetail>
         ),
       ],
     );
-  }
-
-  Column equipmentsItem(IconData icon, String text) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Icon(icon, color: Colors.blue),
-        NormalText(text, Colors.blue, 12)
-      ],
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    tabController = new TabController(length: 3, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    tabController.dispose();
   }
 }

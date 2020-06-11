@@ -57,6 +57,10 @@ final String getAllCourt = """
           id
           name
         }
+        court_facilities {
+          id
+          name
+        }
       }
     }
   """;
