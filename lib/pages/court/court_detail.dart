@@ -44,7 +44,7 @@ class _CourtDetailState extends State<CourtDetail>
             backgroundColor: Colors.white,
             body: ListView.builder(
               shrinkWrap: true,
-              physics: ScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               itemCount: result.data['court'].length,
               itemBuilder: (context, index) {
                 var court = result.data['court'][index];
@@ -56,12 +56,12 @@ class _CourtDetailState extends State<CourtDetail>
                       top: 0,
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        child: Image.network(img['name']),
+                        child: Image.network(img['name'],),
                       ),
                     ),
                     Positioned(
                       left: 5,
-                      top: 25,
+                      top: 10,
                       child: IconButton(
                         icon: Icon(
                           Icons.arrow_back,
@@ -74,7 +74,7 @@ class _CourtDetailState extends State<CourtDetail>
                       ),
                     ),
                     Positioned(
-                      top: 250.0,
+                      top: 210.0,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20.0),
                         child: Container(
@@ -269,7 +269,9 @@ class _CourtDetailState extends State<CourtDetail>
                         ),
                       ),
                     ),
-                    Container(),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                    )
                   ],
                 );
               },
