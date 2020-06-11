@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sparring/pages/court/best_match.dart';
 import 'package:sparring/pages/court/edit_search.dart';
+import 'package:sparring/pages/court/higest_price.dart';
+import 'package:sparring/pages/court/lowest_price.dart';
 
 class SearchResult extends StatefulWidget {
   final String location;
@@ -113,9 +115,17 @@ class _SearchResultState extends State<SearchResult>
             date: widget.date,
             time: widget.time,
           ),
-          BestMatch(),
-          BestMatch()
-        ]
+          LowestPrice(
+            location: widget.location,
+            date: widget.date,
+            time: widget.time,
+          ),
+          HighestPrice(
+            location: widget.location,
+            date: widget.date,
+            time: widget.time,
+          )
+        ],
       ),
     );
   }
