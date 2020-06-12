@@ -26,6 +26,8 @@ final String getAllCourt = """
         name
         address
         price_per_hour
+        latitude
+    		longitude
         court_images {
           id
           name
@@ -62,6 +64,8 @@ final String getAllCourtByHigherPrice = """
         name
         address
         price_per_hour
+        latitude
+    		longitude
         court_images {
           id
           name
@@ -98,6 +102,8 @@ final String getAllCourtByLowerPrice = """
         name
         address
         price_per_hour
+        latitude
+    		longitude
         court_images {
           id
           name

@@ -10,8 +10,19 @@ import 'package:sparring/graphql/search_court.dart';
 
 class CourtDetail extends StatefulWidget {
   final int id;
+  final String name;
+  final String lat;
+  final String long;
+  final String address;
 
-  CourtDetail({Key key, this.id}) : super(key: key);
+  CourtDetail({
+    Key key,
+    this.id,
+    this.name,
+    this.lat,
+    this.long,
+    this.address,
+  }) : super(key: key);
 
   @override
   _CourtDetailState createState() => _CourtDetailState();
@@ -56,14 +67,14 @@ class _CourtDetailState extends State<CourtDetail>
 
   @override
   void initState() {
-     _markers.add(
+    _markers.add(
       Marker(
         markerId: MarkerId("courtLoc"),
-        position: LatLng(-7.6272944, 111.0478108),
+        position: LatLng(double.parse(widget.lat), double.parse(widget.long)),
         icon: BitmapDescriptor.defaultMarker,
         infoWindow: InfoWindow(
-          title: "Lapangan Mania Mantap",
-          snippet: "Jalan Gajah Tebang nomor 4646"
+          title: widget.name,
+          snippet: widget.address,
         ),
       ),
     );
@@ -289,11 +300,18 @@ class _CourtDetailState extends State<CourtDetail>
                                         BoldText(
                                             "Location", 20.0, Colors.black),
                                         Container(
-                                          height: MediaQuery.of(context).size.height - 400,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height -
+                                              400,
                                           child: GoogleMap(
                                             onMapCreated: _onMapCreated,
-                                            initialCameraPosition: CameraPosition(
-                                              target: LatLng(-7.6272944, 111.0478108),
+                                            initialCameraPosition:
+                                                CameraPosition(
+                                              target: LatLng(
+                                                double.parse(widget.lat),
+                                                double.parse(widget.long),
+                                              ),
                                               zoom: 15.0,
                                             ),
                                             markers: _markers,

@@ -68,6 +68,10 @@ class BestMatch extends StatelessWidget {
                               context,
                               screen: CourtDetail(
                                 id: court['id'],
+                                name: court['name'],
+                                address: court['address'],
+                                lat: court['latitude'],
+                                long: court['longitude'],
                               ),
                               platformSpecific: false,
                               withNavBar: false,
