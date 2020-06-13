@@ -7,6 +7,7 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/components/text_style.dart';
 import 'package:sparring/graphql/search_court.dart';
+import 'package:sparring/pages/court/payment.dart';
 
 class CourtDetail extends StatefulWidget {
   final int id;
@@ -396,7 +397,14 @@ class _CourtDetailState extends State<CourtDetail>
               },
             ),
             bottomNavigationBar: RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                pushNewScreen(
+                  context,
+                  screen: Payment(),
+                  platformSpecific: false,
+                  withNavBar: false,
+                );
+              },
               padding: EdgeInsets.symmetric(vertical: 15.0),
               color: Theme.of(context).primaryColor,
               child: Text(
