@@ -61,6 +61,7 @@ class MainActivity: FlutterActivity(), TransactionFinishedCallback {
 
 
     override fun onTransactionFinished(result: TransactionResult) {
+        Toast.makeText(this, "order id: result.response.orderId", Toast.LENGTH_LONG)
         if(result.response != null) {
              when(result.status) {
                  TransactionResult.STATUS_SUCCESS -> Toast.makeText(this, "Success ID: "+ result.response.transactionId, Toast.LENGTH_SHORT)

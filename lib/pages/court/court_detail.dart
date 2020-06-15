@@ -15,6 +15,9 @@ class CourtDetail extends StatefulWidget {
   final String lat;
   final String long;
   final String address;
+  final String date;
+  final String time;
+  final int price;
 
   CourtDetail({
     Key key,
@@ -23,6 +26,9 @@ class CourtDetail extends StatefulWidget {
     this.lat,
     this.long,
     this.address,
+    this.date,
+    this.time,
+    this.price,
   }) : super(key: key);
 
   @override
@@ -81,7 +87,7 @@ class _CourtDetailState extends State<CourtDetail>
     );
 
     super.initState();
-    tabController = new TabController(length: 3, vsync: this);
+    tabController = new TabController(length: 2, vsync: this);
   }
 
   @override
@@ -165,7 +171,6 @@ class _CourtDetailState extends State<CourtDetail>
                               tabs: <Widget>[
                                 Tab(text: "Overview"),
                                 Tab(text: "Location"),
-                                Tab(text: "Review"),
                               ],
                             ),
                             backgroundColor: Colors.white,
@@ -322,66 +327,6 @@ class _CourtDetailState extends State<CourtDetail>
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: SingleChildScrollView(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          BoldText(
-                                              "Reviews", 20.0, Colors.black),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Row(
-                                            children: <Widget>[
-                                              Container(
-                                                width: 50.0,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.orange,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      Icons.star,
-                                                      color: Colors.white,
-                                                      size: 15.0,
-                                                    ),
-                                                    BoldText("4.5", 15.0,
-                                                        Colors.white),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              NormalText("(420 reviews)",
-                                                  Colors.grey, 14),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 16,
-                                          ),
-                                          reviewProfile(
-                                              "Hichem", "5.0", "05,Mar,2020"),
-                                          reviewProfile(
-                                              "Walid", "3.5", "17,feb,2020"),
-                                          reviewProfile(
-                                              "kratos", "4.0", "10,jan,2020"),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
                               ],
                               controller: tabController,
                             ),
@@ -400,7 +345,14 @@ class _CourtDetailState extends State<CourtDetail>
               onPressed: () {
                 pushNewScreen(
                   context,
-                  screen: Payment(),
+                  screen: Payment(
+                    courtId: widget.id,
+                    date: widget.date,
+                    time: widget.time,
+                    qty: 2,
+                    name: widget.name,
+                    price: widget.price,
+                  ),
                   platformSpecific: false,
                   withNavBar: false,
                 );

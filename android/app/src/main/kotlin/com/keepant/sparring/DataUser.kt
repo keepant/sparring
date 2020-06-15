@@ -21,7 +21,8 @@ object DataUser {
     }
 
     fun transactionRequest(id: String?, price: Int, qty: Int, name: String?) : TransactionRequest {
-        val request = TransactionRequest(System.currentTimeMillis().toString()+" ", 20000.0)
+        val totalPrice = price * qty;
+        val request = TransactionRequest(System.currentTimeMillis().toString()+" ", totalPrice.toDouble())
         request.customerDetails = userDetails()
 
         val details = ItemDetails(id, price.toDouble(), qty, name)
