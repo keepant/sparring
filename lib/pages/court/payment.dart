@@ -7,11 +7,12 @@ import 'package:intl/intl.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/search_court.dart';
+import 'package:uuid/uuid.dart';
 
 const CHANNEL = "com.keepant.sparring";
 const KEY_NATIVE = "showPaymentGateway";
 
-class Payment extends StatelessWidget {
+class Payment extends StatefulWidget {
   final int courtId;
   final String date;
   final String time;
@@ -31,11 +32,20 @@ class Payment extends StatelessWidget {
 
   static const platform = const MethodChannel(CHANNEL);
 
+  @override
+  _PaymentState createState() => _PaymentState();
+}
+
+class _PaymentState extends State<Payment> {
+  String uuid = Uuid().v4();
+
   Future<Null> _showNativeView() async {
-    await platform.invokeMethod(KEY_NATIVE, {
-      "name": name,
-      "price": price.toString(),
-      "qty": qty.toString(),
+    await Payment.platform.invokeMethod(KEY_NATIVE, {
+      "courtId": widget.courtId,
+      "orderId": uuid,
+      "name": widget.name,
+      "price": widget.price.toString(),
+      "qty": widget.qty.toString(),
     });
   }
 
@@ -48,7 +58,7 @@ class Payment extends StatelessWidget {
             documentNode: gql(getCourt),
             pollInterval: 10,
             variables: {
-              "id": courtId,
+              "id": widget.courtId,
             }),
         builder: (QueryResult result,
             {FetchMore fetchMore, VoidCallback refetch}) {
@@ -150,7 +160,7 @@ class Payment extends StatelessWidget {
                               Container(
                                 padding: EdgeInsets.only(left: 8.0),
                                 child: Text(new DateFormat.yMMMMd('en_US')
-                                    .format(DateTime.parse(date))
+                                    .format(DateTime.parse(widget.date))
                                     .toString()),
                               ),
                             ],
@@ -168,12 +178,12 @@ class Payment extends StatelessWidget {
                                 padding: EdgeInsets.only(left: 8.0),
                                 child: Text(new DateFormat.Hm()
                                         .format(DateTime.parse(
-                                            '2020-06-01' + ' ' + time))
+                                            '2020-06-01' + ' ' + widget.time))
                                         .toString() +
                                     " - " +
                                     new DateFormat.Hm()
                                         .format(DateTime.parse(
-                                            '2020-06-01' + ' ' + time))
+                                            '2020-06-01' + ' ' + widget.time))
                                         .toString()),
                               ),
                             ],

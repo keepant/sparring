@@ -20,9 +20,9 @@ object DataUser {
         return cd
     }
 
-    fun transactionRequest(id: String?, price: Int, qty: Int, name: String?) : TransactionRequest {
+    fun transactionRequest(orderID: String, id: String?, price: Int, qty: Int, name: String?) : TransactionRequest {
         val totalPrice = price * qty;
-        val request = TransactionRequest(System.currentTimeMillis().toString()+" ", totalPrice.toDouble())
+        val request = TransactionRequest(orderID, totalPrice.toDouble())
         request.customerDetails = userDetails()
 
         val details = ItemDetails(id, price.toDouble(), qty, name)

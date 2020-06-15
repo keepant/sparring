@@ -31,11 +31,15 @@ class MainActivity: FlutterActivity(), TransactionFinishedCallback {
                 val name = (""+call.argument("name"))
                 val price = (""+call.argument("price")).toInt()
                 val qty = (""+call.argument("qty")).toInt()
+                val orderId = (""+call.argument("orderId"))
+                val courtId = (""+call.argument("courtId"))
+
 
                 initMidtransSdk()
 
                 MidtransSDK.getInstance().transactionRequest = DataUser.transactionRequest(
-                        "1",
+                        orderId,
+                        courtId,
                         price,
                         qty,
                         name

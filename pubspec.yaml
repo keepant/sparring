@@ -50,6 +50,7 @@ dependencies:
   bubble_tab_indicator: ^0.1.4
   modal_bottom_sheet: ^0.1.6+1
   google_maps_flutter: ^0.5.28+1
+  uuid: ^2.1.0
 
 dev_dependencies:
   flutter_test:
