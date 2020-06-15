@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:intl/intl.dart';
 
+const CHANNEL = "com.keepant.sparring";
+const KEY_NATIVE = "showPaymentGateway";
+
 class Payment extends StatelessWidget {
+  static const platform = const MethodChannel(CHANNEL);
+
+  Future<Null> _showNativeView() async {
+    await platform.invokeMethod(KEY_NATIVE, {
+      "name": "Lapangan",
+      "price": "20000",
+      "qty": "1"
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +35,7 @@ class Payment extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            height: ScreenUtil().setHeight(450),
+            height: 230,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -148,17 +161,11 @@ class Payment extends StatelessWidget {
               ],
             ),
           ),
-          
         ],
       ),
       bottomNavigationBar: RaisedButton(
         onPressed: () {
-          pushNewScreen(
-            context,
-            screen: Payment(),
-            platformSpecific: false,
-            withNavBar: false,
-          );
+          _showNativeView();
         },
         padding: EdgeInsets.symmetric(vertical: 15.0),
         color: Theme.of(context).primaryColor,
@@ -170,3 +177,4 @@ class Payment extends StatelessWidget {
     );
   }
 }
+
