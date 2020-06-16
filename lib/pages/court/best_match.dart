@@ -37,7 +37,7 @@ class BestMatch extends StatelessWidget {
       child: Query(
         options: QueryOptions(
           documentNode: gql(getAllCourt),
-          pollInterval: 1,
+          pollInterval: 10,
           variables: {
             'date': date,
             'time': timeParam,

@@ -1,12 +1,11 @@
 final String getAllBookings = """ 
     query GetAllBookings(\$status: String!){
-      bookings (where: {status: {_eq: \$status}} order_by: {created_at: desc}){
+      bookings (where: {booking_status: {_eq: \$status}} order_by: {created_at: desc}){
         id
         date
         time_start
         time_end
-        status
-        payment_info
+        booking_status
         payment_method
         payment_status
         total_price
@@ -37,14 +36,13 @@ final String getAllBookings = """
   """;
 
   final String getBooking = """ 
-    query GetBooking(\$id: Int!){
+    query GetBooking(\$id: uuid!){
       bookings (where: {id: {_eq: \$id}}){
         id
         date
         time_start
         time_end
-        status
-        payment_info
+        booking_status
         payment_method
         payment_status
         total_price

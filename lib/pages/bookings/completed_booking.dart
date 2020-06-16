@@ -8,9 +8,10 @@ import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
 import 'package:sparring/pages/bookings/booking_detail.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 class CompletedBooking extends StatelessWidget {
-  final int id;
+  final Uuid id;
 
   CompletedBooking({Key key, this.id}) : super(key: key);
 
@@ -54,7 +55,7 @@ class CompletedBooking extends StatelessWidget {
                                   booking['date'] + ' ' + booking['time_end']))
                               .toString(),
                           icon: FontAwesomeIcons.solidCalendarCheck,
-                          status: booking['status'].toUpperCase(),
+                          status: booking['booking_status'].toUpperCase(),
                           color: Colors.green,
                           onTap: () {
                             pushNewScreen(

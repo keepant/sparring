@@ -10,7 +10,7 @@ import 'package:sparring/i18n.dart';
 import 'package:intl/intl.dart';
 
 class BookingDetail extends StatelessWidget {
-  final int id;
+  final String id;
 
   BookingDetail({Key key, this.id}) : super(key: key);
 
@@ -25,7 +25,7 @@ class BookingDetail extends StatelessWidget {
   }
 
   Color getColorPayment(String status) {
-    if (status == 'completed') {
+    if (status == 'settlement') {
       return Colors.green;
     } else if (status == 'pending') {
       return Colors.blue;
@@ -45,7 +45,7 @@ class BookingDetail extends StatelessWidget {
   }
 
   IconData getIconPayment(String status) {
-    if (status == 'completed') {
+    if (status == 'settlement') {
       return FontAwesomeIcons.solidCheckCircle;
     } else if (status == 'pending') {
       return FontAwesomeIcons.solidQuestionCircle;
@@ -63,7 +63,7 @@ class BookingDetail extends StatelessWidget {
       child: Query(
         options: QueryOptions(
           documentNode: gql(getBooking),
-          pollInterval: 1,
+          pollInterval: 10,
           variables: {
             'id': id,
           },
@@ -131,7 +131,7 @@ class BookingDetail extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.only(left: 8.0),
                             child: Text(
-                              booking['status'].toUpperCase(),
+                              booking['booking_status'].toUpperCase(),
                               style: TextStyle(
                                 color: getColorStatus(booking['status']),
                                 fontStyle: FontStyle.italic,
@@ -239,26 +239,21 @@ class BookingDetail extends StatelessWidget {
                         children: <Widget>[
                           Container(
                             child: Text(
-                              "You pay",
+                              "Payment Method",
                               style: TextStyle(fontWeight: FontWeight.w600),
                             ),
                           ),
                           Container(
                             child: Text(
-                              "Rp " + booking['total_price'].toString(),
-                              style: TextStyle(fontWeight: FontWeight.w600),
+                              booking['payment_method'] == 'cod'
+                                  ? 'Cash on Delivery (COD)'
+                                  : booking['payment_method'].toUpperCase(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ],
-                      ),
-                    ),
-                    Divider(),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 4.0),
-                      child: Text(
-                        'Payment Method',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16.0),
                       ),
                     ),
                     Padding(
@@ -268,14 +263,14 @@ class BookingDetail extends StatelessWidget {
                         children: <Widget>[
                           Container(
                             child: Text(
-                              booking['payment_method'] == 'cod'
-                                  ? 'Cash on Delivery (COD)'
-                                  : booking['payment_method'],
+                              "You pay",
+                              style: TextStyle(fontWeight: FontWeight.w600),
                             ),
                           ),
                           Container(
                             child: Text(
-                              booking['payment_info'],
+                              "Rp " + booking['total_price'].toString(),
+                              style: TextStyle(fontWeight: FontWeight.w600),
                             ),
                           ),
                         ],

@@ -10,7 +10,7 @@ import 'package:sparring/pages/bookings/booking_detail.dart';
 import 'package:intl/intl.dart';
 
 class UpcomingBooking extends StatelessWidget {
-  final int id;
+  final String id;
 
   UpcomingBooking({Key key, this.id}) : super(key: key);
 
@@ -21,7 +21,7 @@ class UpcomingBooking extends StatelessWidget {
       child: Query(
         options: QueryOptions(
             documentNode: gql(getAllBookings),
-            //pollInterval: 1,
+            pollInterval: 10,
             variables: {
               'status': 'upcoming',
             }),
@@ -36,10 +36,10 @@ class UpcomingBooking extends StatelessWidget {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         var booking = result.data['bookings'][index];
-                        //var user = result.data['bookings'][index]['user'];
                         var court = result.data['bookings'][index]['court'];
                         var img = result.data['bookings'][index]['court']
                             ['court_images'][0];
+
                         return BookingCard(
                           imgUrl: img['name'],
                           title: court['name'],
@@ -57,7 +57,7 @@ class UpcomingBooking extends StatelessWidget {
                                   booking['date'] + ' ' + booking['time_end']))
                               .toString(),
                           icon: FontAwesomeIcons.calendarAlt,
-                          status: booking['status'].toUpperCase(),
+                          status: booking['booking_status'].toUpperCase(),
                           color: Colors.blue,
                           onTap: () {
                             pushNewScreen(

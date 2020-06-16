@@ -1,5 +1,5 @@
 final String getAllCourt = """ 
-    query GetAllCourt(\$date: date!, \$time: time!, \$name: String!){
+    query GetAllCourt(\$date: String!, \$time: String!, \$name: String!){
       court (
         where: {
           _and: [
@@ -14,7 +14,7 @@ final String getAllCourt = """
                 bookings: {
                   _and: [
                     {date: {_eq: \$date}}
-                    {status: {_eq: "upcoming"}}
+                    {booking_status: {_eq: "upcoming"}}
                     {time_start: {_eq: \$time}}
                   ]
                 }
@@ -52,7 +52,7 @@ final String getAllCourtByHigherPrice = """
                 bookings: {
                   _and: [
                     {date: {_eq: \$date}}
-                    {status: {_eq: "upcoming"}}
+                    {booking_status: {_eq: "upcoming"}}
                     {time_start: {_eq: \$time}}
                   ]
                 }
@@ -90,7 +90,7 @@ final String getAllCourtByLowerPrice = """
                 bookings: {
                   _and: [
                     {date: {_eq: \$date}}
-                    {status: {_eq: "upcoming"}}
+                    {booking_status: {_eq: "upcoming"}}
                     {time_start: {_eq: \$time}}
                   ]
                 }
