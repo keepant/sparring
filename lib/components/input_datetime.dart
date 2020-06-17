@@ -10,6 +10,7 @@ class InputDateTime extends StatelessWidget {
   final TextEditingController textEditingController;
   final Future<DateTime> Function(BuildContext context, DateTime currentValue)
       onShowPicker;
+  final String warningText;
 
   InputDateTime({
     Key key,
@@ -19,6 +20,7 @@ class InputDateTime extends StatelessWidget {
     this.hintText,
     this.icon,
     this.initialValue,
+    this.warningText,
   }) : super(key: key);
 
   @override
@@ -31,6 +33,7 @@ class InputDateTime extends StatelessWidget {
         ),
       ),
       child: DateTimeField(
+          validator: (value) => value == null ? warningText : null,
           initialValue: initialValue,
           controller: textEditingController,
           decoration: InputDecoration(

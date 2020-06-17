@@ -1,3 +1,4 @@
+import 'package:empty_widget/empty_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -22,51 +23,65 @@ class CancelledBooking extends StatelessWidget {
         }),
         builder: (QueryResult result,
             {FetchMore fetchMore, VoidCallback refetch}) {
-          return result.loading
-              ? Loading()
-              : result.hasException
-                  ? Center(child: Text(result.exception.toString()))
-                  : ListView.builder(
-                      itemCount: result.data['bookings'].length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        var booking = result.data['bookings'][index];
-                        //var user = result.data['bookings'][index]['user'];
-                        var court = result.data['bookings'][index]['court'];
-                        var img = result.data['bookings'][index]['court']
-                            ['court_images'][0];
-                        return BookingCard(
-                          imgUrl: img['name'],
-                          title: court['name'],
-                          location: court['address'],
-                          date: new DateFormat.yMMMMd('en_US')
-                              .format(DateTime.parse(booking['date']))
-                              .toString(),
-                          timeStart: new DateFormat.Hm()
-                              .format(DateTime.parse(booking['date'] +
-                                  ' ' +
-                                  booking['time_start']))
-                              .toString(),
-                          timeEnd: new DateFormat.Hm()
-                              .format(DateTime.parse(
-                                  booking['date'] + ' ' + booking['time_end']))
-                              .toString(),
-                          icon: FontAwesomeIcons.solidCalendarTimes,
-                          status: booking['booking_status'].toUpperCase(),
-                          color: Colors.red,
-                          onTap: () {
-                            pushNewScreen(
-                              context,
-                              screen: BookingDetail(
-                                id: booking['id'],
-                              ),
-                              platformSpecific: false,
-                              withNavBar: false,
-                            );
-                          },
-                        );
-                      },
-                    );
+          if (result.loading) {
+            return Loading();
+          }
+
+          if (result.hasException) {
+            return Center(
+              child: Text(result.exception.toString()),
+            );
+          }
+
+          if (result.data['bookings'].length == 0) {
+            return EmptyListWidget(
+              title: 'No bookings',
+              subTitle: 'No cancelled bookings available yet',
+              image: null,
+              packageImage: PackageImage.Image_4,
+            );
+          }
+
+          return ListView.builder(
+            itemCount: result.data['bookings'].length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              var booking = result.data['bookings'][index];
+              //var user = result.data['bookings'][index]['user'];
+              var court = result.data['bookings'][index]['court'];
+              var img =
+                  result.data['bookings'][index]['court']['court_images'][0];
+              return BookingCard(
+                imgUrl: img['name'],
+                title: court['name'],
+                location: court['address'],
+                date: new DateFormat.yMMMMd('en_US')
+                    .format(DateTime.parse(booking['date']))
+                    .toString(),
+                timeStart: new DateFormat.Hm()
+                    .format(DateTime.parse(
+                        booking['date'] + ' ' + booking['time_start']))
+                    .toString(),
+                timeEnd: new DateFormat.Hm()
+                    .format(DateTime.parse(
+                        booking['date'] + ' ' + booking['time_end']))
+                    .toString(),
+                icon: FontAwesomeIcons.solidCalendarTimes,
+                status: booking['booking_status'].toUpperCase(),
+                color: Colors.red,
+                onTap: () {
+                  pushNewScreen(
+                    context,
+                    screen: BookingDetail(
+                      id: booking['id'],
+                    ),
+                    platformSpecific: false,
+                    withNavBar: false,
+                  );
+                },
+              );
+            },
+          );
         },
       ),
     );

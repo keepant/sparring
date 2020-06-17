@@ -1,3 +1,4 @@
+import 'package:empty_widget/empty_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -46,43 +47,57 @@ class HighestPrice extends StatelessWidget {
         ),
         builder: (QueryResult result,
             {FetchMore fetchMore, VoidCallback refetch}) {
-          return result.loading
-              ? Loading()
-              : result.hasException
-                  ? Center(child: Text(result.exception.toString()))
-                  : ListView.builder(
-                      itemCount: result.data['court'].length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        var court = result.data['court'][index];
-                        var img =
-                            result.data['court'][index]['court_images'][0];
+          if (result.loading) {
+            return Loading();
+          }
 
-                        return CourtCard(
-                          imgUrl: img['name'],
-                          title: court['name'],
-                          location: court['address'],
-                          price: court['price_per_hour'].toString(),
-                          onTap: () {
-                            pushNewScreen(
-                              context,
-                              screen: CourtDetail(
-                                id: court['id'],
-                                name: court['name'],
-                                address: court['address'],
-                                lat: court['latitude'],
-                                long: court['longitude'],
-                                date: date,
-                                time: timeParam,
-                                price: int.parse(court['price_per_hour']),
-                              ),
-                              platformSpecific: false,
-                              withNavBar: false,
-                            );
-                          },
-                        );
-                      },
-                    );
+          if (result.hasException) {
+            return Center(
+              child: Text(result.exception.toString()),
+            );
+          }
+
+          if (result.data['court'].length == 0) {
+            return EmptyListWidget(
+              title: 'No court',
+              subTitle: 'No court match with the search',
+              image: null,
+              packageImage: PackageImage.Image_4,
+            );
+          }
+
+          return ListView.builder(
+            itemCount: result.data['court'].length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              var court = result.data['court'][index];
+              var img = result.data['court'][index]['court_images'][0];
+
+              return CourtCard(
+                imgUrl: img['name'],
+                title: court['name'],
+                location: court['address'],
+                price: court['price_per_hour'].toString(),
+                onTap: () {
+                  pushNewScreen(
+                    context,
+                    screen: CourtDetail(
+                      id: court['id'],
+                      name: court['name'],
+                      address: court['address'],
+                      lat: court['latitude'],
+                      long: court['longitude'],
+                      date: date,
+                      time: timeParam,
+                      price: int.parse(court['price_per_hour']),
+                    ),
+                    platformSpecific: false,
+                    withNavBar: false,
+                  );
+                },
+              );
+            },
+          );
         },
       ),
     );

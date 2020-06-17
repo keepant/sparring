@@ -4,9 +4,15 @@ class InputText extends StatelessWidget {
   final String hintText;
   final TextEditingController textEditingController;
   final IconData icon;
+  final String warningText;
 
-   InputText({Key key, @required this.textEditingController, this.hintText, this.icon})
-      : super(key: key);
+  InputText({
+    Key key,
+    @required this.textEditingController,
+    this.hintText,
+    this.icon,
+    this.warningText,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +23,8 @@ class InputText extends StatelessWidget {
           Radius.circular(5.0),
         ),
       ),
-      child: TextField(
+      child: TextFormField(
+        validator: (value) => value.isEmpty ? warningText : null,
         style: TextStyle(
           fontSize: 15.0,
           //color: Colors.blueGrey[300],
