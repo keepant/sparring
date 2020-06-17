@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -124,7 +125,10 @@ class _LoginPageState extends State<LoginPage> {
             print(_emailControl.text + _passwdControl.text);
 
             await prefs.setToken(_token);
-            print("token: " + _token);
+
+            String userId = await auth.getUid();
+            await prefs.setUserId(userId);
+            print("token: " + _token + "userid: " + userId);
             pushNewScreen(
               context,
               screen: BookingsPage(),
@@ -272,6 +276,9 @@ class _LoginPageState extends State<LoginPage> {
         _token = await auth.signInWithGoogle();
         print("token: " + _token);
         await prefs.setToken(_token);
+        
+        String userId = await auth.getUid();
+        await prefs.setUserId(userId);
 
         Navigator.of(context).push(
           MaterialPageRoute(

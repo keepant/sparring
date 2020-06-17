@@ -8,12 +8,9 @@ import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
 import 'package:sparring/pages/bookings/booking_detail.dart';
 import 'package:intl/intl.dart';
-import 'package:uuid/uuid.dart';
 
 class CancelledBooking extends StatelessWidget {
-  final Uuid id;
-
-  CancelledBooking({Key key, this.id}) : super(key: key);
+  CancelledBooking({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

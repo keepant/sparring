@@ -8,9 +8,11 @@ import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
 import 'package:sparring/i18n.dart';
 import 'package:intl/intl.dart';
+import 'package:sparring/models/booking_payment_status.dart';
+import 'package:sparring/api/client.dart' as midtransClient;
 
 class BookingDetail extends StatelessWidget {
-  final String id;
+  final int id;
 
   BookingDetail({Key key, this.id}) : super(key: key);
 
@@ -83,6 +85,7 @@ class BookingDetail extends StatelessWidget {
               title: Text(I18n.of(context).bookingDetailsTitle),
             ),
             body: ListView.builder(
+              shrinkWrap: true,
               itemCount: result.data['bookings'].length,
               itemBuilder: (context, index) {
                 var booking = result.data['bookings'][index];
@@ -205,76 +208,110 @@ class BookingDetail extends StatelessWidget {
                             fontWeight: FontWeight.bold, fontSize: 16.0),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 4.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                            child: Icon(
-                              getIconPayment(booking['payment_status']),
-                              color: getColorPayment(booking['payment_status']),
+                    FutureBuilder<BookingPaymentStatus>(
+                      future: midtransClient
+                          .bookingPaymentStatus(booking['order_id']),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<BookingPaymentStatus> snapshot) {
+                        if (snapshot.hasError) {
+                          return Expanded(
+                            child: Center(
+                              child: Text(snapshot.error.toString()),
                             ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              booking['payment_status'].toUpperCase(),
-                              style: TextStyle(
-                                color:
-                                    getColorPayment(booking['payment_status']),
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.w600,
+                          );
+                        }
+
+                        if (snapshot.hasData) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    16.0, 4.0, 16.0, 4.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      child: Icon(
+                                        getIconPayment(
+                                            snapshot.data.transactionStatus),
+                                        color: getColorPayment(
+                                            snapshot.data.transactionStatus),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 8.0),
+                                      child: Text(
+                                        snapshot.data.transactionStatus
+                                            .toUpperCase(),
+                                        style: TextStyle(
+                                          color: getColorPayment(
+                                              snapshot.data.transactionStatus),
+                                          fontStyle: FontStyle.italic,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Divider(),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 4.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            child: Text(
-                              "Payment Method",
-                              style: TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                          Container(
-                            child: Text(
-                              booking['payment_method'] == 'cod'
-                                  ? 'Cash on Delivery (COD)'
-                                  : booking['payment_method'].toUpperCase(),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                              Divider(),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    16.0, 4.0, 16.0, 4.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Container(
+                                      child: Text(
+                                        "Payment Method",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        snapshot.data.paymentType.toUpperCase(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 4.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            child: Text(
-                              "You pay",
-                              style: TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                          Container(
-                            child: Text(
-                              "Rp " + booking['total_price'].toString(),
-                              style: TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ],
-                      ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    16.0, 4.0, 16.0, 4.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Container(
+                                      child: Text(
+                                        "You pay",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        "Rp " +
+                                            booking['total_price'].toString(),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          );
+                        }
+                        return  Loading();
+                      },
                     ),
                   ],
                 );

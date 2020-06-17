@@ -6,8 +6,12 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:intl/intl.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
+import 'package:sparring/graphql/bookings.dart';
 import 'package:sparring/graphql/search_court.dart';
+import 'package:sparring/models/booking_payment_status.dart';
+import 'package:sparring/services/prefs.dart';
 import 'package:uuid/uuid.dart';
+import 'package:sparring/api/client.dart' as midtransClient;
 
 const CHANNEL = "com.keepant.sparring";
 const KEY_NATIVE = "showPaymentGateway";
@@ -52,7 +56,7 @@ class _PaymentState extends State<Payment> {
   @override
   Widget build(BuildContext context) {
     return GraphQLProvider(
-      client: API.guestClient,
+      client: API.client,
       child: Query(
         options: QueryOptions(
             documentNode: gql(getCourt),
@@ -255,16 +259,47 @@ class _PaymentState extends State<Payment> {
                 );
               },
             ),
-            bottomNavigationBar: RaisedButton(
-              onPressed: () {
-                _showNativeView();
-              },
-              padding: EdgeInsets.symmetric(vertical: 15.0),
-              color: Theme.of(context).primaryColor,
-              child: Text(
-                "Checkout",
-                style: TextStyle(color: Colors.white, fontSize: 20.0),
+            bottomNavigationBar: Mutation(
+              options: MutationOptions(
+                documentNode: gql(addBooking),
+                update: (Cache cache, QueryResult result) {
+                  return cache;
+                },
+                onCompleted: (dynamic resultData) {
+                  print(resultData);
+                },
+                onError: (error) => print(error),
               ),
+              builder: (RunMutation runMutation, QueryResult result) {
+                return RaisedButton(
+                  onPressed: () async {
+                    int totalPrice = widget.qty * widget.price;
+
+                    print("MUTATONNNNNNN--------------");
+                    runMutation({
+                      'date': widget.date,
+                      'time_start': widget.time,
+                      'time_end': "15:00",
+                      'booking_status': "upcoming",
+                      'total_price': totalPrice,
+                      'user_id': await prefs.getUserId(),
+                      'court_id': widget.courtId,
+                      'qty': widget.qty,
+                      'order_id': uuid,
+                    });
+
+                    _showNativeView();
+                    
+                  },
+                  padding: EdgeInsets.symmetric(vertical: 15.0),
+                  color: Theme.of(context).primaryColor,
+                  child: Text(
+                    "Checkout",
+                    style: TextStyle(color: Colors.white, fontSize: 20.0),
+                  ),
+                );
+                
+              },
             ),
           );
         },

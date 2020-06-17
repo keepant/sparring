@@ -37,7 +37,7 @@ final String getAllCourt = """
   """;
 
 final String getAllCourtByHigherPrice = """ 
-    query GetAllCourtByHigherPrice(\$date: date!, \$time: time!, \$name: String!){
+    query GetAllCourtByHigherPrice(\$date: String!, \$time: String!, \$name: String!){
       court (
         where: {
           _and: [
@@ -75,7 +75,7 @@ final String getAllCourtByHigherPrice = """
   """;
 
 final String getAllCourtByLowerPrice = """ 
-    query GetAllCourtByLowerPrice(\$date: date!, \$time: time!, \$name: String!){
+    query GetAllCourtByLowerPrice(\$date: String!, \$time: String!, \$name: String!){
       court (
         where: {
           _and: [

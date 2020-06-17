@@ -13,6 +13,16 @@ class Prefs {
     final SharedPreferences prefs = await _prefs;
     return prefs.setString('token', value);
   }
+
+  Future<String> getUserId() async {
+    final SharedPreferences prefs = await _prefs;
+    return prefs.getString('userId') ?? null;
+  } 
+
+  Future<bool> setUserId(String value) async {
+    final SharedPreferences prefs = await _prefs;
+    return prefs.setString('userId', value);
+  }
   
   Future<bool> clearToken() async {
     final SharedPreferences prefs = await _prefs;

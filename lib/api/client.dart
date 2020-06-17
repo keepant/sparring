@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:sparring/api/http.dart' as httpClient;
-import 'package:sparring/models/booking.dart';
+import 'package:sparring/models/booking_payment_status.dart';
 
 class FetchException implements Exception {
   final DioError _error;
@@ -13,19 +13,11 @@ class FetchException implements Exception {
   }
 }
 
-Future<List<Booking>> bookings(String status) async {
+Future<BookingPaymentStatus> bookingPaymentStatus(String orderID) async {
   try {
-    Response response = await httpClient.bookings();
-    List<Booking> bookings = [];
-
-    for (var i = 0; i < response.data.length; i++) {
-      if (response.data[i]['status'] == status) {
-        bookings.add(Booking.fromJson(response.data[i]));
-      }
-    }
-
-    return bookings;
+    Response response = await httpClient.bookingsPaymentStatus(orderID);
+    return BookingPaymentStatus.fromJson(response.data);
   } on DioError catch (err) {
-    throw FetchException(err, 'unable to load bookings');
+    throw FetchException(err, 'unable to load payment info');
   }
 }

@@ -10,9 +10,8 @@ import 'package:sparring/pages/bookings/booking_detail.dart';
 import 'package:intl/intl.dart';
 
 class UpcomingBooking extends StatelessWidget {
-  final String id;
 
-  UpcomingBooking({Key key, this.id}) : super(key: key);
+  UpcomingBooking({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

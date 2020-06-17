@@ -8,7 +8,7 @@ abstract class BaseAuth {
   Future<void> sendEmailVerification();
   Future<bool> isEmailVerified();
   Future<String> signInWithGoogle();
-  Future<FirebaseUser> getCurrentUser();
+  Future<String> getUid();
 }
 
 class Auth implements BaseAuth {
@@ -51,7 +51,7 @@ class Auth implements BaseAuth {
     }
 
     FirebaseUser user = await _firebaseAuth.currentUser();
-    return await user.getIdToken(refresh: true);
+    return await user.getIdToken(refresh: false);
   }
 
   Future<void> signOut() async {
@@ -90,8 +90,10 @@ class Auth implements BaseAuth {
     return await user.getIdToken(refresh: true);
   }
 
-  Future<FirebaseUser> getCurrentUser() async {
-    return await _firebaseAuth.currentUser();
+  Future<String> getUid() async {
+    FirebaseUser user = await _firebaseAuth.currentUser();
+
+    return user.uid;
   }
 }
 
