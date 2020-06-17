@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -127,8 +128,8 @@ class BookingDetail extends StatelessWidget {
                         children: <Widget>[
                           Container(
                             child: Icon(
-                              getIconStatus(booking['status']),
-                              color: getColorStatus(booking['status']),
+                              getIconStatus(booking['booking_status']),
+                              color: getColorStatus(booking['booking_status']),
                             ),
                           ),
                           Container(
@@ -136,7 +137,8 @@ class BookingDetail extends StatelessWidget {
                             child: Text(
                               booking['booking_status'].toUpperCase(),
                               style: TextStyle(
-                                color: getColorStatus(booking['status']),
+                                color:
+                                    getColorStatus(booking['booking_status']),
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -310,7 +312,7 @@ class BookingDetail extends StatelessWidget {
                             ],
                           );
                         }
-                        return  Loading();
+                        return Loading();
                       },
                     ),
                   ],

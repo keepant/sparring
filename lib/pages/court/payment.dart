@@ -8,10 +8,8 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
 import 'package:sparring/graphql/search_court.dart';
-import 'package:sparring/models/booking_payment_status.dart';
 import 'package:sparring/services/prefs.dart';
 import 'package:uuid/uuid.dart';
-import 'package:sparring/api/client.dart' as midtransClient;
 
 const CHANNEL = "com.keepant.sparring";
 const KEY_NATIVE = "showPaymentGateway";

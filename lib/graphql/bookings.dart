@@ -34,6 +34,7 @@ final String getBooking = """
         booking_status
         total_price
         order_id
+        qty
     		court{
           id
           name
