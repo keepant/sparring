@@ -110,7 +110,8 @@ class _RegisterPageState extends State<RegisterPage> {
             await callable.call(<String, dynamic>{
               'email': _emailControl.text,
               'displayName': _fullNameControl.text,
-              'password': _passwdControl.text
+              'password': _passwdControl.text,
+              'photoURL': "https://i.ibb.co/2dbTY5C/person.png",
             });
 
             Navigator.pushReplacement(
@@ -277,13 +278,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       height: 50,
                     ),
                     _formWidget(),
-                    SizedBox(height: height * .14),
+                    SizedBox(height: height * .10),
                     _loginAccountLabel(),
                   ],
                 ),
               ),
             ),
-            Positioned(top: 40, left: 0, child: _backButton()),
+            Positioned(top: 20, left: 0, child: _backButton()),
           ],
         ),
       ),
