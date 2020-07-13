@@ -3,8 +3,8 @@ import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sparring/i18n.dart';
-import 'package:sparring/pages/accounts/me.dart';
 import 'package:sparring/pages/court/court_page.dart';
+import 'package:sparring/pages/more/more.dart';
 import 'package:sparring/services/auth_check.dart';
 
 class Home extends StatefulWidget {
@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
       CourtPage(),
       AuthCheck(),
       AuthCheck(),
-      Me(),
+      More(),
     ];
   }
 
@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
         isTranslucent: false,
       ),
       PersistentBottomNavBarItem(
-        icon: FaIcon(FontAwesomeIcons.userAlt),
+        icon: Icon(Icons.menu),
         title: I18n.of(context).account,
         activeColor: Colors.deepOrange,
         activeContentColor: Colors.white,

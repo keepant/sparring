@@ -1,17 +1,18 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sparring/components/text_style.dart';
 import 'package:sparring/services/auth.dart';
 import 'package:sparring/services/prefs.dart';
 
-class Me extends StatefulWidget {
+class More extends StatefulWidget {
   @override
-  _MeState createState() => _MeState();
+  _MoreState createState() => _MoreState();
 }
 
-class _MeState extends State<Me> {
+class _MoreState extends State<More> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +82,8 @@ class _MeState extends State<Me> {
                 await auth.signOut();
 
                 await prefs.clearToken();
+
+                OneSignal.shared.removeExternalUserId();
 
                 Flushbar(
                   message: "Logout successfully!",
