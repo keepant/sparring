@@ -53,6 +53,7 @@ dependencies:
   uuid: ^2.1.0
   empty_widget: ^0.0.1
   onesignal_flutter: ^2.6.0
+  flutter_statusbarcolor: ^0.2.3
 
 dev_dependencies:
   flutter_test:
