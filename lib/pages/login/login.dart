@@ -10,6 +10,7 @@ import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/bookings/bookings.dart';
 import 'package:sparring/pages/login/register.dart';
 import 'package:sparring/services/auth.dart';
+import 'package:sparring/services/auth_check.dart';
 import 'package:sparring/services/prefs.dart';
 
 class LoginPage extends StatefulWidget {
@@ -130,13 +131,9 @@ class _LoginPageState extends State<LoginPage> {
             await prefs.setUserId(userId);
             print("token: " + _token + "userid: " + userId);
             OneSignal.shared.setExternalUserId(userId);
-            
-            pushNewScreen(
-              context,
-              screen: BookingsPage(),
-              platformSpecific: false,
-              withNavBar: true,
-            );
+
+            Navigator.of(context).popUntil(ModalRoute.withName("/"));
+
             FocusScope.of(context).unfocus();
             Flushbar(
               message: "Login successfully!",
@@ -278,19 +275,13 @@ class _LoginPageState extends State<LoginPage> {
         _token = await auth.signInWithGoogle();
         print("token: " + _token);
         await prefs.setToken(_token);
-        
+
         String userId = await auth.getUid();
         await prefs.setUserId(userId);
-        
+
         OneSignal.shared.setExternalUserId(userId);
 
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) {
-              return BookingsPage();
-            },
-          ),
-        );
+        Navigator.of(context).popUntil(ModalRoute.withName("/"));
 
         Flushbar(
           message: "Login successfully!",
@@ -476,7 +467,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Positioned(top: 15, left: 0, child: _backButton()),
+            Positioned(top: 30, left: 0, child: _backButton()),
           ],
         ),
       ),
