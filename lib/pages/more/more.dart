@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sparring/components/text_style.dart';
+import 'package:sparring/pages/more/about.dart';
 import 'package:sparring/services/auth.dart';
 import 'package:sparring/services/prefs.dart';
 
@@ -84,9 +85,16 @@ class _MoreState extends State<More> {
               text: "My Team",
             ),
             _profileItem(
-              icon: FontAwesomeIcons.infoCircle,
-              text: "About Us ",
-            ),
+                icon: FontAwesomeIcons.infoCircle,
+                text: "About Us ",
+                onTap: () {
+                  pushNewScreen(
+                    context,
+                    screen: AboutUs(),
+                    platformSpecific: false,
+                    withNavBar: false,
+                  );
+                }),
             _profileItem(
               icon: FontAwesomeIcons.signOutAlt,
               text: "Logout",
