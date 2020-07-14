@@ -4,18 +4,19 @@ class BoldText extends StatelessWidget {
   final double size;
   final String text;
   final Color color;
-  bool isVeryBold = false;
 
-  BoldText(this.text, this.size, this.color);
-  BoldText.veryBold(this.text, this.size, this.color, this.isVeryBold);
+  BoldText({
+    this.text,
+    this.size,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       style: TextStyle(
-        fontFamily: "nunito",
-        fontWeight: isVeryBold ? FontWeight.w900 : FontWeight.w700,
+        fontWeight: FontWeight.w900,
         color: color,
         fontSize: size,
       ),
@@ -28,7 +29,11 @@ class NormalText extends StatelessWidget {
   final String text;
   final Color color;
 
-  NormalText(this.text, this.color, this.size);
+  NormalText({
+    this.text,
+    this.color,
+    this.size,
+  });
 
   @override
   Widget build(BuildContext context) {

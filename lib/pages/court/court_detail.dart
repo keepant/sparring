@@ -8,6 +8,7 @@ import 'package:sparring/components/loading.dart';
 import 'package:sparring/components/text_style.dart';
 import 'package:sparring/graphql/search_court.dart';
 import 'package:sparring/pages/court/payment.dart';
+import 'package:sparring/pages/utils/utils.dart';
 
 class CourtDetail extends StatefulWidget {
   final int id;
@@ -67,7 +68,11 @@ class _CourtDetailState extends State<CourtDetail>
         SizedBox(
           height: 5,
         ),
-        NormalText(text, Colors.blue, 12)
+        NormalText(
+          text: text,
+          color: Colors.blue,
+          size: 12,
+        )
       ],
     );
   }
@@ -183,7 +188,10 @@ class _CourtDetailState extends State<CourtDetail>
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
                                       BoldText(
-                                          court['name'], 20.0, Colors.black),
+                                        text: court['name'],
+                                        size: 20.0,
+                                        color: Colors.black,
+                                      ),
                                       Row(
                                         children: <Widget>[
                                           Icon(
@@ -191,20 +199,22 @@ class _CourtDetailState extends State<CourtDetail>
                                             color: Colors.grey,
                                             size: 15.0,
                                           ),
-                                          NormalText(court['address'],
-                                              Colors.grey, 15.0),
+                                          NormalText(
+                                            text: court['address'],
+                                            color: Colors.grey,
+                                            size: 15.0,
+                                          ),
                                         ],
                                       ),
                                       SizedBox(
                                         height: 10,
                                       ),
                                       NormalText(
-                                          "Rp." +
-                                              court['price_per_hour']
-                                                  .toString() +
-                                              " per hour",
-                                          Colors.black,
-                                          16.0),
+                                        text:
+                                            "${formatCurrency(court['price_per_hour'])} per hour",
+                                        color: Colors.black,
+                                        size: 16.0,
+                                      ),
                                       SizedBox(
                                         height: 10.0,
                                       ),
@@ -216,7 +226,9 @@ class _CourtDetailState extends State<CourtDetail>
                                         height: 10,
                                       ),
                                       BoldText(
-                                          "Description", 20.0, Colors.black),
+                                          text: "Description",
+                                          size: 20.0,
+                                          color: Colors.black),
                                       SizedBox(
                                         height: 10,
                                       ),
@@ -231,16 +243,18 @@ class _CourtDetailState extends State<CourtDetail>
                                                 MainAxisAlignment.spaceBetween,
                                             children: <Widget>[
                                               Container(
-                                                child: NormalText("Open day",
-                                                    Colors.black, 15.0),
+                                                child: NormalText(
+                                                  text: "Open day",
+                                                  color: Colors.black,
+                                                  size: 15.0,
+                                                ),
                                               ),
                                               Container(
                                                 child: NormalText(
-                                                    court['open_day'] +
-                                                        " - " +
-                                                        court['closed_day'],
-                                                    Colors.black,
-                                                    15.0),
+                                                    text:
+                                                        "${court['open_day']} - ${court['closed_day']}",
+                                                    color: Colors.black,
+                                                    size: 15.0),
                                               ),
                                             ],
                                           ),
@@ -249,16 +263,18 @@ class _CourtDetailState extends State<CourtDetail>
                                                 MainAxisAlignment.spaceBetween,
                                             children: <Widget>[
                                               Container(
-                                                child: NormalText("Open hours",
-                                                    Colors.black, 15.0),
+                                                child: NormalText(
+                                                  text: "Open hours",
+                                                  color: Colors.black,
+                                                  size: 15.0,
+                                                ),
                                               ),
                                               Container(
                                                 child: NormalText(
-                                                  court['open_hour'] +
-                                                      " - " +
-                                                      court['closed_hour'],
-                                                  Colors.black,
-                                                  15.0,
+                                                  text:
+                                                      "${court['open_hour']} - ${court['closed_hour']}",
+                                                  color: Colors.black,
+                                                  size: 15.0,
                                                 ),
                                               ),
                                             ],
@@ -276,7 +292,10 @@ class _CourtDetailState extends State<CourtDetail>
                                         height: 10,
                                       ),
                                       BoldText(
-                                          "Facilities", 20.0, Colors.black),
+                                        text: "Facilities",
+                                        size: 20.0,
+                                        color: Colors.black,
+                                      ),
                                       SizedBox(
                                         height: 10,
                                       ),
@@ -304,7 +323,10 @@ class _CourtDetailState extends State<CourtDetail>
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         BoldText(
-                                            "Location", 20.0, Colors.black),
+                                          text: "Location",
+                                          size: 20.0,
+                                          color: Colors.black,
+                                        ),
                                         Container(
                                           height: MediaQuery.of(context)
                                                   .size
@@ -390,7 +412,11 @@ class _CourtDetailState extends State<CourtDetail>
             SizedBox(
               width: 10,
             ),
-            BoldText(name, 16, Colors.black)
+            BoldText(
+              text: name,
+              size: 16.0,
+              color: Colors.black,
+            )
           ],
         ),
         SizedBox(
@@ -413,23 +439,33 @@ class _CourtDetailState extends State<CourtDetail>
                     color: Colors.white,
                     size: 15.0,
                   ),
-                  BoldText(review, 15.0, Colors.white),
+                  BoldText(
+                    text: review,
+                    size: 15.0,
+                    color: Colors.white,
+                  ),
                 ],
               ),
             ),
             SizedBox(
               width: 10,
             ),
-            NormalText(date, Colors.grey, 12.0)
+            NormalText(
+              text: date,
+              color: Colors.grey,
+              size: 12.0,
+            )
           ],
         ),
         SizedBox(
           height: 10,
         ),
         NormalText(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-            Colors.black,
-            12.0),
+          text:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+          color: Colors.black,
+          size: 12.0,
+        ),
         SizedBox(
           height: 10,
         ),

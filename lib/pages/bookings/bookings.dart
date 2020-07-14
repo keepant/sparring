@@ -14,10 +14,35 @@ class BookingsPage extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        backgroundColor: Color(0xffdee4eb),
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text(I18n.of(context).myBookingTitle),
+          title: Text(
+            I18n.of(context).myBookingTitle,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 21.0,
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              highlightColor: Colors.transparent,
+              splashColor: Colors.transparent,
+              child: Text(
+                "Sparring",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey[200],
+                  fontSize: 16.0,
+                ),
+              ),
+              onPressed: () {
+                print("sparring");
+              },
+            )
+          ],
           bottom: TabBar(
+            indicatorColor: Colors.white,
             tabs: [
               Tab(
                 text: I18n.of(context).upcomingText,

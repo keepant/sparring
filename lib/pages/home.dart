@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/fa_icon.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/court/court_page.dart';
 import 'package:sparring/pages/more/more.dart';
+import 'package:sparring/pages/notifications/notifications.dart';
 import 'package:sparring/services/auth_check.dart';
 
 class Home extends StatefulWidget {
@@ -20,7 +18,7 @@ class _HomeState extends State<Home> {
     return [
       CourtPage(),
       AuthCheck(),
-      AuthCheck(),
+      NotificationPage(),
       More(),
     ];
   }
@@ -36,16 +34,16 @@ class _HomeState extends State<Home> {
         isTranslucent: false,
       ),
       PersistentBottomNavBarItem(
-        icon: FaIcon(FontAwesomeIcons.calendarAlt),
-        title: I18n.of(context).booking,
+        icon: Icon(Icons.calendar_today),
+        title: "History",
         activeColor: Colors.deepOrange,
         activeContentColor: Colors.white,
         inactiveColor: Colors.grey,
         isTranslucent: false,
       ),
       PersistentBottomNavBarItem(
-        icon: FaIcon(FontAwesomeIcons.running),
-        title: "Match",
+        icon: Icon(Icons.notifications),
+        title: "Notifications",
         activeColor: Colors.deepOrange,
         activeContentColor: Colors.white,
         inactiveColor: Colors.grey,
@@ -53,7 +51,7 @@ class _HomeState extends State<Home> {
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.menu),
-        title: I18n.of(context).account,
+        title: "More",
         activeColor: Colors.deepOrange,
         activeContentColor: Colors.white,
         inactiveColor: Colors.grey,

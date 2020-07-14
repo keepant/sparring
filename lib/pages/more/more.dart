@@ -16,7 +16,15 @@ class _MoreState extends State<More> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Profile")),
+      appBar: AppBar(
+        title: Text(
+          "Profile",
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 21.0,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -27,16 +35,18 @@ class _MoreState extends State<More> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   CircleAvatar(
-                    radius: 50,
-                    child: Image.asset('assets/img/pp.png')
-                  ),
+                      radius: 50, child: Image.asset('assets/img/pp.png')),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        BoldText("Irfan Dwi Prasetyo", 20.0, Colors.black),
+                        BoldText(
+                          text: "Irfan Dwi Prasetyo",
+                          size: 20.0,
+                          color: Colors.black,
+                        ),
                         Row(
                           children: <Widget>[
                             Icon(
@@ -44,7 +54,10 @@ class _MoreState extends State<More> {
                               color: Colors.grey,
                               size: 15.0,
                             ),
-                            NormalText("Oran,Algeria", Colors.grey, 16),
+                            NormalText(
+                                text: "Oran,Algeria",
+                                color: Colors.grey,
+                                size: 16.0),
                           ],
                         ),
                       ],
@@ -114,7 +127,11 @@ class _MoreState extends State<More> {
             SizedBox(
               width: 15,
             ),
-            NormalText(text, Colors.black, 20.0)
+            NormalText(
+              text: text,
+              color: Colors.black,
+              size: 20.0,
+            )
           ],
         ),
       ),
