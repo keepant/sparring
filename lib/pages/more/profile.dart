@@ -69,22 +69,17 @@ class _ProfileState extends State<Profile> {
               title: Text(
                 "Profile",
                 style: TextStyle(
-                  color: Colors.black54,
                   fontWeight: FontWeight.bold,
-                  fontSize: 21.0,
                 ),
               ),
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back,
-                  color: Colors.black87,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
-              centerTitle: true,
-              backgroundColor: Colors.white,
               elevation: 0,
             ),
             body: Form(

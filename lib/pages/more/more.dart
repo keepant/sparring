@@ -11,6 +11,7 @@ import 'package:sparring/components/text_style.dart';
 import 'package:sparring/graphql/users.dart';
 import 'package:sparring/pages/more/about.dart';
 import 'package:sparring/pages/more/profile.dart';
+import 'package:sparring/pages/more/team/team.dart';
 import 'package:sparring/services/auth.dart';
 import 'package:sparring/services/auth/profile.dart';
 import 'package:sparring/services/prefs.dart';
@@ -136,9 +137,18 @@ class _MoreState extends State<More> {
                           },
                         ),
                         _profileItem(
-                          icon: FontAwesomeIcons.userFriends,
-                          text: "My Team",
-                        ),
+                            icon: FontAwesomeIcons.userFriends,
+                            text: "My Team",
+                            onTap: () {
+                              pushNewScreen(
+                                context,
+                                screen: Team(
+                                  userId: _userId,
+                                ),
+                                platformSpecific: false,
+                                withNavBar: false,
+                              );
+                            }),
                         _profileItem(
                             icon: FontAwesomeIcons.infoCircle,
                             text: "About Us ",

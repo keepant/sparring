@@ -57,6 +57,11 @@ dependencies:
   url_launcher: ^5.5.0
   package_info: ^0.4.1
   grouped_buttons: ^1.0.4
+  image_picker: ^0.6.7+2
+  firebase_storage: ^3.1.6
+  firebase_core: ^0.4.5
+  flutter_form_builder: ^3.11.3
+  firebase_image: ^0.1.6
 
 dev_dependencies:
   flutter_test:
