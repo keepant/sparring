@@ -1,4 +1,7 @@
+import 'package:firebase_image/firebase_image.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.widget.dart';
@@ -6,6 +9,8 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/team.dart';
 import 'package:sparring/pages/more/team/add_team.dart';
+import 'package:sparring/pages/utils/env.dart';
+import 'package:intl/intl.dart';
 
 class Team extends StatefulWidget {
   final String userId;
@@ -20,6 +25,11 @@ class Team extends StatefulWidget {
 }
 
 class _TeamState extends State<Team> {
+  final TextEditingController _nameTxt = new TextEditingController();
+  final TextEditingController _addressTxt = new TextEditingController();
+  final TextEditingController _createdTxt = new TextEditingController();
+  final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +54,6 @@ class _TeamState extends State<Team> {
         child: Query(
           options: QueryOptions(
             documentNode: gql(getTeam),
-            pollInterval: 5,
             variables: {
               'id': widget.userId,
             },
@@ -63,7 +72,131 @@ class _TeamState extends State<Team> {
 
             var team = result.data['team'];
 
-            return team.length < 1 ? emptyTeam() : Container();
+            return team.length < 1
+                ? emptyTeam()
+                : FormBuilder(
+                    key: _fbKey,
+                    child: ListView(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                      children: <Widget>[
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(bottom: 15.0, top: 8.0),
+                          child: Center(
+                            child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 50,
+                              backgroundImage: team[0]['logo'] == null ||
+                                      team[0]['logo'] == ''
+                                  ? AssetImage("assets/img/default_logo.png")
+                                  : FirebaseImage(
+                                      fbTeamLogoURI + team[0]['logo'],
+                                    ),
+                            ),
+                          ),
+                        ),
+                        FormBuilderTextField(
+                          attribute: "name",
+                          decoration: InputDecoration(labelText: "Team name"),
+                          controller: _nameTxt..text = team[0]['name'],
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15.0,
+                          ),
+                          validators: [
+                            FormBuilderValidators.required(),
+                          ],
+                        ),
+                        FormBuilderTextField(
+                          attribute: "address",
+                          decoration:
+                              InputDecoration(labelText: "Team base location"),
+                          controller: _addressTxt..text = team[0]['address'],
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15.0,
+                          ),
+                          validators: [
+                            FormBuilderValidators.required(),
+                          ],
+                        ),
+                        FormBuilderTextField(
+                          readOnly: true,
+                          attribute: "created",
+                          decoration: InputDecoration(labelText: "Created"),
+                          controller: _createdTxt
+                            ..text = new DateFormat.yMMMMd('en_US')
+                                .format(DateTime.parse(team[0]['created_at']))
+                                .toString(),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15.0,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15.0,
+                        ),
+                        Mutation(
+                          options: MutationOptions(
+                            documentNode: gql(updateTeam),
+                            update: (Cache cache, QueryResult result) {
+                              return cache;
+                            },
+                            onCompleted: (dynamic resultData) {
+                              print(resultData);
+                              Flushbar(
+                                message: "Data saved!",
+                                margin: EdgeInsets.all(8),
+                                borderRadius: 8,
+                                duration: Duration(seconds: 2),
+                              )..show(context);
+                            },
+                            onError: (error) => print(error),
+                          ),
+                          builder:
+                              (RunMutation runMutation, QueryResult result) {
+                            return RaisedButton(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                              ),
+                              color: Theme.of(context).primaryColor,
+                              child: Text(
+                                "Update",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              onPressed: () {
+                                String name = _nameTxt.text;
+
+                                runMutation({
+                                  'name': name,
+                                  'address': _addressTxt.text,
+                                  'id': team[0]['id'],
+                                });
+
+                                print(
+                                    "name: $name\naddress: ${_addressTxt.text}\n");
+
+                                if (_fbKey.currentState.validate()) {
+                                  FocusScope.of(context).unfocus();
+                                  Flushbar(
+                                    message: "Saving update..",
+                                    showProgressIndicator: true,
+                                    margin: EdgeInsets.all(8),
+                                    borderRadius: 8,
+                                  )..show(context);
+                                }
+                              },
+                            );
+                          },
+                        )
+                      ],
+                    ),
+                  );
           },
         ),
       ),

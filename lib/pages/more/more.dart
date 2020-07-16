@@ -58,7 +58,7 @@ class _MoreState extends State<More> {
                 child: Query(
                   options: QueryOptions(
                       documentNode: gql(getUserData),
-                      pollInterval: 5,
+                      pollInterval: 1,
                       variables: {'id': _userId}),
                   builder: (QueryResult result,
                       {FetchMore fetchMore, VoidCallback refetch}) {
@@ -88,8 +88,9 @@ class _MoreState extends State<More> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               CircleAvatar(
-                                  radius: 50,
-                                  child: Image.asset('assets/img/pp.png')),
+                                radius: 50,
+                                child: Image.asset('assets/img/pp.png'),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 12, horizontal: 30),

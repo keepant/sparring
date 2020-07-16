@@ -43,7 +43,6 @@ class _ProfileState extends State<Profile> {
       child: Query(
         options: QueryOptions(
             documentNode: gql(getUserData),
-            pollInterval: 10,
             variables: {
               'id': widget.userId,
             }),
@@ -92,7 +91,7 @@ class _ProfileState extends State<Profile> {
                     child: Center(
                       child: CircleAvatar(
                         radius: 50,
-                        backgroundImage: user['profile_picture'] == null
+                        backgroundImage: user['profile_picture'] == '' || user['profile_picture'] == null
                             ? AssetImage("assets/img/pp.png")
                             : NetworkImage(user['profile_picture']),
                       ),

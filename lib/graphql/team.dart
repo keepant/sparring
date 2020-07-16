@@ -23,3 +23,14 @@ final String addTeam = """
     }
   }
 """;
+
+final String updateTeam = """
+  mutation updateTeam(\$id: Int!, \$name: String!, \$address: String!){
+    update_team(where: {id: {_eq: \$id}} _set: {
+      name: \$name
+      address: \$address
+    }) {
+      affected_rows
+    }
+  }
+""";
