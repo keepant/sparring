@@ -14,3 +14,16 @@ final String getUserData = """
     }
   }
 """;
+
+final String updateUser = """
+  mutation updateUser(\$id: String!, \$name: String!, \$sex: String!, \$address: String!, \$phone: String!){
+    update_users(where: {id: {_eq: \$id}} _set: {
+      name: \$name
+      sex: \$sex
+      address: \$address
+      phone_number: \$phone
+    }) {	
+      affected_rows
+    }
+  }
+""";

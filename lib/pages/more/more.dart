@@ -10,6 +10,7 @@ import 'package:sparring/components/loading.dart';
 import 'package:sparring/components/text_style.dart';
 import 'package:sparring/graphql/users.dart';
 import 'package:sparring/pages/more/about.dart';
+import 'package:sparring/pages/more/profile.dart';
 import 'package:sparring/services/auth.dart';
 import 'package:sparring/services/auth/profile.dart';
 import 'package:sparring/services/prefs.dart';
@@ -49,7 +50,7 @@ class _MoreState extends State<More> {
         ),
       ),
       body: SingleChildScrollView(
-        child: _userId == ''
+        child: _userId == null
             ? _emptyUser()
             : GraphQLProvider(
                 client: API.client,
@@ -122,6 +123,17 @@ class _MoreState extends State<More> {
                         _profileItem(
                           icon: FontAwesomeIcons.userAlt,
                           text: "My Informations",
+                          onTap: () {
+                            pushNewScreen(
+                              context,
+                              screen: Profile(
+                                userId: _userId,
+                                sex: user['sex'],
+                              ),
+                              platformSpecific: false,
+                              withNavBar: false,
+                            );
+                          },
                         ),
                         _profileItem(
                           icon: FontAwesomeIcons.userFriends,

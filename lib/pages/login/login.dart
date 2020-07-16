@@ -7,10 +7,8 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sparring/components/bezier.dart';
 import 'package:sparring/i18n.dart';
-import 'package:sparring/pages/bookings/bookings.dart';
 import 'package:sparring/pages/login/register.dart';
 import 'package:sparring/services/auth.dart';
-import 'package:sparring/services/auth_check.dart';
 import 'package:sparring/services/prefs.dart';
 
 class LoginPage extends StatefulWidget {
