@@ -1,3 +1,4 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,8 +11,9 @@ import 'package:sparring/components/loading.dart';
 import 'package:sparring/components/text_style.dart';
 import 'package:sparring/graphql/users.dart';
 import 'package:sparring/pages/more/about.dart';
-import 'package:sparring/pages/more/profile.dart';
+import 'package:sparring/pages/more/profile/profile.dart';
 import 'package:sparring/pages/more/team/team.dart';
+import 'package:sparring/pages/utils/env.dart';
 import 'package:sparring/services/auth.dart';
 import 'package:sparring/services/auth/profile.dart';
 import 'package:sparring/services/prefs.dart';
@@ -93,8 +95,16 @@ class _MoreState extends State<More> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               CircleAvatar(
+                                backgroundColor: Colors.white,
                                 radius: 50,
-                                child: Image.asset('assets/img/pp.png'),
+                                backgroundImage:
+                                    user['profile_picture'] == '' ||
+                                            user['profile_picture'] == null
+                                        ? AssetImage("assets/img/pp.png")
+                                        : FirebaseImage(
+                                            fbProfileUserURI +
+                                                user['profile_picture'],
+                                          ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(

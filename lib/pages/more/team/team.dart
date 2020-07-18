@@ -32,7 +32,6 @@ class _TeamState extends State<Team> {
   final TextEditingController _createdTxt = new TextEditingController();
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
-  String path;
   final _picker = ImagePicker();
 
   @override
@@ -90,6 +89,7 @@ class _TeamState extends State<Team> {
                               const EdgeInsets.only(bottom: 15.0, top: 8.0),
                           child: Center(
                             child: InkWell(
+                              highlightColor: Colors.transparent,
                               child: Stack(
                                 children: <Widget>[
                                   CircleAvatar(
@@ -110,7 +110,7 @@ class _TeamState extends State<Team> {
                                     left: 75,
                                     child: Icon(
                                       Icons.camera_alt,
-                                      color: Colors.grey[600],
+                                      color: Colors.black,
                                       size: 25.0,
                                     ),
                                   ),

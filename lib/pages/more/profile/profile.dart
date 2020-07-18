@@ -1,11 +1,16 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:grouped_buttons/grouped_buttons.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.widget.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:intl/intl.dart';
 import 'package:sparring/graphql/users.dart';
+import 'package:sparring/pages/more/profile/crop_profile.dart';
+import 'package:sparring/pages/utils/env.dart';
 
 class Profile extends StatefulWidget {
   final String userId;
@@ -36,16 +41,16 @@ class _ProfileState extends State<Profile> {
     _picked = widget.sex;
   }
 
+  final _picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     return GraphQLProvider(
       client: API.client,
       child: Query(
-        options: QueryOptions(
-            documentNode: gql(getUserData),
-            variables: {
-              'id': widget.userId,
-            }),
+        options: QueryOptions(documentNode: gql(getUserData), variables: {
+          'id': widget.userId,
+        }),
         builder: (QueryResult result,
             {FetchMore fetchMore, VoidCallback refetch}) {
           if (result.loading) {
@@ -76,7 +81,7 @@ class _ProfileState extends State<Profile> {
                   Icons.arrow_back,
                 ),
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.of(context).popUntil(ModalRoute.withName("/"));
                 },
               ),
               elevation: 0,
@@ -89,11 +94,49 @@ class _ProfileState extends State<Profile> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 15.0, top: 8.0),
                     child: Center(
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: user['profile_picture'] == '' || user['profile_picture'] == null
-                            ? AssetImage("assets/img/pp.png")
-                            : NetworkImage(user['profile_picture']),
+                      child: InkWell(
+                        highlightColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        child: Stack(
+                          children: <Widget>[
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 50,
+                              backgroundImage: user['profile_picture'] == '' ||
+                                      user['profile_picture'] == null
+                                  ? AssetImage("assets/img/pp.png")
+                                  : FirebaseImage(
+                                      fbProfileUserURI + user['profile_picture'],
+                                    ),
+                            ),
+                            Positioned(
+                              top: 70,
+                              right: 0,
+                              bottom: 40.0,
+                              left: 75,
+                              child: Icon(
+                                Icons.camera_alt,
+                                color: Colors.black,
+                                size: 25.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        onTap: () async {
+                          final pickedFile = await _picker.getImage(
+                              source: ImageSource.gallery);
+
+                          pushNewScreen(
+                            context,
+                            screen: CropProfile(
+                              file: pickedFile.path,
+                              name: user['name'],
+                              id: user['id'],
+                              gender: user['sex'],
+                            ),
+                            withNavBar: false,
+                          );
+                        },
                       ),
                     ),
                   ),

@@ -27,3 +27,13 @@ final String updateUser = """
     }
   }
 """;
+
+final String updateProfilePicture = """
+  mutation updateProfilePicture(\$id: String!, \$profile_picture: String!){
+    update_users(where: {id: {_eq: \$id}} _set: {
+      profile_picture: \$profile_picture
+    }) {
+      affected_rows
+    }
+  }
+""";
