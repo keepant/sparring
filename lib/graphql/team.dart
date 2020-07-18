@@ -34,3 +34,13 @@ final String updateTeam = """
     }
   }
 """;
+
+final String updateLogo = """
+  mutation updateLogo(\$id: Int!, \$logo: String!){
+    update_team(where: {id: {_eq: \$id}} _set: {
+      logo: \$logo
+    }) {
+      affected_rows
+    }
+  }
+""";

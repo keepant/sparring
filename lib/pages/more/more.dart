@@ -51,15 +51,18 @@ class _MoreState extends State<More> {
         ),
       ),
       body: SingleChildScrollView(
-        child: _userId == null
+        child: _userId == null || _userId == ''
             ? _emptyUser()
             : GraphQLProvider(
                 client: API.client,
                 child: Query(
                   options: QueryOptions(
-                      documentNode: gql(getUserData),
-                      pollInterval: 1,
-                      variables: {'id': _userId}),
+                    documentNode: gql(getUserData),
+                    pollInterval: 1,
+                    variables: {
+                      'id': _userId,
+                    },
+                  ),
                   builder: (QueryResult result,
                       {FetchMore fetchMore, VoidCallback refetch}) {
                     if (result.loading) {
@@ -67,7 +70,9 @@ class _MoreState extends State<More> {
                     }
 
                     if (result.exception.toString().contains(
-                        "ClientException: Unhandled Failure Invalid argument(s)")) {
+                            "ClientException: Unhandled Failure Invalid argument(s)") ||
+                        result.exception.toString().contains(
+                            "Could not verify JWT: JWTExpired: Undefined location")) {
                       return _emptyUser();
                     }
 

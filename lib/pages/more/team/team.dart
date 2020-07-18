@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.widget.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/team.dart';
 import 'package:sparring/pages/more/team/add_team.dart';
+import 'package:sparring/pages/more/team/crop_image.dart';
 import 'package:sparring/pages/utils/env.dart';
 import 'package:intl/intl.dart';
 
@@ -29,6 +31,9 @@ class _TeamState extends State<Team> {
   final TextEditingController _addressTxt = new TextEditingController();
   final TextEditingController _createdTxt = new TextEditingController();
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
+
+  String path;
+  final _picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -84,15 +89,47 @@ class _TeamState extends State<Team> {
                           padding:
                               const EdgeInsets.only(bottom: 15.0, top: 8.0),
                           child: Center(
-                            child: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 50,
-                              backgroundImage: team[0]['logo'] == null ||
-                                      team[0]['logo'] == ''
-                                  ? AssetImage("assets/img/default_logo.png")
-                                  : FirebaseImage(
-                                      fbTeamLogoURI + team[0]['logo'],
+                            child: InkWell(
+                              child: Stack(
+                                children: <Widget>[
+                                  CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 50,
+                                    backgroundImage: team[0]['logo'] == null ||
+                                            team[0]['logo'] == ''
+                                        ? AssetImage(
+                                            "assets/img/default_logo.png")
+                                        : FirebaseImage(
+                                            fbTeamLogoURI + team[0]['logo'],
+                                          ),
+                                  ),
+                                  Positioned(
+                                    top: 70,
+                                    right: 0,
+                                    bottom: 40.0,
+                                    left: 75,
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      color: Colors.grey[600],
+                                      size: 25.0,
                                     ),
+                                  ),
+                                ],
+                              ),
+                              onTap: () async {
+                                final pickedFile = await _picker.getImage(source: ImageSource.gallery);
+
+                                pushNewScreen(
+                                  context,
+                                  screen: CropImage(
+                                    file: pickedFile.path,
+                                    name: team[0]['name'],
+                                    userId: team[0]['user_id'],
+                                    id: team[0]['id'],
+                                  ),
+                                  withNavBar: false,
+                                );
+                              },
                             ),
                           ),
                         ),
