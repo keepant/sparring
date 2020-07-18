@@ -9,6 +9,7 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/components/text_style.dart';
 import 'package:sparring/graphql/search_court.dart';
+import 'package:sparring/pages/court/court_hero.dart';
 import 'package:sparring/pages/court/payment.dart';
 import 'package:sparring/pages/utils/env.dart';
 import 'package:sparring/pages/utils/utils.dart';
@@ -144,28 +145,42 @@ class _CourtDetailState extends State<CourtDetail>
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         height: 250,
-                        child: Carousel(
-                          autoplay: true,
-                          animationCurve: Curves.fastOutSlowIn,
-                          animationDuration: Duration(milliseconds: 1000),
-                          dotSize: 6.0,
-                          dotIncreasedColor: Theme.of(context).primaryColor,
-                          dotBgColor: Colors.transparent,
-                          dotPosition: DotPosition.topCenter,
-                          dotVerticalPadding: 10.0,
-                          showIndicator: true,
-                          indicatorBgPadding: 7.0,
-                          images: [
-                            FirebaseImage(fbCourtURI + img[0]['name']),
-                            FirebaseImage(fbCourtURI + img[1]['name']),
-                            FirebaseImage(fbCourtURI + img[2]['name'])
-                          ],
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CourtHero(
+                                  image: img,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Hero(
+                            tag: "court-picture",
+                            child: Carousel(
+                              autoplay: true,
+                              animationCurve: Curves.fastOutSlowIn,
+                              animationDuration: Duration(milliseconds: 1000),
+                              dotSize: 6.0,
+                              dotIncreasedColor: Theme.of(context).primaryColor,
+                              dotBgColor: Colors.transparent,
+                              dotPosition: DotPosition.topCenter,
+                              dotVerticalPadding: 10.0,
+                              showIndicator: true,
+                              indicatorBgPadding: 7.0,
+                              images: [
+                                FirebaseImage(fbCourtURI + img[0]['name']),
+                                FirebaseImage(fbCourtURI + img[1]['name']),
+                                FirebaseImage(fbCourtURI + img[2]['name'])
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
                     Positioned(
                       left: 5,
-                      top: 10,
                       child: IconButton(
                         icon: Icon(
                           Icons.arrow_back,
