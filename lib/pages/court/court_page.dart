@@ -176,7 +176,7 @@ class _CourtPageState extends State<CourtPage> {
                             print("time: " + _timeControl.text);
 
                             FocusScope.of(context).unfocus();
-
+    
                             pushNewScreen(
                               context,
                               screen: SearchResult(

@@ -77,7 +77,7 @@ class LowestPrice extends StatelessWidget {
                 imgUrl: img['name'],
                 title: court['name'],
                 location: court['address'],
-                price: court['price_per_hour'].toString(),
+                price: court['price_per_hour'],
                 onTap: () {
                   pushNewScreen(
                     context,

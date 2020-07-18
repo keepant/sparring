@@ -254,7 +254,7 @@ class _MoreState extends State<More> {
                     children: <Widget>[
                       Container(
                         height: 20,
-                        width: MediaQuery.of(context).size.width,
+                        width: 200,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
                           color: Colors.white,
@@ -265,7 +265,7 @@ class _MoreState extends State<More> {
                       ),
                       Container(
                         height: 15,
-                        width: MediaQuery.of(context).size.width,
+                        width: 150,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
                           color: Colors.white,
@@ -287,31 +287,40 @@ class _MoreState extends State<More> {
             height: 5.0,
           ),
           Container(
-            height: 20,
+            height: 25,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
               color: Colors.white,
             ),
           ),
+          SizedBox(
+            height: 10.0,
+          ),
           Container(
-            height: 20,
+            height: 25,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
               color: Colors.white,
             ),
           ),
+          SizedBox(
+            height: 10.0,
+          ),
           Container(
-            height: 20,
+            height: 25,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
               color: Colors.white,
             ),
           ),
+          SizedBox(
+            height: 10.0,
+          ),
           Container(
-            height: 20,
+            height: 25,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),

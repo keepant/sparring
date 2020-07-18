@@ -1,10 +1,13 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
+import 'package:sparring/pages/utils/env.dart';
+import 'package:sparring/pages/utils/utils.dart';
 
 class CourtCard extends StatelessWidget {
   final String imgUrl;
   final String title;
   final String location;
-  final String price;
+  final int price;
   final GestureTapCallback onTap;
 
   CourtCard({
@@ -39,8 +42,11 @@ class CourtCard extends StatelessWidget {
                         width: 100,
                         height: 100,
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
                           image: DecorationImage(
-                            image: NetworkImage(imgUrl),
+                            image: FirebaseImage(
+                              fbCourtURI + imgUrl,
+                            ),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -91,7 +97,7 @@ class CourtCard extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 8.0, top: 20),
                           child: Text(
-                            "Rp."+ price + " per hour",
+                            "${formatCurrency(price)} / hour",
                             style: TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 16.0),
                           ),

@@ -135,9 +135,11 @@ final String getCourt = """
           id
           name
         }
-        court_facilities {
-          id
-          name
+        court_facilities_pivots{
+          court_facility {
+            id
+            name
+          }
         }
       }
     }

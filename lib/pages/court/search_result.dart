@@ -50,7 +50,7 @@ class _SearchResultState extends State<SearchResult>
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushNamed(context, '/');
+            Navigator.of(context).popUntil(ModalRoute.withName("/"));
           },
         ),
         title: InkWell(

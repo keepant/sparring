@@ -1,8 +1,10 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
@@ -10,6 +12,8 @@ import 'package:sparring/i18n.dart';
 import 'package:intl/intl.dart';
 import 'package:sparring/models/booking_payment_status.dart';
 import 'package:sparring/api/client.dart' as midtransClient;
+import 'package:sparring/pages/utils/env.dart';
+import 'package:sparring/pages/utils/utils.dart';
 
 class BookingDetail extends StatelessWidget {
   final int id;
@@ -103,7 +107,9 @@ class BookingDetail extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(img['name']),
+                          image: FirebaseImage(
+                            fbCourtURI + img['name'],
+                          ),
                         ),
                       ),
                     ),
@@ -269,7 +275,8 @@ class BookingDetail extends StatelessWidget {
                                       child: Text(
                                         "Payment Method",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w600),
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                     ),
                                     Container(
@@ -299,8 +306,7 @@ class BookingDetail extends StatelessWidget {
                                     ),
                                     Container(
                                       child: Text(
-                                        "Rp " +
-                                            booking['total_price'].toString(),
+                                        formatCurrency(booking['total_price']),
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600),
                                       ),
@@ -311,7 +317,49 @@ class BookingDetail extends StatelessWidget {
                             ],
                           );
                         }
-                        return Loading();
+                        return Shimmer.fromColors(
+                          baseColor: Colors.grey[300],
+                          highlightColor: Colors.grey[100],
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                height: 25,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Container(
+                                height: 20,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                               Container(
+                                height: 20,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
                       },
                     ),
                   ],

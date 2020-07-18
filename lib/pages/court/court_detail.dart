@@ -1,3 +1,4 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -8,6 +9,7 @@ import 'package:sparring/components/loading.dart';
 import 'package:sparring/components/text_style.dart';
 import 'package:sparring/graphql/search_court.dart';
 import 'package:sparring/pages/court/payment.dart';
+import 'package:sparring/pages/utils/env.dart';
 import 'package:sparring/pages/utils/utils.dart';
 
 class CourtDetail extends StatefulWidget {
@@ -131,7 +133,8 @@ class _CourtDetailState extends State<CourtDetail>
               itemBuilder: (context, index) {
                 var court = result.data['court'][index];
                 var img = result.data['court'][index]['court_images'][0];
-                var fasility = result.data['court'][index]['court_facilities'];
+                var fasility =
+                    result.data['court'][index]['court_facilities_pivots'];
 
                 return Stack(
                   children: <Widget>[
@@ -139,8 +142,11 @@ class _CourtDetailState extends State<CourtDetail>
                       top: 0,
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        child: Image.network(
-                          img['name'],
+                        child: Image(
+                          image: FirebaseImage(
+                            fbCourtURI + img['name'],
+                          ),
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                     ),
@@ -169,8 +175,9 @@ class _CourtDetailState extends State<CourtDetail>
                             appBar: TabBar(
                               labelColor: Colors.blue,
                               labelStyle: TextStyle(
-                                  fontFamily: "nunito",
-                                  fontWeight: FontWeight.bold),
+                                fontFamily: "nunito",
+                                fontWeight: FontWeight.bold,
+                              ),
                               controller: tabController,
                               indicatorColor: Colors.blue,
                               tabs: <Widget>[
@@ -308,7 +315,9 @@ class _CourtDetailState extends State<CourtDetail>
                                                 padding:
                                                     const EdgeInsets.all(8.0),
                                                 child: equipmentsItem(
-                                                    fasility[index]['name']),
+                                                    fasility[index]
+                                                            ['court_facility']
+                                                        ['name']),
                                               );
                                             }),
                                       ),

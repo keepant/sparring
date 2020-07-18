@@ -1,3 +1,4 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,6 +9,8 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
 import 'package:sparring/graphql/search_court.dart';
+import 'package:sparring/pages/utils/env.dart';
+import 'package:sparring/pages/utils/utils.dart';
 import 'package:sparring/services/prefs.dart';
 import 'package:uuid/uuid.dart';
 
@@ -103,7 +106,9 @@ class _PaymentState extends State<Payment> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(img['name']),
+                          image: FirebaseImage(
+                            fbCourtURI + img['name']
+                          ),
                         ),
                       ),
                     ),
@@ -224,7 +229,7 @@ class _PaymentState extends State<Payment> {
                                   style: TextStyle(fontWeight: FontWeight.w600),
                                 ),
                                 Text(
-                                  "Rp " + court['price_per_hour'].toString(),
+                                  formatCurrency(court['price_per_hour']),
                                   style: TextStyle(fontWeight: FontWeight.w600),
                                 ),
                               ],
@@ -246,7 +251,7 @@ class _PaymentState extends State<Payment> {
                           ),
                           Container(
                             child: Text(
-                              "Rp " + totalPrice.toString(),
+                              formatCurrency(totalPrice),
                               style: TextStyle(fontWeight: FontWeight.w600),
                             ),
                           ),
