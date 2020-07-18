@@ -6,8 +6,8 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:sparring/api/api.dart';
-import 'package:sparring/components/loading.dart';
 import 'package:sparring/components/text_style.dart';
 import 'package:sparring/graphql/users.dart';
 import 'package:sparring/pages/more/about.dart';
@@ -68,7 +68,7 @@ class _MoreState extends State<More> {
                   builder: (QueryResult result,
                       {FetchMore fetchMore, VoidCallback refetch}) {
                     if (result.loading) {
-                      return Loading();
+                      return _userShimmer();
                     }
 
                     if (result.exception.toString().contains(
@@ -229,6 +229,96 @@ class _MoreState extends State<More> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _userShimmer() {
+    return Shimmer.fromColors(
+      highlightColor: Colors.grey[100],
+      baseColor: Colors.grey[300],
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                CircleAvatar(radius: 50, backgroundColor: Colors.white),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        height: 20,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        height: 15,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 8.0,
+          ),
+          Divider(
+            thickness: 2,
+          ),
+          SizedBox(
+            height: 5.0,
+          ),
+          Container(
+            height: 20,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.0),
+              color: Colors.white,
+            ),
+          ),
+          Container(
+            height: 20,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.0),
+              color: Colors.white,
+            ),
+          ),
+          Container(
+            height: 20,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.0),
+              color: Colors.white,
+            ),
+          ),
+          Container(
+            height: 20,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.0),
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
     );
   }
