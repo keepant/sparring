@@ -1,3 +1,4 @@
+import 'package:carousel_pro/carousel_pro.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -132,7 +133,7 @@ class _CourtDetailState extends State<CourtDetail>
               itemCount: result.data['court'].length,
               itemBuilder: (context, index) {
                 var court = result.data['court'][index];
-                var img = result.data['court'][index]['court_images'][0];
+                var img = result.data['court'][index]['court_images'];
                 var fasility =
                     result.data['court'][index]['court_facilities_pivots'];
 
@@ -142,11 +143,23 @@ class _CourtDetailState extends State<CourtDetail>
                       top: 0,
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        child: Image(
-                          image: FirebaseImage(
-                            fbCourtURI + img['name'],
-                          ),
-                          fit: BoxFit.fitWidth,
+                        height: 250,
+                        child: Carousel(
+                          autoplay: true,
+                          animationCurve: Curves.fastOutSlowIn,
+                          animationDuration: Duration(milliseconds: 1000),
+                          dotSize: 6.0,
+                          dotIncreasedColor: Theme.of(context).primaryColor,
+                          dotBgColor: Colors.transparent,
+                          dotPosition: DotPosition.topCenter,
+                          dotVerticalPadding: 10.0,
+                          showIndicator: true,
+                          indicatorBgPadding: 7.0,
+                          images: [
+                            FirebaseImage(fbCourtURI + img[0]['name']),
+                            FirebaseImage(fbCourtURI + img[1]['name']),
+                            FirebaseImage(fbCourtURI + img[2]['name'])
+                          ],
                         ),
                       ),
                     ),
