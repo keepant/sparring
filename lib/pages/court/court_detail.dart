@@ -59,6 +59,10 @@ class _CourtDetailState extends State<CourtDetail>
       return FontAwesomeIcons.cocktail;
     } else if (text == 'Toilet') {
       return FontAwesomeIcons.toilet;
+    } else if (text == 'Bola') {
+      return FontAwesomeIcons.futbol;
+    } else if (text == 'Jersey') {
+      return FontAwesomeIcons.tshirt;
     }
 
     return FontAwesomeIcons.smileBeam;
