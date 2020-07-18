@@ -114,7 +114,7 @@ class _CropProfileState extends State<CropProfile> {
                   );
 
                   String name = widget.name;
-                  String fileName = "$name-logo-${DateTime.now()}.png";
+                  String fileName = "$name-profile-${DateTime.now()}.png";
                   String imgTrim = fileName.replaceAll(" ", "");
                   String logoPath = 'profile/$imgTrim';
 
