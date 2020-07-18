@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/bookings/cancelled_booking.dart';
 import 'package:sparring/pages/bookings/completed_booking.dart';
 import 'package:sparring/pages/bookings/upcoming_booking.dart';
+import 'package:sparring/pages/sparring/sparring.dart';
 
 class BookingsPage extends StatelessWidget {
   BookingsPage({
@@ -37,7 +39,11 @@ class BookingsPage extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                print("sparring");
+                pushNewScreen(
+                  context,
+                  screen: Sparring(),
+                  withNavBar: false,
+                );
               },
             )
           ],
