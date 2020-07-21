@@ -140,7 +140,9 @@ class _MoreState extends State<More> {
                         _profileItem(
                           icon: FontAwesomeIcons.userAlt,
                           text: "My Informations",
-                          onTap: () {
+                          onTap: () async {
+                            await prefs.setTeamId(user['team']['id']);
+                            
                             pushNewScreen(
                               context,
                               screen: Profile(
@@ -155,7 +157,9 @@ class _MoreState extends State<More> {
                         _profileItem(
                             icon: FontAwesomeIcons.userFriends,
                             text: "My Team",
-                            onTap: () {
+                            onTap: () async{
+                              await prefs.setTeamId(user['team']['id']);
+
                               pushNewScreen(
                                 context,
                                 screen: Team(

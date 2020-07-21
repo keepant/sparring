@@ -7,7 +7,7 @@ class Prefs {
   Future<String> getToken() async {
     final SharedPreferences prefs = await _prefs;
     return prefs.getString('token') ?? null;
-  } 
+  }
 
   Future<bool> setToken(String value) async {
     final SharedPreferences prefs = await _prefs;
@@ -17,13 +17,23 @@ class Prefs {
   Future<String> getUserId() async {
     final SharedPreferences prefs = await _prefs;
     return prefs.getString('userId') ?? null;
-  } 
+  }
 
   Future<bool> setUserId(String value) async {
     final SharedPreferences prefs = await _prefs;
     return prefs.setString('userId', value);
   }
-  
+
+  Future<String> getTeamId() async {
+    final SharedPreferences prefs = await _prefs;
+    return prefs.getString('teamId') ?? null;
+  }
+
+  Future<bool> setTeamId(String value) async {
+    final SharedPreferences prefs = await _prefs;
+    return prefs.setString('teamId', value);
+  }
+
   Future<bool> clearToken() async {
     final SharedPreferences prefs = await _prefs;
     return prefs.clear();
@@ -33,6 +43,6 @@ class Prefs {
     final SharedPreferences prefs = await _prefs;
     return prefs.containsKey('token') ?? false;
   }
- }
+}
 
 Prefs prefs = Prefs();

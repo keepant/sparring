@@ -1,5 +1,7 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sparring/pages/utils/env.dart';
 
 class SparringCard extends StatelessWidget {
   final String team1Name;
@@ -53,7 +55,11 @@ class SparringCard extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15.0),
                               image: DecorationImage(
-                                image: NetworkImage(team1Logo),
+                                image: team1Logo == null || team1Logo == ''
+                                    ? AssetImage("assets/img/default_logo.png")
+                                    : FirebaseImage(
+                                        fbTeamLogoURI + team1Logo,
+                                      ),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -90,7 +96,11 @@ class SparringCard extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15.0),
                               image: DecorationImage(
-                                image: NetworkImage(team2Logo),
+                                image: team2Logo == null || team2Logo == ''
+                                    ? AssetImage("assets/img/default_logo.png")
+                                    : FirebaseImage(
+                                        fbTeamLogoURI + team2Logo,
+                                      ),
                                 fit: BoxFit.cover,
                               ),
                             ),
