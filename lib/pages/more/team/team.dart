@@ -74,9 +74,9 @@ class _TeamState extends State<Team> {
               );
             }
 
-            var team = result.data['team'];
+            var team = result.data['users'][0]['team'];
 
-            return team.length < 1
+            return team == null
                 ? emptyTeam()
                 : FormBuilder(
                     key: _fbKey,
@@ -95,12 +95,12 @@ class _TeamState extends State<Team> {
                                   CircleAvatar(
                                     backgroundColor: Colors.white,
                                     radius: 50,
-                                    backgroundImage: team[0]['logo'] == null ||
-                                            team[0]['logo'] == ''
+                                    backgroundImage: team['logo'] == null ||
+                                            team['logo'] == ''
                                         ? AssetImage(
                                             "assets/img/default_logo.png")
                                         : FirebaseImage(
-                                            fbTeamLogoURI + team[0]['logo'],
+                                            fbTeamLogoURI + team['logo'],
                                           ),
                                   ),
                                   Positioned(
@@ -123,9 +123,9 @@ class _TeamState extends State<Team> {
                                   context,
                                   screen: CropImage(
                                     file: pickedFile.path,
-                                    name: team[0]['name'],
-                                    userId: team[0]['user_id'],
-                                    id: team[0]['id'],
+                                    name: team['name'],
+                                    userId: widget.userId,
+                                    id: team['id'],
                                   ),
                                   withNavBar: false,
                                 );
@@ -136,7 +136,7 @@ class _TeamState extends State<Team> {
                         FormBuilderTextField(
                           attribute: "name",
                           decoration: InputDecoration(labelText: "Team name"),
-                          controller: _nameTxt..text = team[0]['name'],
+                          controller: _nameTxt..text = team['name'],
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15.0,
@@ -149,7 +149,7 @@ class _TeamState extends State<Team> {
                           attribute: "address",
                           decoration:
                               InputDecoration(labelText: "Team base location"),
-                          controller: _addressTxt..text = team[0]['address'],
+                          controller: _addressTxt..text = team['address'],
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15.0,
@@ -164,7 +164,7 @@ class _TeamState extends State<Team> {
                           decoration: InputDecoration(labelText: "Created"),
                           controller: _createdTxt
                             ..text = new DateFormat.yMMMMd('en_US')
-                                .format(DateTime.parse(team[0]['created_at']))
+                                .format(DateTime.parse(team['created_at']))
                                 .toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -212,7 +212,7 @@ class _TeamState extends State<Team> {
                                 runMutation({
                                   'name': name,
                                   'address': _addressTxt.text,
-                                  'id': team[0]['id'],
+                                  'id': team['id'],
                                 });
 
                                 print(

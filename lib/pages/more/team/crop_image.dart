@@ -14,7 +14,7 @@ class CropImage extends StatefulWidget {
   final String file;
   final String name;
   final String userId;
-  final int id;
+  final String id;
 
   CropImage({
     Key key,

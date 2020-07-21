@@ -12,6 +12,7 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/graphql/team.dart';
 import 'package:sparring/pages/more/team/team.dart';
 import 'package:sparring/pages/utils/env.dart';
+import 'package:uuid/uuid.dart';
 
 class AddTeam extends StatefulWidget {
   @override
@@ -57,8 +58,11 @@ class _AddTeamState extends State<AddTeam> {
 
   StorageUploadTask uploadTask;
 
+  var uuid = Uuid();
+
   @override
   Widget build(BuildContext context) {
+    print(uuid.v4().toString());
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -165,6 +169,7 @@ class _AddTeamState extends State<AddTeam> {
                         });
 
                         runMutation({
+                          'team_id': uuid.v4(),
                           'name': name,
                           'address': _addressTxt.text,
                           'id': _userId,

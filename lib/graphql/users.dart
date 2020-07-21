@@ -11,6 +11,9 @@ final String getUserData = """
       phone_number
       profile_picture
       created_at
+      team{
+        id
+      }
     }
   }
 """;
