@@ -13,6 +13,7 @@ final getAllSparring = """
         }
       ]
     }) {
+      id
       date
       time_start
       time_end
@@ -30,6 +31,45 @@ final getAllSparring = """
         name
         address
         logo
+      }
+    }
+  }
+""";
+
+final String getSparringDetail = """ 
+  query getSparringDetail(\$id: Int!){
+    sparring(where: {id: {_eq: \$id}}) {
+      id
+      date
+      time_start
+      time_end
+      status
+      location
+      team1 {
+        id
+        name
+        logo
+        address
+        users{
+          id
+          name
+          address
+          profile_picture
+          phone_number
+        }
+      }
+      team2 {
+        id
+        name
+        logo
+        address
+        users{
+          id
+          name
+          address
+          profile_picture
+          phone_number
+        }
       }
     }
   }

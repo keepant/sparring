@@ -3,12 +3,14 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/components/sparring_card.dart';
 import 'package:sparring/graphql/sparring.dart';
 import 'package:sparring/graphql/users.dart';
+import 'package:sparring/pages/sparring/sparring_detail.dart';
 import 'package:sparring/services/auth.dart';
 import 'package:sparring/services/prefs.dart';
 import 'package:intl/intl.dart';
@@ -126,7 +128,17 @@ class _UpcomingSparringState extends State<UpcomingSparring> {
                         var team2 = result.data['sparring'][index]['team2'];
 
                         return SparringCard(
-                          onTap: () {},
+                          onTap: () {
+                            pushNewScreen(
+                              context,
+                              screen: SparringDetail(
+                                id: sparring['id'],
+                                teamId: teamId,
+                              ),
+                              platformSpecific: false,
+                              withNavBar: false,
+                            );
+                          },
                           team1Name: team1['name'],
                           team1Logo: team1['logo'],
                           team2Name: team2['name'],
