@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sparring/components/input_datetime.dart';
 import 'package:sparring/components/input_text.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/court/court_page.dart';
+import 'package:sparring/pages/opponents/post_sparring.dart';
+import 'package:flutter/cupertino.dart';
 
 class OpponentsPage extends StatefulWidget {
   @override
@@ -21,14 +25,33 @@ class _OpponentsPageState extends State<OpponentsPage> {
   final dateFormat = DateFormat("dd MMMM");
   final timeFormat = DateFormat("h:mm");
 
+  SharedPreferences sharedPreferences;
+  String _userId;
+
+  _getUserId() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      _userId = (sharedPreferences.getString("userId") ?? '');
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserId();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: DecoratedBox(
         position: DecorationPosition.background,
         decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/bg/bg-1.jpg'), fit: BoxFit.cover),
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [Colors.blue, Colors.red],
+          ),
         ),
         child: SafeArea(
           child: ListView(
@@ -61,7 +84,7 @@ class _OpponentsPageState extends State<OpponentsPage> {
                           context,
                           screen: CourtPage(),
                           platformSpecific: false,
-                          withNavBar: true, 
+                          withNavBar: true,
                         );
                       },
                       label: Text(
@@ -164,10 +187,89 @@ class _OpponentsPageState extends State<OpponentsPage> {
                     style: TextStyle(color: Colors.white, fontSize: 20.0),
                   ),
                 ),
-              )
+              ),
+              _postSparring(),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _postSparring() {
+    return Column(
+      children: <Widget>[
+        _divider(),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.all(20.0),
+          child: RaisedButton.icon(
+            onPressed: () {
+              showCupertinoModalBottomSheet(
+                expand: true,
+                context: context,
+                backgroundColor: Colors.transparent,
+                builder: (context, scrollController) => PostSparring(
+                  scrollController: scrollController,
+                  userId: _userId,
+                ),
+              );
+            },
+            padding: EdgeInsets.symmetric(vertical: 15.0),
+            color: Colors.deepOrange,
+            icon: Icon(
+              FontAwesomeIcons.running,
+              color: Colors.white,
+            ),
+            label: Text(
+              "Post sparring",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _divider() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: <Widget>[
+          SizedBox(
+            width: 20,
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Divider(
+                thickness: 1,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Text(
+            I18n.of(context).orText,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Divider(
+                thickness: 1,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+        ],
       ),
     );
   }

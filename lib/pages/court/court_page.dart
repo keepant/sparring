@@ -30,8 +30,11 @@ class _CourtPageState extends State<CourtPage> {
       body: DecoratedBox(
         position: DecorationPosition.background,
         decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/bg/bg-1.jpg'), fit: BoxFit.cover),
+         gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [Colors.blue, Colors.redAccent],
+          ),
         ),
         child: SafeArea(
           child: ListView(
