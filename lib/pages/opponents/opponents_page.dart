@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:sparring/api/api.dart';
 import 'package:sparring/components/input_datetime.dart';
 import 'package:sparring/components/input_text.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:sparring/components/loading.dart';
+import 'package:sparring/components/sparring_card.dart';
+import 'package:sparring/graphql/sparring.dart';
+import 'package:sparring/graphql/users.dart';
 import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/court/court_page.dart';
 import 'package:sparring/pages/opponents/post_sparring.dart';
@@ -188,11 +195,142 @@ class _OpponentsPageState extends State<OpponentsPage> {
                   ),
                 ),
               ),
-              _postSparring(),
+              Container(
+                child: GraphQLProvider(
+                  client: API.client,
+                  child: Query(
+                    options: QueryOptions(
+                        documentNode: gql(getUserData),
+                        pollInterval: 1,
+                        variables: {
+                          'id': _userId,
+                        }),
+                    builder: (QueryResult result,
+                        {FetchMore fetchMore, VoidCallback refetch}) {
+                      if (result.loading) {
+                        return _sparringShimmer();
+                      }
+
+                      if (result.hasException) {
+                        print(result.exception.toString());
+                        return Center(
+                          child: Text(result.exception.toString()),
+                        );
+                      }
+
+                      var teamId = result.data['users'][0]['team'];
+
+                      return teamId == null
+                          ? Text('Belom punya team')
+                          : Query(
+                              options: QueryOptions(
+                                documentNode: gql(getSearchSparring),
+                                pollInterval: 10,
+                                variables: {
+                                  'team_id': teamId['id'],
+                                },
+                              ),
+                              builder: (QueryResult result,
+                                  {FetchMore fetchMore, VoidCallback refetch}) {
+                                if (result.loading) {
+                                  return _sparringShimmer();
+                                }
+
+                                if (result.hasException) {
+                                  print(result.exception.toString());
+                                  return Center(
+                                    child: Text(result.exception.toString()),
+                                  );
+                                }
+
+                                var sparring = result.data['sparring'];
+
+                                return sparring.length < 1
+                                    ? _postSparring()
+                                    : _currentSparring(
+                                        teamLogo: sparring[0]['team1']['logo'],
+                                        teamName: sparring[0]['team1']['name'],
+                                        date: sparring[0]['date'],
+                                        timeEnd: sparring[0]['time_end'],
+                                        timeStart: sparring[0]['time_start'],
+                                        court: sparring[0]['court']['name'],
+                                        onTap: () {},
+                                      );
+                              },
+                            );
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _sparringShimmer() {
+    return Shimmer.fromColors(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            return Column(
+              children: <Widget>[
+                Container(
+                  height: 40,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  height: 5.0,
+                )
+              ],
+            );
+          },
+        ),
+      ),
+      baseColor: Colors.grey[300],
+      highlightColor: Colors.grey[100],
+    );
+  }
+
+  Widget _currentSparring({
+    String teamName,
+    String teamLogo,
+    String date,
+    String timeStart,
+    String timeEnd,
+    String court,
+    final GestureTapCallback onTap,
+  }) {
+    return Column(
+      children: <Widget>[
+        _divider("Your current sparring post"),
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+          width: MediaQuery.of(context).size.width,
+          child: SparringCard(
+            onTap: onTap,
+            team1Name: teamName,
+            team1Logo: teamLogo,
+            team2Name: "",
+            team2Logo: "question.png",
+            date: new DateFormat.yMMMMd('en_US')
+                .format(DateTime.parse(date))
+                .toString(),
+            timeStart: new DateFormat.Hm()
+                .format(DateTime.parse(date + ' ' + timeStart))
+                .toString(),
+            timeEnd: new DateFormat.Hm()
+                .format(DateTime.parse(date + ' ' + timeEnd))
+                .toString(),
+            court: court,
+          ),
+        ),
+      ],
     );
   }
 
@@ -240,7 +378,7 @@ class _OpponentsPageState extends State<OpponentsPage> {
       child: Row(
         children: <Widget>[
           SizedBox(
-            width: 20,
+            width: 10,
           ),
           Expanded(
             child: Padding(

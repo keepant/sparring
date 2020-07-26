@@ -45,19 +45,19 @@ final String getSparringDetail = """
       time_end
       status
       location
-      team1 {
-        id
-        name
-        logo
-        address
-        users{
+        team1 {
           id
           name
+          logo
           address
-          profile_picture
-          phone_number
+          users{
+            id
+            name
+            address
+            profile_picture
+            phone_number
+          }
         }
-      }
       team2 {
         id
         name
@@ -87,6 +87,40 @@ final String insertSparring = """
       }
     ) {
       affected_rows
+    }
+  }
+""";
+
+final String getSearchSparring = """
+  query getSearchSparring(\$team_id: uuid!){
+    sparring(where: {
+      _and: [
+        {
+          team_1_id: {_eq: \$team_id}
+          
+        }
+        {
+          status: {_eq: "searching"}
+        }
+      ]
+    }) {
+      id
+      date
+      time_start
+      time_end
+      court{
+        id
+        name
+        address
+        latitude
+        longitude
+      }
+      team1 {
+        id
+        name
+        logo
+        address
+      }
     }
   }
 """;
