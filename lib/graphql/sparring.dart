@@ -17,9 +17,15 @@ final getAllSparring = """
       date
       time_start
       time_end
-      location
       status
       created_at
+      court{
+        id
+        name
+        address
+        latitude
+        longitude
+      }
       team1 {
         id
         name
@@ -44,7 +50,13 @@ final String getSparringDetail = """
       time_start
       time_end
       status
-      location
+      court{
+        id
+        name
+        address
+        latitude
+        longitude
+      }
         team1 {
           id
           name

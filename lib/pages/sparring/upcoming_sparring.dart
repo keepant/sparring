@@ -126,6 +126,7 @@ class _UpcomingSparringState extends State<UpcomingSparring> {
                         var sparring = result.data['sparring'][index];
                         var team1 = result.data['sparring'][index]['team1'];
                         var team2 = result.data['sparring'][index]['team2'];
+                        var court = sparring['court'];
 
                         return SparringCard(
                           onTap: () {
@@ -156,7 +157,7 @@ class _UpcomingSparringState extends State<UpcomingSparring> {
                                   ' ' +
                                   sparring['time_end']))
                               .toString(),
-                          court: sparring['location'],
+                          court: court['name'],
                         );
                       },
                     );

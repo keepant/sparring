@@ -281,7 +281,10 @@ class _OpponentsPageState extends State<OpponentsPage> {
                 Container(
                   height: 40,
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.white,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    color: Colors.white,
+                  ),
                 ),
                 SizedBox(
                   height: 5.0,
