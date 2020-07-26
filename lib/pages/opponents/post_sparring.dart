@@ -10,6 +10,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.widget.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
+import 'package:sparring/graphql/sparring.dart';
 import 'package:sparring/graphql/users.dart';
 import 'package:sparring/pages/more/team/add_team.dart';
 import 'package:sparring/pages/utils/env.dart';
@@ -136,206 +137,244 @@ class _PostSparringState extends State<PostSparring> {
                               var court = booking['court'];
                               var img = court['court_images'][0];
 
-                              return InkWell(
-                                onTap: () {
-                                  _onSelected(index);
-                                  print(court['name']);
-                                  AwesomeDialog(
-                                    context: context,
-                                    animType: AnimType.SCALE,
-                                    dialogType: DialogType.INFO,
-                                    btnOk: Container(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 15.0),
-                                      margin: EdgeInsets.only(top: 30.0),
-                                      width: MediaQuery.of(context).size.width -
-                                          300.0,
-                                      decoration: BoxDecoration(
-                                        color: Theme.of(context).primaryColor,
-                                        borderRadius:
-                                            BorderRadius.circular(180.0),
-                                      ),
-                                      child: Text(
-                                        "Yes",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xffffffff),
-                                        ),
-                                      ),
-                                    ),
-                                    body: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 20.0),
-                                          child: Text(
-                                            "Choose this court?",
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 120,
-                                          height: 120,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                              image: DecorationImage(
-                                                image: FirebaseImage(
-                                                  fbCourtURI + img['name'],
-                                                ),
-                                                fit: BoxFit.fill,
-                                              )),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 20.0),
-                                          child: Column(
+                              return Mutation(
+                                  options: MutationOptions(
+                                    documentNode: gql(insertSparring),
+                                    update: (Cache cache, QueryResult result) {
+                                      return cache;
+                                    },
+                                    onCompleted: (dynamic resultData) {
+                                      print(resultData);
+                                      Flushbar(
+                                        message: "Sparring successfully saved!",
+                                        margin: EdgeInsets.all(8),
+                                        borderRadius: 8,
+                                        duration: Duration(seconds: 2),
+                                      )..show(context);
+                                      // Navigator.of(context)
+                                      //     .popUntil(ModalRoute.withName("/"));
+                                    },
+                                    onError: (error) => print(error),
+                                  ),
+                                  builder: (RunMutation runMutation,
+                                      QueryResult result) {
+                                    return InkWell(
+                                      onTap: () {
+                                        _onSelected(index);
+                                        print(court['name']);
+                                        AwesomeDialog(
+                                          context: context,
+                                          useRootNavigator: true,
+                                          animType: AnimType.SCALE,
+                                          dialogType: DialogType.INFO,
+                                          btnOkOnPress: () {
+                                            print(
+                                                "date: ${booking['date']}\ntime: ${booking['time_start']} - ${booking['time_end']}\nteam: ${teamId['id']}\ncourt: ${court['id']}");
+                                            runMutation({
+                                              'date': booking['date'],
+                                              'time_start':
+                                                  booking['time_start'],
+                                              'time_end': booking['time_end'],
+                                              'team_id': teamId['id'],
+                                              'court_id': court['id'],
+                                            });
+                                            Flushbar(
+                                              message: "Finishing...",
+                                              showProgressIndicator: true,
+                                              margin: EdgeInsets.all(8),
+                                              borderRadius: 8,
+                                            )..show(context);
+                                          },
+                                          btnOkText: "Yes, I pick this court",
+                                          btnOkColor:
+                                              Theme.of(context).primaryColor,
+                                          body: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
                                             children: <Widget>[
-                                              Text(
-                                                court['name'],
-                                                style: TextStyle(
-                                                  fontSize: 21.0,
-                                                  fontWeight: FontWeight.bold,
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 20.0),
+                                                child: Text(
+                                                  "Choose this court?",
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                    fontSize: 16.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
-                                              Text(
-                                                "on " +
-                                                    new DateFormat.yMMMMd(
-                                                            'en_US')
-                                                        .format(DateTime.parse(
-                                                            booking['date']))
-                                                        .toString(),
-                                                style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                              Container(
+                                                width: 120,
+                                                height: 120,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15.0),
+                                                    image: DecorationImage(
+                                                      image: FirebaseImage(
+                                                        fbCourtURI +
+                                                            img['name'],
+                                                      ),
+                                                      fit: BoxFit.fill,
+                                                    )),
                                               ),
-                                              Text(
-                                                new DateFormat.Hm()
-                                                        .format(DateTime.parse(
-                                                            booking['date'] +
-                                                                ' ' +
-                                                                booking[
-                                                                    'time_start']))
-                                                        .toString() +
-                                                    " - " +
-                                                    new DateFormat.Hm()
-                                                        .format(DateTime.parse(
-                                                            booking['date'] +
-                                                                ' ' +
-                                                                booking[
-                                                                    'time_end']))
-                                                        .toString(),
-                                                style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold,
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 20.0),
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Text(
+                                                      court['name'],
+                                                      style: TextStyle(
+                                                        fontSize: 21.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "on " +
+                                                          new DateFormat.yMMMMd(
+                                                                  'en_US')
+                                                              .format(DateTime
+                                                                  .parse(booking[
+                                                                      'date']))
+                                                              .toString(),
+                                                      style: TextStyle(
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      new DateFormat.Hm()
+                                                              .format(DateTime
+                                                                  .parse(booking[
+                                                                          'date'] +
+                                                                      ' ' +
+                                                                      booking[
+                                                                          'time_start']))
+                                                              .toString() +
+                                                          " - " +
+                                                          new DateFormat.Hm()
+                                                              .format(DateTime
+                                                                  .parse(booking[
+                                                                          'date'] +
+                                                                      ' ' +
+                                                                      booking[
+                                                                          'time_end']))
+                                                              .toString(),
+                                                      style: TextStyle(
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  )..show();
-                                },
-                                child: Card(
-                                  color: _selectedIndex != null &&
-                                          _selectedIndex == index
-                                      ? Colors.grey[300]
-                                      : Colors.white,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 4.0, horizontal: 12.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          court['name'],
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: <Widget>[
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: <Widget>[
-                                                Padding(
-                                                  padding: EdgeInsets.all(4.0),
-                                                  child: Icon(
-                                                    FontAwesomeIcons
-                                                        .calendarAlt,
-                                                    size: 14.0,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.all(4.0),
-                                                  child: Text(new DateFormat
-                                                          .yMMMMd('en_US')
-                                                      .format(DateTime.parse(
-                                                          booking['date']))
-                                                      .toString()),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: <Widget>[
-                                                Padding(
-                                                  padding: EdgeInsets.all(4.0),
-                                                  child: Icon(
-                                                    FontAwesomeIcons.clock,
-                                                    size: 14.0,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.all(4.0),
-                                                  child: Text(
-                                                    new DateFormat.Hm()
+                                        )..show();
+                                      },
+                                      child: Card(
+                                        color: _selectedIndex != null &&
+                                                _selectedIndex == index
+                                            ? Colors.grey[300]
+                                            : Colors.white,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 4.0, horizontal: 12.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Text(
+                                                court['name'],
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: <Widget>[
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: <Widget>[
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.all(4.0),
+                                                        child: Icon(
+                                                          FontAwesomeIcons
+                                                              .calendarAlt,
+                                                          size: 14.0,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.all(4.0),
+                                                        child: Text(new DateFormat
+                                                                .yMMMMd('en_US')
                                                             .format(DateTime
                                                                 .parse(booking[
-                                                                        'date'] +
-                                                                    ' ' +
-                                                                    booking[
-                                                                        'time_start']))
-                                                            .toString() +
-                                                        " - " +
-                                                        new DateFormat.Hm()
-                                                            .format(DateTime
-                                                                .parse(booking[
-                                                                        'date'] +
-                                                                    ' ' +
-                                                                    booking[
-                                                                        'time_end']))
-                                                            .toString(),
+                                                                    'date']))
+                                                            .toString()),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ),
-                                              ],
-                                            )
-                                          ],
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: <Widget>[
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.all(4.0),
+                                                        child: Icon(
+                                                          FontAwesomeIcons
+                                                              .clock,
+                                                          size: 14.0,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.all(4.0),
+                                                        child: Text(
+                                                          new DateFormat.Hm()
+                                                                  .format(DateTime.parse(booking[
+                                                                          'date'] +
+                                                                      ' ' +
+                                                                      booking[
+                                                                          'time_start']))
+                                                                  .toString() +
+                                                              " - " +
+                                                              new DateFormat
+                                                                      .Hm()
+                                                                  .format(DateTime.parse(booking[
+                                                                          'date'] +
+                                                                      ' ' +
+                                                                      booking[
+                                                                          'time_end']))
+                                                                  .toString(),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
+                                      ),
+                                    );
+                                  });
                             },
                           ),
                         );

@@ -74,3 +74,19 @@ final String getSparringDetail = """
     }
   }
 """;
+
+final String insertSparring = """
+  mutation insertSparring(\$date: String!, \$time_start: String!, \$time_end: String!, \$team_id: uuid!, \$court_id: Int!){
+    insert_sparring(
+      objects: {
+        date: \$date
+        time_start: \$time_start
+        time_end: \$time_end
+        team_1_id: \$team_id
+        court_id: \$court_id
+      }
+    ) {
+      affected_rows
+    }
+  }
+""";

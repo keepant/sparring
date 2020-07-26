@@ -199,7 +199,7 @@ class _OpponentsPageState extends State<OpponentsPage> {
   Widget _postSparring() {
     return Column(
       children: <Widget>[
-        _divider(),
+        _divider(I18n.of(context).orText),
         Container(
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.all(20.0),
@@ -234,7 +234,7 @@ class _OpponentsPageState extends State<OpponentsPage> {
     );
   }
 
-  Widget _divider() {
+  Widget _divider(String text) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Row(
@@ -252,7 +252,7 @@ class _OpponentsPageState extends State<OpponentsPage> {
             ),
           ),
           Text(
-            I18n.of(context).orText,
+            text,
             style: TextStyle(
               color: Colors.white,
             ),
