@@ -10,7 +10,6 @@ import 'package:sparring/components/input_datetime.dart';
 import 'package:sparring/components/input_text.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:sparring/components/loading.dart';
 import 'package:sparring/components/sparring_card.dart';
 import 'package:sparring/graphql/sparring.dart';
 import 'package:sparring/graphql/users.dart';
@@ -221,7 +220,7 @@ class _OpponentsPageState extends State<OpponentsPage> {
                       var teamId = result.data['users'][0]['team'];
 
                       return teamId == null
-                          ? Text('Belom punya team')
+                          ? Container()
                           : Query(
                               options: QueryOptions(
                                 documentNode: gql(getSearchSparring),

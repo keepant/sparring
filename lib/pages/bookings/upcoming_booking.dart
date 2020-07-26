@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/booking_card.dart';
 import 'package:sparring/components/loading.dart';
@@ -14,9 +15,30 @@ import 'package:intl/intl.dart';
 import 'package:sparring/services/auth.dart';
 import 'package:sparring/services/prefs.dart';
 
-class UpcomingBooking extends StatelessWidget {
+class UpcomingBooking extends StatefulWidget {
   UpcomingBooking({Key key}) : super(key: key);
 
+  @override
+  _UpcomingBookingState createState() => _UpcomingBookingState();
+}
+
+class _UpcomingBookingState extends State<UpcomingBooking> {
+  SharedPreferences sharedPreferences;
+  String _userId;
+
+  _getUserId() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      _userId = (sharedPreferences.getString("userId") ?? '');
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserId();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return GraphQLProvider(
@@ -26,6 +48,7 @@ class UpcomingBooking extends StatelessWidget {
             documentNode: gql(getAllBookings),
             pollInterval: 10,
             variables: {
+              'id': _userId,
               'status': 'upcoming',
             }),
         builder: (QueryResult result,

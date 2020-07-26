@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:empty_widget/empty_widget.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
@@ -124,6 +125,14 @@ class _PostSparringState extends State<PostSparring> {
                           print(result.exception.toString());
                           return Center(
                             child: Text(result.exception.toString()),
+                          );
+                        }
+                        if (result.data['bookings'].length == 0) {
+                          return EmptyListWidget(
+                            title: 'No bookings',
+                            subTitle: 'Make booking court to post sparring!',
+                            image: null,
+                            packageImage: PackageImage.Image_4,
                           );
                         }
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/booking_card.dart';
 import 'package:sparring/components/loading.dart';
@@ -10,17 +11,42 @@ import 'package:sparring/graphql/bookings.dart';
 import 'package:sparring/pages/bookings/booking_detail.dart';
 import 'package:intl/intl.dart';
 
-class CompletedBooking extends StatelessWidget {
+class CompletedBooking extends StatefulWidget {
   CompletedBooking({Key key}) : super(key: key);
+
+  @override
+  _CompletedBookingState createState() => _CompletedBookingState();
+}
+
+class _CompletedBookingState extends State<CompletedBooking> {
+  SharedPreferences sharedPreferences;
+  String _userId;
+
+  _getUserId() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      _userId = (sharedPreferences.getString("userId") ?? '');
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserId();
+  }
 
   @override
   Widget build(BuildContext context) {
     return GraphQLProvider(
       client: API.client,
       child: Query(
-        options: QueryOptions(documentNode: gql(getAllBookings), variables: {
-          'status': 'completed',
-        }),
+        options: QueryOptions(
+          documentNode: gql(getAllBookings),
+          variables: {
+            'id': _userId,
+            'status': 'completed',
+          },
+        ),
         builder: (QueryResult result,
             {FetchMore fetchMore, VoidCallback refetch}) {
           if (result.loading) {

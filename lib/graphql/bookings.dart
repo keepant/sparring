@@ -1,6 +1,13 @@
 final String getAllBookings = """ 
-    query GetAllBookings(\$status: String!){
-      bookings (where: {booking_status: {_eq: \$status}} order_by: {created_at: asc}){
+    query GetAllBookings(\$status: String!, \$id: String!){
+      bookings (
+        where: {
+          _and: [
+            {user_id: {_eq: \$id}}
+            {booking_status: {_eq: \$status}}
+          ]
+        } order_by: {created_at: asc}
+      ){
         id
         date
         time_start
