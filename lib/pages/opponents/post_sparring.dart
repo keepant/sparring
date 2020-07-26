@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
@@ -37,14 +38,6 @@ class _PostSparringState extends State<PostSparring> {
 
   _onSelected(int index) {
     setState(() => _selectedIndex = index);
-  }
-
-  bool popup = false;
-
-  showPopup() {
-    setState(() {
-      this.popup = true;
-    });
   }
 
   @override
@@ -143,120 +136,205 @@ class _PostSparringState extends State<PostSparring> {
                               var court = booking['court'];
                               var img = court['court_images'][0];
 
-                              return Stack(
-                                children: <Widget>[
-                                  InkWell(
-                                    onTap: () {
-                                      _onSelected(index);
-                                      this.showPopup();
-                                    },
-                                    child: Card(
-                                      color: _selectedIndex != null &&
-                                              _selectedIndex == index
-                                          ? Colors.grey[300]
-                                          : Colors.white,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 4.0, horizontal: 12.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                              court['name'],
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: <Widget>[
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.all(4.0),
-                                                      child: Icon(
-                                                        FontAwesomeIcons
-                                                            .calendarAlt,
-                                                        size: 14.0,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.all(4.0),
-                                                      child: Text(new DateFormat
-                                                              .yMMMMd('en_US')
-                                                          .format(
-                                                              DateTime.parse(
-                                                                  booking[
-                                                                      'date']))
-                                                          .toString()),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.all(4.0),
-                                                      child: Icon(
-                                                        FontAwesomeIcons.clock,
-                                                        size: 14.0,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.all(4.0),
-                                                      child: Text(
-                                                        new DateFormat.Hm()
-                                                                .format(DateTime
-                                                                    .parse(booking[
-                                                                            'date'] +
-                                                                        ' ' +
-                                                                        booking[
-                                                                            'time_start']))
-                                                                .toString() +
-                                                            " - " +
-                                                            new DateFormat.Hm()
-                                                                .format(DateTime
-                                                                    .parse(booking[
-                                                                            'date'] +
-                                                                        ' ' +
-                                                                        booking[
-                                                                            'time_end']))
-                                                                .toString(),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          ],
+                              return InkWell(
+                                onTap: () {
+                                  _onSelected(index);
+                                  print(court['name']);
+                                  AwesomeDialog(
+                                    context: context,
+                                    animType: AnimType.SCALE,
+                                    dialogType: DialogType.INFO,
+                                    btnOk: Container(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 15.0),
+                                      margin: EdgeInsets.only(top: 30.0),
+                                      width: MediaQuery.of(context).size.width -
+                                          300.0,
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).primaryColor,
+                                        borderRadius:
+                                            BorderRadius.circular(180.0),
+                                      ),
+                                      child: Text(
+                                        "Yes",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xffffffff),
                                         ),
                                       ),
                                     ),
+                                    body: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 20.0),
+                                          child: Text(
+                                            "Choose this court?",
+                                            style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 120,
+                                          height: 120,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15.0),
+                                              image: DecorationImage(
+                                                image: FirebaseImage(
+                                                  fbCourtURI + img['name'],
+                                                ),
+                                                fit: BoxFit.fill,
+                                              )),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 20.0),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Text(
+                                                court['name'],
+                                                style: TextStyle(
+                                                  fontSize: 21.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                "on " +
+                                                    new DateFormat.yMMMMd(
+                                                            'en_US')
+                                                        .format(DateTime.parse(
+                                                            booking['date']))
+                                                        .toString(),
+                                                style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                new DateFormat.Hm()
+                                                        .format(DateTime.parse(
+                                                            booking['date'] +
+                                                                ' ' +
+                                                                booking[
+                                                                    'time_start']))
+                                                        .toString() +
+                                                    " - " +
+                                                    new DateFormat.Hm()
+                                                        .format(DateTime.parse(
+                                                            booking['date'] +
+                                                                ' ' +
+                                                                booking[
+                                                                    'time_end']))
+                                                        .toString(),
+                                                style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )..show();
+                                },
+                                child: Card(
+                                  color: _selectedIndex != null &&
+                                          _selectedIndex == index
+                                      ? Colors.grey[300]
+                                      : Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 4.0, horizontal: 12.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          court['name'],
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: <Widget>[
+                                                Padding(
+                                                  padding: EdgeInsets.all(4.0),
+                                                  child: Icon(
+                                                    FontAwesomeIcons
+                                                        .calendarAlt,
+                                                    size: 14.0,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.all(4.0),
+                                                  child: Text(new DateFormat
+                                                          .yMMMMd('en_US')
+                                                      .format(DateTime.parse(
+                                                          booking['date']))
+                                                      .toString()),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: <Widget>[
+                                                Padding(
+                                                  padding: EdgeInsets.all(4.0),
+                                                  child: Icon(
+                                                    FontAwesomeIcons.clock,
+                                                    size: 14.0,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.all(4.0),
+                                                  child: Text(
+                                                    new DateFormat.Hm()
+                                                            .format(DateTime
+                                                                .parse(booking[
+                                                                        'date'] +
+                                                                    ' ' +
+                                                                    booking[
+                                                                        'time_start']))
+                                                            .toString() +
+                                                        " - " +
+                                                        new DateFormat.Hm()
+                                                            .format(DateTime
+                                                                .parse(booking[
+                                                                        'date'] +
+                                                                    ' ' +
+                                                                    booking[
+                                                                        'time_end']))
+                                                            .toString(),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  (this.popup)
-                                      ? bookPopup(
-                                          img: img['name'],
-                                          court: court['name'],
-                                          date: booking['date'],
-                                          timeStart: booking['time_start'],
-                                          timeEnd: booking['time_end'],
-                                          onTapCancel: () {
-                                            this.popup = false;
-                                          },
-                                          onTapYes: () {})
-                                      : Container()
-                                ],
+                                ),
                               );
                             },
                           ),
@@ -265,181 +343,6 @@ class _PostSparringState extends State<PostSparring> {
                     );
             },
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget bookPopup({
-    String img,
-    String court,
-    String date,
-    String timeStart,
-    String timeEnd,
-    GestureTapCallback onTapCancel,
-    GestureTapCallback onTapYes,
-  }) {
-    return Container(
-      color: Color.fromRGBO(0, 0, 0, 0.7),
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        margin: EdgeInsets.fromLTRB(30.0, 129.0, 30.0, 340.0),
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
-              child: Text(
-                "Choose this court?",
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Container(
-              width: 130,
-              height: 130,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                  image: DecorationImage(
-                image: FirebaseImage(
-                  fbCourtURI + img,
-                ),
-                fit: BoxFit.fill,
-              )),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    court,
-                    style: TextStyle(
-                      fontSize: 21.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "on "+new DateFormat.yMMMMd('en_US')
-                        .format(DateTime.parse(date))
-                        .toString(),
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    new DateFormat.Hm()
-                            .format(DateTime.parse(date + ' ' + timeStart))
-                            .toString() +
-                        " - " +
-                        new DateFormat.Hm()
-                            .format(DateTime.parse(date + ' ' + timeEnd))
-                            .toString(),
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                GestureDetector(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 15.0),
-                    margin: EdgeInsets.only(top: 30.0),
-                    width: MediaQuery.of(context).size.width - 300.0,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(180.0),
-                    ),
-                    child: Text(
-                      "Cancel",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xffffffff),
-                      ),
-                    ),
-                  ),
-                  onTap: onTapCancel,
-                ),
-                GestureDetector(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 15.0),
-                    margin: EdgeInsets.only(top: 30.0),
-                    width: MediaQuery.of(context).size.width - 300.0,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(180.0),
-                    ),
-                    child: Text(
-                      "Yes",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xffffffff),
-                      ),
-                    ),
-                  ),
-                  onTap: onTapYes,
-                ),
-              ],
-            ),
-            // GraphQLProvider(
-            //   client: API.client,
-            //   child: Mutation(
-            //     options: MutationOptions(
-            //       documentNode: gql(updateSelfieAndAccountStatus),
-            //       update: (Cache cache, QueryResult result) {
-            //         return cache;
-            //       },
-            //       onCompleted: (dynamic resultData) {
-            //         print(resultData);
-            //         Navigator.of(context).popUntil(ModalRoute.withName("/"));
-            //       },
-            //       onError: (error) => print(error),
-            //     ),
-            //     builder: (RunMutation runMutation, QueryResult result) {
-            //       return GestureDetector(
-            //         child: Container(
-            //           padding: EdgeInsets.symmetric(vertical: 15.0),
-            //           margin: EdgeInsets.only(top: 30.0),
-            //           width: MediaQuery.of(context).size.width - 90.0,
-            //           decoration: BoxDecoration(
-            //             color: Theme.of(context).primaryColor,
-            //             borderRadius: BorderRadius.circular(180.0),
-            //           ),
-            //           child: Text(
-            //             "Ok, I got it",
-            //             textAlign: TextAlign.center,
-            //             style: TextStyle(
-            //               fontSize: 16.0,
-            //               fontWeight: FontWeight.bold,
-            //               color: Color(0xffffffff),
-            //             ),
-            //           ),
-            //         ),
-            //         onTap: () {},
-            //       );
-            //     },
-            //   ),
-            // ),
-          ],
         ),
       ),
     );
