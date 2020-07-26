@@ -112,6 +112,7 @@ class _PostSparringState extends State<PostSparring> {
                         documentNode: gql(getAllBookings),
                         pollInterval: 10,
                         variables: {
+                          'id': widget.userId,
                           'status': 'upcoming',
                         },
                       ),
@@ -128,11 +129,13 @@ class _PostSparringState extends State<PostSparring> {
                           );
                         }
                         if (result.data['bookings'].length == 0) {
-                          return EmptyListWidget(
-                            title: 'No bookings',
-                            subTitle: 'Make booking court to post sparring!',
-                            image: null,
-                            packageImage: PackageImage.Image_4,
+                          return Center(
+                            child: EmptyListWidget(
+                              title: 'No court avalilable',
+                              subTitle: 'Make booking court to post sparring!',
+                              image: null,
+                              packageImage: PackageImage.Image_4,
+                            ),
                           );
                         }
 
