@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/sparring.dart';
@@ -71,6 +72,7 @@ class SparringDetail extends StatelessWidget {
             var team2 = sparring['team2'];
             var user1 = team1['users'][0];
             var user2 = team2['users'][0];
+            var court = sparring['court'];
 
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -252,17 +254,24 @@ class SparringDetail extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(4.0),
                             child: Text(
-                              sparring['location'],
+                              court['name'],
                               style: TextStyle(fontWeight: FontWeight.w600),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Text("See location",
-                          style: TextStyle(color: Colors.blue)),
+                    InkWell(
+                      highlightColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      onTap: () {
+                        MapsLauncher.launchCoordinates(double.parse(court['latitude']), double.parse(court['longitude']));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Text("See location",
+                            style: TextStyle(color: Colors.blue)),
+                      ),
                     )
                   ],
                 ),
@@ -465,8 +474,7 @@ class TeamInfo extends StatelessWidget {
                   highlightColor: Colors.transparent,
                   splashColor: Colors.transparent,
                   onTap: () {
-                    Navigation.launchURL(
-                        "http://wa.me/$phoneNumber");
+                    Navigation.launchURL("http://wa.me/$phoneNumber");
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
