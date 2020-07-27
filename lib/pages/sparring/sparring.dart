@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/sparring/cancelled_sparring.dart';
 import 'package:sparring/pages/sparring/completed_sparring.dart';
@@ -20,7 +21,7 @@ class Sparring extends StatelessWidget {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.of(context).popUntil(ModalRoute.withName("/"));
             },
           ),
           title: Text(
