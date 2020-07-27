@@ -27,7 +27,7 @@ class _MoreState extends State<More> {
   SharedPreferences sharedPreferences;
   String _userId;
 
-  _getUserId() async {
+  Future<void> _getUserId() async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       _userId = (sharedPreferences.getString("userId") ?? '');
@@ -52,157 +52,161 @@ class _MoreState extends State<More> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: _userId == null || _userId == ''
-            ? _emptyUser()
-            : GraphQLProvider(
-                client: API.client,
-                child: Query(
-                  options: QueryOptions(
-                    documentNode: gql(getUserData),
-                    pollInterval: 1,
-                    variables: {
-                      'id': _userId,
+      body: RefreshIndicator(
+        onRefresh: _getUserId,
+        child: SingleChildScrollView(
+          child: _userId == null || _userId == ''
+              ? _emptyUser()
+              : GraphQLProvider(
+                  client: API.client,
+                  child: Query(
+                    options: QueryOptions(
+                      documentNode: gql(getUserData),
+                      pollInterval: 1,
+                      variables: {
+                        'id': _userId,
+                      },
+                    ),
+                    builder: (QueryResult result,
+                        {FetchMore fetchMore, VoidCallback refetch}) {
+                      if (result.loading) {
+                        return _userShimmer();
+                      }
+
+                      if (result.exception.toString().contains(
+                              "ClientException: Unhandled Failure Invalid argument(s)") ||
+                          result.exception.toString().contains(
+                              "Could not verify JWT: JWTExpired: Undefined location")) {
+                        return _emptyUser();
+                      }
+
+                      if (result.hasException) {
+                        return Center(
+                          child: Text(result.exception.toString()),
+                        );
+                      }
+
+                      var user = result.data['users'][0];
+
+                      return Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 50,
+                                  backgroundImage:
+                                      user['profile_picture'] == '' ||
+                                              user['profile_picture'] == null
+                                          ? AssetImage("assets/img/pp.png")
+                                          : FirebaseImage(
+                                              fbProfileUserURI +
+                                                  user['profile_picture'],
+                                            ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 12, horizontal: 30),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      BoldText(
+                                        text: user['name'],
+                                        size: 20.0,
+                                        color: Colors.black,
+                                      ),
+                                      NormalText(
+                                        text: user['email'],
+                                        color: Colors.grey,
+                                        size: 17.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8.0,
+                          ),
+                          Divider(
+                            thickness: 2,
+                          ),
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          _profileItem(
+                            icon: FontAwesomeIcons.userAlt,
+                            text: "My Informations",
+                            onTap: () {
+                              pushNewScreen(
+                                context,
+                                screen: Profile(
+                                  userId: _userId,
+                                  sex: user['sex'],
+                                ),
+                                platformSpecific: false,
+                                withNavBar: false,
+                              );
+                            },
+                          ),
+                          _profileItem(
+                              icon: FontAwesomeIcons.userFriends,
+                              text: "My Team",
+                              onTap: () {
+                                pushNewScreen(
+                                  context,
+                                  screen: Team(
+                                    userId: _userId,
+                                  ),
+                                  platformSpecific: false,
+                                  withNavBar: false,
+                                );
+                              }),
+                          _profileItem(
+                              icon: FontAwesomeIcons.infoCircle,
+                              text: "About Us ",
+                              onTap: () {
+                                pushNewScreen(
+                                  context,
+                                  screen: AboutUs(),
+                                  platformSpecific: false,
+                                  withNavBar: false,
+                                );
+                              }),
+                          _profileItem(
+                            icon: FontAwesomeIcons.signOutAlt,
+                            text: "Logout",
+                            onTap: () async {
+                              final auth = new Auth();
+                              await auth.signOut();
+
+                              await prefs.clearToken();
+
+                              OneSignal.shared.removeExternalUserId();
+
+                              Navigator.of(context)
+                                  .popUntil(ModalRoute.withName("/"));
+
+                              Flushbar(
+                                message: "Logout successfully!",
+                                margin: EdgeInsets.all(8),
+                                borderRadius: 8,
+                                duration: Duration(seconds: 4),
+                              )..show(context);
+                            },
+                          ),
+                        ],
+                      );
                     },
                   ),
-                  builder: (QueryResult result,
-                      {FetchMore fetchMore, VoidCallback refetch}) {
-                    if (result.loading) {
-                      return _userShimmer();
-                    }
-
-                    if (result.exception.toString().contains(
-                            "ClientException: Unhandled Failure Invalid argument(s)") ||
-                        result.exception.toString().contains(
-                            "Could not verify JWT: JWTExpired: Undefined location")) {
-                      return _emptyUser();
-                    }
-
-                    if (result.hasException) {
-                      return Center(
-                        child: Text(result.exception.toString()),
-                      );
-                    }
-
-                    var user = result.data['users'][0];
-
-                    return Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              CircleAvatar(
-                                backgroundColor: Colors.white,
-                                radius: 50,
-                                backgroundImage:
-                                    user['profile_picture'] == '' ||
-                                            user['profile_picture'] == null
-                                        ? AssetImage("assets/img/pp.png")
-                                        : FirebaseImage(
-                                            fbProfileUserURI +
-                                                user['profile_picture'],
-                                          ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 12, horizontal: 30),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    BoldText(
-                                      text: user['name'],
-                                      size: 20.0,
-                                      color: Colors.black,
-                                    ),
-                                    NormalText(
-                                      text: user['email'],
-                                      color: Colors.grey,
-                                      size: 17.0,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 8.0,
-                        ),
-                        Divider(
-                          thickness: 2,
-                        ),
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        _profileItem(
-                          icon: FontAwesomeIcons.userAlt,
-                          text: "My Informations",
-                          onTap: () {
-                            pushNewScreen(
-                              context,
-                              screen: Profile(
-                                userId: _userId,
-                                sex: user['sex'],
-                              ),
-                              platformSpecific: false,
-                              withNavBar: false,
-                            );
-                          },
-                        ),
-                        _profileItem(
-                            icon: FontAwesomeIcons.userFriends,
-                            text: "My Team",
-                            onTap: () {
-                              pushNewScreen(
-                                context,
-                                screen: Team(
-                                  userId: _userId,
-                                ),
-                                platformSpecific: false,
-                                withNavBar: false,
-                              );
-                            }),
-                        _profileItem(
-                            icon: FontAwesomeIcons.infoCircle,
-                            text: "About Us ",
-                            onTap: () {
-                              pushNewScreen(
-                                context,
-                                screen: AboutUs(),
-                                platformSpecific: false,
-                                withNavBar: false,
-                              );
-                            }),
-                        _profileItem(
-                          icon: FontAwesomeIcons.signOutAlt,
-                          text: "Logout",
-                          onTap: () async {
-                            final auth = new Auth();
-                            await auth.signOut();
-
-                            await prefs.clearToken();
-
-                            OneSignal.shared.removeExternalUserId();
-
-                            Navigator.of(context)
-                                .popUntil(ModalRoute.withName("/"));
-
-                            Flushbar(
-                              message: "Logout successfully!",
-                              margin: EdgeInsets.all(8),
-                              borderRadius: 8,
-                              duration: Duration(seconds: 4),
-                            )..show(context);
-                          },
-                        ),
-                      ],
-                    );
-                  },
                 ),
-              ),
+        ),
       ),
     );
   }

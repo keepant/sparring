@@ -15,6 +15,7 @@ import 'package:sparring/graphql/sparring.dart';
 import 'package:sparring/graphql/users.dart';
 import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/court/court_page.dart';
+import 'package:sparring/pages/opponents/opponents_result.dart';
 import 'package:sparring/pages/opponents/post_sparring.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -28,8 +29,8 @@ class _OpponentsPageState extends State<OpponentsPage> {
   final TextEditingController _dateControl = new TextEditingController();
   final TextEditingController _timeControl = new TextEditingController();
 
-  final dateFormat = DateFormat("dd MMMM");
-  final timeFormat = DateFormat("h:mm");
+  final dateFormat = DateFormat("yyyy-MM-dd");
+  final timeFormat = DateFormat.Hm();
 
   SharedPreferences sharedPreferences;
   String _userId;
@@ -147,16 +148,17 @@ class _OpponentsPageState extends State<OpponentsPage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 child: InputDateTime(
-                  textEditingController: _dateControl,
+                  textEditingController: _dateControl
+                    ..text = dateFormat.format(DateTime.now()).toString(),
                   format: dateFormat,
                   hintText: I18n.of(context).hintDateTextField,
                   icon: FontAwesomeIcons.calendarAlt,
                   onShowPicker: (context, currentValue) {
                     return showDatePicker(
                       context: context,
-                      firstDate: DateTime(1900),
-                      initialDate: currentValue ?? DateTime.now(),
-                      lastDate: DateTime(2100),
+                      firstDate: DateTime.now(),
+                      initialDate: DateTime.now(),
+                      lastDate: DateTime.now().add(Duration(days: 30)),
                     );
                   },
                 ),
@@ -164,7 +166,8 @@ class _OpponentsPageState extends State<OpponentsPage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 child: InputDateTime(
-                  textEditingController: _timeControl,
+                  textEditingController: _timeControl
+                    ..text = timeFormat.format(DateTime.now()).toString(),
                   format: timeFormat,
                   hintText: I18n.of(context).hintTimeTextField,
                   icon: FontAwesomeIcons.clock,
@@ -172,7 +175,8 @@ class _OpponentsPageState extends State<OpponentsPage> {
                     final time = await showTimePicker(
                       context: context,
                       initialTime: TimeOfDay.fromDateTime(
-                          currentValue ?? DateTime.now()),
+                        currentValue ?? DateTime.now(),
+                      ),
                     );
                     return DateTimeField.convert(time);
                   },
@@ -185,6 +189,19 @@ class _OpponentsPageState extends State<OpponentsPage> {
                     print("loc: " + _locationControl.text);
                     print("date: " + _dateControl.text);
                     print("time: " + _timeControl.text);
+
+                    FocusScope.of(context).unfocus();
+
+                    pushNewScreen(
+                      context,
+                      screen: OpponentsResult(
+                        location: _locationControl.text,
+                        date: _dateControl.text,
+                        time: _timeControl.text,
+                      ),
+                      platformSpecific: false,
+                      withNavBar: false,
+                    );
                   },
                   padding: EdgeInsets.symmetric(vertical: 15.0),
                   color: Theme.of(context).primaryColor,
@@ -208,6 +225,14 @@ class _OpponentsPageState extends State<OpponentsPage> {
                         {FetchMore fetchMore, VoidCallback refetch}) {
                       if (result.loading) {
                         return _sparringShimmer();
+                      }
+
+                      if (result.exception
+                              .toString()
+                              .contains('ClientException: Unhandled') ||
+                          result.exception.toString().contains(
+                              'Could not verify JWT: JWTExpired: Undefined location')) {
+                        return Container();
                       }
 
                       if (result.hasException) {

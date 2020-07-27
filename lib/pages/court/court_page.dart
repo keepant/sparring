@@ -144,7 +144,7 @@ class _CourtPageState extends State<CourtPage> {
                               context: context,
                               firstDate: DateTime.now(),
                               initialDate: DateTime.now(),
-                              lastDate: DateTime(2100),
+                              lastDate: DateTime.now().add(Duration(days: 30)),
                             );
                           },
                         ),

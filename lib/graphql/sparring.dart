@@ -136,3 +136,39 @@ final String getSearchSparring = """
     }
   }
 """;
+
+final String getAvailableSparring = """
+  query getAvailableSparring(\$name: String!, \$date: String!, \$time: String!){
+    sparring (
+      where: {
+        _and: [
+          {
+            _or: [
+              {court: {name: {_ilike: \$name}}}
+              {court: {address: {_ilike: \$name}}}
+            ]
+          }
+          {status: {_eq: "searching"}}
+          {date: {_eq: \$date}}
+          {time_start: {_eq: \$time}}
+        ]
+      }
+    ){
+      id
+      date
+      time_start
+      time_end
+      status
+      team1{
+        id
+        name
+        logo
+        address
+      }
+      court{
+        name
+        address
+      }
+    }
+  }
+""";

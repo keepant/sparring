@@ -6,6 +6,7 @@ import 'package:sparring/pages/court/best_match.dart';
 import 'package:sparring/pages/court/edit_search.dart';
 import 'package:sparring/pages/court/higest_price.dart';
 import 'package:sparring/pages/court/lowest_price.dart';
+import 'package:sparring/pages/utils/utils.dart';
 
 class SearchResult extends StatefulWidget {
   final String location;
@@ -77,7 +78,7 @@ class _SearchResultState extends State<SearchResult>
             child: TextField(
               controller: _searchControl
                 ..text =
-                    widget.location + "\n" + widget.date + " at " + widget.time,
+                    widget.location + "\n" + formatDate(widget.date) + " at " + widget.time,
               style: TextStyle(
                   height: 1, fontSize: 13, fontWeight: FontWeight.w600),
               maxLines: null,
