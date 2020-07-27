@@ -172,3 +172,53 @@ final String getAvailableSparring = """
     }
   }
 """;
+
+final String insertOpponent = """
+  mutation insertOpponent(\$id: Int!, \$team: uuid!){
+    update_sparring(
+      where: {id: {_eq: \$id}}
+      _set: {
+        team_2_id: \$team
+        status: "upcoming"
+      }
+    ) {
+      affected_rows
+    }
+}
+""";
+
+final String getAvailableSparringDetail = """
+  query getAvailableSparringDetail(\$id: Int!){
+    sparring (
+        where: {id: {_eq: \$id}}
+      ){
+        id
+        date
+        time_start
+        time_end
+        status
+        team1{
+          id
+          name
+          logo
+          address
+          users{
+            id
+            name
+            profile_picture
+            address
+          }
+        }
+        court{
+          name
+          address
+          latitude
+          longitude
+          court_images{
+            id
+            name
+          }
+        }
+      }
+  }
+""";
