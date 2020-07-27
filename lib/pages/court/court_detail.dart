@@ -340,18 +340,19 @@ class _CourtDetailState extends State<CourtDetail>
                                       ),
                                       Expanded(
                                         child: ListView.builder(
-                                            itemCount: fasility.length,
-                                            scrollDirection: Axis.horizontal,
-                                            itemBuilder: (context, index) {
-                                              return Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: equipmentsItem(
-                                                    fasility[index]
-                                                            ['court_facility']
-                                                        ['name']),
-                                              );
-                                            }),
+                                          itemCount: fasility.length,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: equipmentsItem(
+                                                  fasility[index]
+                                                          ['court_facility']
+                                                      ['name']),
+                                            );
+                                          },
+                                        ),
                                       ),
                                     ],
                                   ),

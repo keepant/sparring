@@ -27,7 +27,7 @@ class OpponentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         height: 130,
         child: Card(

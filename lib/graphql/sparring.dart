@@ -12,7 +12,7 @@ final getAllSparring = """
           status: {_eq: \$status}
         }
       ]
-    }) {
+    }order_by: {created_at: asc}) {
       id
       date
       time_start
