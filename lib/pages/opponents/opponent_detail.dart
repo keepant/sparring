@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flushbar/flushbar.dart';
@@ -18,10 +19,12 @@ import 'package:sparring/pages/utils/utils.dart';
 
 class OpponentDetail extends StatefulWidget {
   final int id;
+  final String opTeamId;
 
   OpponentDetail({
     Key key,
     this.id,
+    this.opTeamId,
   }) : super(key: key);
 
   @override
@@ -89,18 +92,19 @@ class _OpponentDetailState extends State<OpponentDetail> {
                 },
                 onCompleted: (dynamic resultData) {
                   print(resultData);
-                  Flushbar(
-                    message: "Success make sparring!",
-                    margin: EdgeInsets.all(8),
-                    borderRadius: 8,
-                    duration: Duration(seconds: 2),
-                  )..show(context);
 
                   pushNewScreen(
                     context,
                     screen: Sparring(),
                     withNavBar: false,
                   );
+
+                  Flushbar(
+                    message: "Success make sparring!",
+                    margin: EdgeInsets.all(8),
+                    borderRadius: 8,
+                    duration: Duration(seconds: 2),
+                  )..show(context);
                 },
                 onError: (error) => print(error),
               ),
@@ -135,18 +139,33 @@ class _OpponentDetailState extends State<OpponentDetail> {
                                 ),
                               ),
                               onPressed: () {
-                                runMutation({
-                                  'id': widget.id,
-                                  'team': teamId[0]['team']['id'],
-                                });
-                                Navigator.of(context).pop();
-                                Flushbar(
-                                  message: "Making sparring..",
-                                  showProgressIndicator: true,
-                                  margin: EdgeInsets.all(8),
-                                  borderRadius: 8,
-                                  duration: Duration(seconds: 2),
-                                )..show(context);
+                                if (teamId[0]['team']['id'] ==
+                                    widget.opTeamId) {
+                                  Navigator.of(context).pop();
+                                  AwesomeDialog(
+                                    autoHide: Duration(seconds: 2),
+                                    context: context,
+                                    useRootNavigator: true,
+                                    animType: AnimType.SCALE,
+                                    dialogType: DialogType.INFO,
+                                    title: "Oppss",
+                                    desc:
+                                        "You cannot sparring with your own team 😋",
+                                  )..show();
+                                } else {
+                                  runMutation({
+                                    'id': widget.id,
+                                    'team': teamId[0]['team']['id'],
+                                  });
+                                  Navigator.of(context).pop();
+                                  Flushbar(
+                                    message: "Making sparring..",
+                                    showProgressIndicator: true,
+                                    margin: EdgeInsets.all(8),
+                                    borderRadius: 8,
+                                    duration: Duration(seconds: 2),
+                                  )..show(context);
+                                }
                               },
                             )
                           ],

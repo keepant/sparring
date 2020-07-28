@@ -149,6 +149,7 @@ class _OpponentsResultState extends State<OpponentsResult>
                       context,
                       screen: OpponentDetail(
                         id: sparring['id'],
+                        opTeamId: team['id'],
                       ),
                       withNavBar: false,
                     );
