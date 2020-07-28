@@ -6,7 +6,6 @@ import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/utils/navigation.dart';
 
 class AboutUs extends StatefulWidget {
-
   @override
   _AboutUsState createState() => _AboutUsState();
 }
@@ -65,10 +64,16 @@ class _AboutUsState extends State<AboutUs> {
                         size: 17.0,
                         color: Colors.black,
                       ),
-                      NormalText(
-                        text: I18n.of(context).descAppText,
-                        color: Colors.grey,
-                        size: 14.0,
+                      Container(
+                        width: MediaQuery.of(context).size.width - 140,
+                        child: Text(
+                          I18n.of(context).descAppText,
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14.0,
+                          ),
+                          overflow: TextOverflow.clip,
+                        ),
                       ),
                     ],
                   ),
