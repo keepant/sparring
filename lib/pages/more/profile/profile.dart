@@ -9,6 +9,7 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:intl/intl.dart';
 import 'package:sparring/graphql/users.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/more/profile/crop_profile.dart';
 import 'package:sparring/pages/utils/env.dart';
 
@@ -71,7 +72,7 @@ class _ProfileState extends State<Profile> {
             backgroundColor: Colors.white,
             appBar: AppBar(
               title: Text(
-                "Profile",
+                I18n.of(context).profileText,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
@@ -106,7 +107,8 @@ class _ProfileState extends State<Profile> {
                                       user['profile_picture'] == null
                                   ? AssetImage("assets/img/pp.png")
                                   : FirebaseImage(
-                                      fbProfileUserURI + user['profile_picture'],
+                                      fbProfileUserURI +
+                                          user['profile_picture'],
                                     ),
                             ),
                             Positioned(
@@ -141,38 +143,38 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   EditView(
-                    label: "Name",
+                    label: I18n.of(context).fullNameText,
                     textEditingController: _nameTxt..text = user['name'],
                     keyboardType: TextInputType.text,
-                    hintText: "Full name",
-                    warningText: "Name cannot be empty!",
+                    hintText: I18n.of(context).fullNameText,
+                    warningText: I18n.of(context).fullNameEmptyWarningText,
                   ),
                   EditView(
-                    label: "Email",
+                    label: I18n.of(context).emailText,
                     textEditingController: _emailTxt..text = user['email'],
                     keyboardType: TextInputType.emailAddress,
-                    hintText: "Email",
-                    warningText: "Email cannot be empty!",
+                    hintText: I18n.of(context).emailText,
+                    warningText: I18n.of(context).emailEmptyWarningText,
                     enabled: false,
                   ),
                   _radioBtn(),
                   EditView(
-                    label: "Phone number",
+                    label: I18n.of(context).phoneNumberText,
                     textEditingController: _phoneTxt
                       ..text = user['phone_number'],
                     keyboardType: TextInputType.number,
-                    hintText: "Phone number",
-                    warningText: "Phone number cannot be empty!",
+                    hintText: I18n.of(context).phoneNumberText,
+                    warningText: I18n.of(context).phoneNumberEmptyWarningText,
                   ),
                   EditView(
-                    label: "Address",
+                    label: I18n.of(context).addressText,
                     textEditingController: _addressTxt..text = user['address'],
                     keyboardType: TextInputType.text,
-                    hintText: "Address",
-                    warningText: "Address cannot be empty!",
+                    hintText: I18n.of(context).addressText,
+                    warningText: I18n.of(context).addressEmptyWarningText,
                   ),
                   FieldView(
-                    label: "Joined",
+                    label: I18n.of(context).joinedText,
                     text: new DateFormat.yMMMMd('en_US')
                         .format(DateTime.parse(user['created_at']))
                         .toString(),
@@ -182,64 +184,65 @@ class _ProfileState extends State<Profile> {
                     height: 40,
                   ),
                   Mutation(
-                      options: MutationOptions(
-                        documentNode: gql(updateUser),
-                        update: (Cache cache, QueryResult result) {
-                          return cache;
-                        },
-                        onCompleted: (dynamic resultData) {
-                          print(resultData);
-                          Flushbar(
-                            message: "Data saved!",
-                            margin: EdgeInsets.all(8),
-                            borderRadius: 8,
-                            duration: Duration(seconds: 2),
-                          )..show(context);
-                        },
-                        onError: (error) => print(error),
-                      ),
-                      builder: (RunMutation runMutation, QueryResult result) {
-                        return RaisedButton(
-                          onPressed: () {
-                            print("name: " +
-                                _nameTxt.text +
-                                "\nemail: " +
-                                _emailTxt.text +
-                                "\nsex: " +
-                                _picked +
-                                "\nphone number: " +
-                                _phoneTxt.text +
-                                "\naddress: " +
-                                _addressTxt.text);
+                    options: MutationOptions(
+                      documentNode: gql(updateUser),
+                      update: (Cache cache, QueryResult result) {
+                        return cache;
+                      },
+                      onCompleted: (dynamic resultData) {
+                        print(resultData);
+                        Flushbar(
+                          message: I18n.of(context).dataSavedText,
+                          margin: EdgeInsets.all(8),
+                          borderRadius: 8,
+                          duration: Duration(seconds: 2),
+                        )..show(context);
+                      },
+                      onError: (error) => print(error),
+                    ),
+                    builder: (RunMutation runMutation, QueryResult result) {
+                      return RaisedButton(
+                        onPressed: () {
+                          print("name: " +
+                              _nameTxt.text +
+                              "\nemail: " +
+                              _emailTxt.text +
+                              "\nsex: " +
+                              _picked +
+                              "\nphone number: " +
+                              _phoneTxt.text +
+                              "\naddress: " +
+                              _addressTxt.text);
 
-                            if (_formKey.currentState.validate()) {
-                              runMutation({
-                                'id': widget.userId,
-                                'name': _nameTxt.text,
-                                'sex': _picked,
-                                'phone': _phoneTxt.text,
-                                'address': _addressTxt.text
-                              });
-                              FocusScope.of(context).unfocus();
-                              Flushbar(
-                                message: "Saving changes..",
-                                showProgressIndicator: true,
-                                margin: EdgeInsets.all(8),
-                                borderRadius: 8,
-                                duration: Duration(seconds: 2),
-                              )..show(context);
-                            }
-                          },
-                          color: Theme.of(context).primaryColor,
-                          child: Text(
-                            "Save",
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.white,
-                            ),
+                          if (_formKey.currentState.validate()) {
+                            runMutation({
+                              'id': widget.userId,
+                              'name': _nameTxt.text,
+                              'sex': _picked,
+                              'phone': _phoneTxt.text,
+                              'address': _addressTxt.text
+                            });
+                            FocusScope.of(context).unfocus();
+                            Flushbar(
+                              message: I18n.of(context).savingChangesText,
+                              showProgressIndicator: true,
+                              margin: EdgeInsets.all(8),
+                              borderRadius: 8,
+                              duration: Duration(seconds: 2),
+                            )..show(context);
+                          }
+                        },
+                        color: Theme.of(context).primaryColor,
+                        child: Text(
+                          I18n.of(context).saveText,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
                           ),
-                        );
-                      }),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -256,7 +259,7 @@ class _ProfileState extends State<Profile> {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(top: 4.0),
-          child: Text("Sex"),
+          child: Text(I18n.of(context).genderText),
         ),
         RadioButtonGroup(
           orientation: GroupedButtonsOrientation.HORIZONTAL,

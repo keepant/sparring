@@ -10,6 +10,7 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/booking_card.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/bookings/booking_detail.dart';
 import 'package:sparring/pages/utils/utils.dart';
 import 'package:sparring/services/auth.dart';
@@ -73,7 +74,7 @@ class _UpcomingBookingState extends State<UpcomingBooking> {
                 Navigator.of(context).popUntil(ModalRoute.withName("/"));
 
                 Flushbar(
-                  message: "Logout successfully!",
+                  message: I18n.of(context).logoutText,
                   margin: EdgeInsets.all(8),
                   borderRadius: 8,
                   duration: Duration(seconds: 4),
@@ -91,8 +92,8 @@ class _UpcomingBookingState extends State<UpcomingBooking> {
 
           if (result.data['bookings'].length == 0) {
             return EmptyListWidget(
-              title: 'No bookings',
-              subTitle: 'No upcoming bookings available yet',
+              title: I18n.of(context).noBookingsText,
+              subTitle: I18n.of(context).noUpcomingBookingsText,
               image: null,
               packageImage: PackageImage.Image_4,
             );

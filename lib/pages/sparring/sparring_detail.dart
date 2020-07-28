@@ -7,6 +7,7 @@ import 'package:maps_launcher/maps_launcher.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/sparring.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/utils/env.dart';
 import 'package:sparring/pages/utils/navigation.dart';
 
@@ -44,7 +45,7 @@ class SparringDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sparring detail"),
+        title: Text(I18n.of(context).oppDetailText),
       ),
       body: GraphQLProvider(
         client: API.client,
@@ -265,12 +266,16 @@ class SparringDetail extends StatelessWidget {
                       highlightColor: Colors.transparent,
                       splashColor: Colors.transparent,
                       onTap: () {
-                        MapsLauncher.launchCoordinates(double.parse(court['latitude']), double.parse(court['longitude']));
+                        MapsLauncher.launchCoordinates(
+                            double.parse(court['latitude']),
+                            double.parse(court['longitude']));
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(right: 8.0),
-                        child: Text("See location",
-                            style: TextStyle(color: Colors.blue)),
+                        child: Text(
+                          I18n.of(context).seeLocationText,
+                          style: TextStyle(color: Colors.blue),
+                        ),
                       ),
                     )
                   ],
@@ -282,7 +287,7 @@ class SparringDetail extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16.0, 14.0, 16.0, 4.0),
                   child: Text(
-                    'Opponents information',
+                    I18n.of(context).oppInfoText,
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
                   ),
@@ -366,7 +371,7 @@ class TeamInfo extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Team name"),
+              Text(I18n.of(context).teamNameText),
               Text(
                 teamName,
                 style: TextStyle(fontWeight: FontWeight.w600),
@@ -379,7 +384,7 @@ class TeamInfo extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Team base location"),
+              Text(I18n.of(context).teamLocationText),
               Text(
                 teamLoaction,
                 style: TextStyle(fontWeight: FontWeight.w600),
@@ -392,7 +397,7 @@ class TeamInfo extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Team captain"),
+              Text(I18n.of(context).teamCaptainText),
               Text(
                 captain,
                 style: TextStyle(fontWeight: FontWeight.w600),
@@ -403,7 +408,7 @@ class TeamInfo extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(16.0, 14.0, 16.0, 4.0),
           child: Text(
-            'Captain information',
+            I18n.of(context).capInfoText,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
           ),
         ),
@@ -432,7 +437,7 @@ class TeamInfo extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Name"),
+              Text(I18n.of(context).nameText),
               Text(
                 captain,
                 style: TextStyle(fontWeight: FontWeight.w600),
@@ -445,7 +450,7 @@ class TeamInfo extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Address"),
+              Text(I18n.of(context).addressText),
               Text(
                 address ?? "-",
                 style: TextStyle(fontWeight: FontWeight.w600),
@@ -458,7 +463,7 @@ class TeamInfo extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Phone number"),
+              Text(I18n.of(context).phoneNumberText),
               Text(
                 phoneNumber ?? "-",
                 style: TextStyle(fontWeight: FontWeight.w600),

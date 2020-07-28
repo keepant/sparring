@@ -186,17 +186,8 @@ class BookingDetail extends StatelessWidget {
                               ),
                               Container(
                                 padding: EdgeInsets.only(left: 8.0),
-                                child: Text(new DateFormat.Hm()
-                                        .format(DateTime.parse(booking['date'] +
-                                            ' ' +
-                                            booking['time_start']))
-                                        .toString() +
-                                    " - " +
-                                    new DateFormat.Hm()
-                                        .format(DateTime.parse(booking['date'] +
-                                            ' ' +
-                                            booking['time_end']))
-                                        .toString()),
+                                child: Text(
+                                    "${formatTime(booking['time_start'])} - ${formatTime(booking['time_end'])}"),
                               ),
                             ],
                           )
@@ -210,9 +201,11 @@ class BookingDetail extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 4.0),
                       child: Text(
-                        'Payment Details',
+                        I18n.of(context).paymentDetailsText,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16.0),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
                       ),
                     ),
                     FutureBuilder<BookingPaymentStatus>(
@@ -273,7 +266,7 @@ class BookingDetail extends StatelessWidget {
                                   children: <Widget>[
                                     Container(
                                       child: Text(
-                                        "Payment Method",
+                                        I18n.of(context).paymentMethodText,
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -299,7 +292,7 @@ class BookingDetail extends StatelessWidget {
                                   children: <Widget>[
                                     Container(
                                       child: Text(
-                                        "You pay",
+                                        I18n.of(context).youPayText,
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600),
                                       ),
@@ -349,7 +342,7 @@ class BookingDetail extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                               Container(
+                              Container(
                                 height: 20,
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(

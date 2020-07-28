@@ -9,6 +9,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.widget.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/team.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/more/team/add_team.dart';
 import 'package:sparring/pages/more/team/crop_image.dart';
 import 'package:sparring/pages/utils/env.dart';
@@ -39,7 +40,7 @@ class _TeamState extends State<Team> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "My Team",
+          I18n.of(context).myTeamText,
           style: TextStyle(
             fontWeight: FontWeight.w600,
           ),
@@ -135,7 +136,7 @@ class _TeamState extends State<Team> {
                         ),
                         FormBuilderTextField(
                           attribute: "name",
-                          decoration: InputDecoration(labelText: "Team name"),
+                          decoration: InputDecoration(labelText: I18n.of(context).teamNameText),
                           controller: _nameTxt..text = team['name'],
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -148,7 +149,7 @@ class _TeamState extends State<Team> {
                         FormBuilderTextField(
                           attribute: "address",
                           decoration:
-                              InputDecoration(labelText: "Team base location"),
+                              InputDecoration(labelText: I18n.of(context).teamLocationText),
                           controller: _addressTxt..text = team['address'],
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -161,7 +162,7 @@ class _TeamState extends State<Team> {
                         FormBuilderTextField(
                           readOnly: true,
                           attribute: "created",
-                          decoration: InputDecoration(labelText: "Created"),
+                          decoration: InputDecoration(labelText: I18n.of(context).createdText),
                           controller: _createdTxt
                             ..text = new DateFormat.yMMMMd('en_US')
                                 .format(DateTime.parse(team['created_at']))
@@ -183,7 +184,7 @@ class _TeamState extends State<Team> {
                             onCompleted: (dynamic resultData) {
                               print(resultData);
                               Flushbar(
-                                message: "Data saved!",
+                                message: I18n.of(context).dataSavedText,
                                 margin: EdgeInsets.all(8),
                                 borderRadius: 8,
                                 duration: Duration(seconds: 2),
@@ -200,7 +201,7 @@ class _TeamState extends State<Team> {
                               ),
                               color: Theme.of(context).primaryColor,
                               child: Text(
-                                "Update",
+                                I18n.of(context).updateText,
                                 style: TextStyle(
                                   fontSize: 15,
                                   color: Colors.white,
@@ -221,7 +222,7 @@ class _TeamState extends State<Team> {
                                 if (_fbKey.currentState.validate()) {
                                   FocusScope.of(context).unfocus();
                                   Flushbar(
-                                    message: "Saving update..",
+                                    message: I18n.of(context).savingUpdateText,
                                     showProgressIndicator: true,
                                     margin: EdgeInsets.all(8),
                                     borderRadius: 8,

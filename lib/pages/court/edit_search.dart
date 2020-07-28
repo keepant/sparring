@@ -15,7 +15,9 @@ class EditSearch extends StatelessWidget {
   final String date;
   final String time;
 
-  const EditSearch({Key key, this.scrollController, this.location, this.date, this.time}) : super(key: key);
+  const EditSearch(
+      {Key key, this.scrollController, this.location, this.date, this.time})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class EditSearch extends StatelessWidget {
       child: CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
           leading: Container(),
-          middle: Text("Edit search"),
+          middle: Text(I18n.of(context).editSearchText),
           trailing: IconButton(
             icon: Icon(Icons.close),
             onPressed: () {
@@ -108,7 +110,10 @@ class EditSearch extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                   child: Text(
                     I18n.of(context).doneText,
-                    style: TextStyle(color: Colors.white, fontSize: 20.0),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                    ),
                   ),
                 ),
               )

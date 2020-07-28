@@ -29,7 +29,7 @@ class EditSearch extends StatelessWidget {
       child: CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
           leading: Container(),
-          middle: Text("Edit search"),
+          middle: Text(I18n.of(context).editSearchText),
           trailing: IconButton(
             icon: Icon(Icons.close),
             onPressed: () {

@@ -1,5 +1,6 @@
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/utils/env.dart';
 import 'package:sparring/pages/utils/utils.dart';
 
@@ -97,7 +98,7 @@ class CourtCard extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 8.0, top: 20),
                           child: Text(
-                            "${formatCurrency(price)} / hour",
+                            "${formatCurrency(price)} / ${I18n.of(context).hourText}",
                             style: TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 16.0),
                           ),

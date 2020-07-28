@@ -68,7 +68,6 @@ class _WelcomeLoginPageState extends State<WelcomeLoginPage> {
       text: TextSpan(
         text: I18n.of(context).title,
         style: GoogleFonts.portLligatSans(
-          // textStyle: Theme.of(context).textTheme.display1,
           fontSize: 30,
           fontWeight: FontWeight.w700,
           color: Colors.white,

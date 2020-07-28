@@ -7,6 +7,7 @@ import 'package:sparring/components/court_card.dart';
 import 'package:intl/intl.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/search_court.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/court/court_detail.dart';
 
 class HighestPrice extends StatelessWidget {
@@ -59,8 +60,8 @@ class HighestPrice extends StatelessWidget {
 
           if (result.data['court'].length == 0) {
             return EmptyListWidget(
-              title: 'No court',
-              subTitle: 'No court match with the search',
+              title: I18n.of(context).noCourtText,
+              subTitle: I18n.of(context).noCourtSearchText,
               image: null,
               packageImage: PackageImage.Image_4,
             );

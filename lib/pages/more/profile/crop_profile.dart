@@ -7,6 +7,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.widget.dart';
 import 'package:simple_image_crop/simple_image_crop.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/graphql/users.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/more/profile/profile.dart';
 import 'package:sparring/pages/utils/env.dart';
 
@@ -82,7 +83,7 @@ class _CropProfileState extends State<CropProfile> {
                 );
 
                 Flushbar(
-                  message: "Profile picture saved!",
+                  message: I18n.of(context).saveProfileText,
                   margin: EdgeInsets.all(8),
                   borderRadius: 8,
                   duration: Duration(seconds: 2),
@@ -100,7 +101,7 @@ class _CropProfileState extends State<CropProfile> {
                   color: Colors.white,
                 ),
                 label: Text(
-                  "Save",
+                  I18n.of(context).saveText,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -130,7 +131,7 @@ class _CropProfileState extends State<CropProfile> {
 
                   print("new pp: $imgTrim");
                   Flushbar(
-                    message: "Saving profile picture..",
+                    message: I18n.of(context).savePPText,
                     showProgressIndicator: true,
                     margin: EdgeInsets.all(8),
                     borderRadius: 8,

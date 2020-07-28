@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:sparring/components/text_style.dart';
+import 'package:sparring/i18n.dart';
 
 class NotificationPage extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _NotificationPageState extends State<NotificationPage> {
       backgroundColor: Color(0xffdee4eb),
       appBar: AppBar(
         title: Text(
-          "Notification",
+          I18n.of(context).notification,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 21.0,

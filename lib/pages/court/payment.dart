@@ -8,6 +8,7 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
 import 'package:sparring/graphql/search_court.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/utils/env.dart';
 import 'package:sparring/pages/utils/utils.dart';
 import 'package:sparring/services/prefs.dart';
@@ -84,7 +85,7 @@ class _PaymentState extends State<Payment> {
                   Navigator.of(context).pop();
                 },
               ),
-              title: Text("Payment details"),
+              title: Text(I18n.of(context).paymentDetailsText),
             ),
             body: ListView.builder(
               shrinkWrap: true,
@@ -105,9 +106,7 @@ class _PaymentState extends State<Payment> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: FirebaseImage(
-                            fbCourtURI + img['name']
-                          ),
+                          image: FirebaseImage(fbCourtURI + img['name']),
                         ),
                       ),
                     ),
@@ -139,7 +138,7 @@ class _PaymentState extends State<Payment> {
                       padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 4.0),
                       child: InkWell(
                         child: Text(
-                          "See court details",
+                          I18n.of(context).seeCourtDetailsText,
                           style: TextStyle(
                             color: Colors.blue,
                             fontSize: 13.0,
@@ -180,7 +179,8 @@ class _PaymentState extends State<Payment> {
                               ),
                               Container(
                                 padding: EdgeInsets.only(left: 8.0),
-                                child: Text("${formatTime(widget.time)} - ${formatAddTime(widget.time, qty)}"),
+                                child: Text(
+                                    "${formatTime(widget.time)} - ${formatAddTime(widget.time, qty)}"),
                               ),
                             ],
                           )
@@ -194,7 +194,7 @@ class _PaymentState extends State<Payment> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 4.0),
                       child: Text(
-                        'Invoice',
+                        I18n.of(context).invoiceText,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16.0),
                       ),
@@ -206,7 +206,7 @@ class _PaymentState extends State<Payment> {
                         children: <Widget>[
                           Container(
                             child: Text(
-                              "Price",
+                              I18n.of(context).priceText,
                               style: TextStyle(fontWeight: FontWeight.w600),
                             ),
                           ),
@@ -214,7 +214,7 @@ class _PaymentState extends State<Payment> {
                             child: Row(
                               children: <Widget>[
                                 Text(
-                                  qty.toString() + " hour" + " x ",
+                                  "${qty.toString()} ${I18n.of(context).hourText} x )",
                                   style: TextStyle(fontWeight: FontWeight.w600),
                                 ),
                                 Text(
@@ -234,7 +234,7 @@ class _PaymentState extends State<Payment> {
                         children: <Widget>[
                           Container(
                             child: Text(
-                              "Total price",
+                              I18n.of(context).totalPriceText,
                               style: TextStyle(fontWeight: FontWeight.w600),
                             ),
                           ),
@@ -281,16 +281,14 @@ class _PaymentState extends State<Payment> {
                     });
 
                     _showNativeView();
-                    
                   },
                   padding: EdgeInsets.symmetric(vertical: 15.0),
                   color: Theme.of(context).primaryColor,
                   child: Text(
-                    "Checkout",
+                    I18n.of(context).checkoutText,
                     style: TextStyle(color: Colors.white, fontSize: 20.0),
                   ),
                 );
-                
               },
             ),
           );

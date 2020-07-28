@@ -120,8 +120,8 @@ class _RegisterPageState extends State<RegisterPage> {
             );
 
             Flushbar(
-              title: "Register successfully!",
-              message: "Please login to access your account.",
+              title: I18n.of(context).registerSuccessText,
+              message: I18n.of(context).descRegisterSuccessText,
               margin: EdgeInsets.all(8),
               duration: Duration(seconds: 3),
               borderRadius: 8,
@@ -199,7 +199,6 @@ class _RegisterPageState extends State<RegisterPage> {
       text: TextSpan(
         text: I18n.of(context).title,
         style: GoogleFonts.portLligatSans(
-          //textStyle: Theme.of(context).textTheme.display1,
           fontSize: 30,
           fontWeight: FontWeight.w700,
           color: Color(0xffe46b10),
@@ -218,7 +217,7 @@ class _RegisterPageState extends State<RegisterPage> {
             _fullNameControl,
             hint: "John Mayer",
             keyboardType: TextInputType.text,
-            warningText: "Full name can\'t be empty!",
+            warningText: I18n.of(context).fullNameEmptyWarningText,
           ),
           _entryField(
             I18n.of(context).emailText,
@@ -231,7 +230,7 @@ class _RegisterPageState extends State<RegisterPage> {
             I18n.of(context).passwordText,
             _passwdControl,
             isPassword: _isHidePassword,
-            warningText: "Password can\'t be empty!",
+            warningText: I18n.of(context).passwordEmptyWarningText,
             suffixIcon: GestureDetector(
               onTap: () {
                 _togglePasswordVisibility();

@@ -30,7 +30,7 @@ class _CourtPageState extends State<CourtPage> {
       body: DecoratedBox(
         position: DecorationPosition.background,
         decoration: BoxDecoration(
-         gradient: LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [Colors.blue, Colors.redAccent],
@@ -123,7 +123,6 @@ class _CourtPageState extends State<CourtPage> {
                         padding: EdgeInsets.only(
                             top: 20.0, left: 20.0, right: 20.0, bottom: 10.0),
                         child: InputText(
-                          warningText: 'Location cannot be empty!',
                           hintText: I18n.of(context).hintLocationCourtTextField,
                           icon: FontAwesomeIcons.mapMarkerAlt,
                           textEditingController: _locationControl,
@@ -133,7 +132,6 @@ class _CourtPageState extends State<CourtPage> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
                         child: InputDateTime(
-                          warningText: 'Date cannot be empty!',
                           textEditingController: _dateControl
                             ..text =
                                 dateFormat.format(DateTime.now()).toString(),
@@ -144,7 +142,9 @@ class _CourtPageState extends State<CourtPage> {
                               context: context,
                               firstDate: DateTime.now(),
                               initialDate: DateTime.now(),
-                              lastDate: DateTime.now().add(Duration(days: 30)),
+                              lastDate: DateTime.now().add(
+                                Duration(days: 30),
+                              ),
                             );
                           },
                         ),
@@ -153,7 +153,6 @@ class _CourtPageState extends State<CourtPage> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
                         child: InputDateTime(
-                          warningText: 'Time cannot be empty!',
                           textEditingController: _timeControl
                             ..text =
                                 timeFormat.format(DateTime.now()).toString(),
@@ -179,7 +178,7 @@ class _CourtPageState extends State<CourtPage> {
                             print("time: " + _timeControl.text);
 
                             FocusScope.of(context).unfocus();
-    
+
                             pushNewScreen(
                               context,
                               screen: SearchResult(

@@ -13,6 +13,7 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/sparring.dart';
 import 'package:sparring/graphql/users.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/sparring/sparring.dart';
 import 'package:sparring/pages/utils/env.dart';
 import 'package:sparring/pages/utils/utils.dart';
@@ -52,7 +53,7 @@ class _OpponentDetailState extends State<OpponentDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Opponent detail'),
+        title: Text(I18n.of(context).opponentDetailText),
       ),
       bottomNavigationBar: GraphQLProvider(
         client: API.client,
@@ -100,7 +101,7 @@ class _OpponentDetailState extends State<OpponentDetail> {
                   );
 
                   Flushbar(
-                    message: "Success make sparring!",
+                    message: I18n.of(context).makeSparringText,
                     margin: EdgeInsets.all(8),
                     borderRadius: 8,
                     duration: Duration(seconds: 2),
@@ -115,12 +116,13 @@ class _OpponentDetailState extends State<OpponentDetail> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text("Pick opponent"),
-                          content: Text("Are you sure to pick this opponent?"),
+                          title: Text(I18n.of(context).pickOpponentText),
+                          content:
+                              Text(I18n.of(context).pickOpponentConfirmText),
                           actions: <Widget>[
                             FlatButton(
                               child: Text(
-                                "Cancel",
+                                I18n.of(context).cancelText,
                                 style: TextStyle(
                                   fontSize: 15.0,
                                 ),
@@ -132,7 +134,7 @@ class _OpponentDetailState extends State<OpponentDetail> {
                             FlatButton(
                               splashColor: Theme.of(context).primaryColor,
                               child: Text(
-                                "Yes, sure",
+                                I18n.of(context).sureText,
                                 style: TextStyle(
                                   color: Theme.of(context).primaryColor,
                                   fontSize: 15.0,
@@ -150,7 +152,7 @@ class _OpponentDetailState extends State<OpponentDetail> {
                                     dialogType: DialogType.INFO,
                                     title: "Oppss",
                                     desc:
-                                        "You cannot sparring with your own team 😋",
+                                        I18n.of(context).alertSelfSparringText,
                                   )..show();
                                 } else {
                                   runMutation({
@@ -159,7 +161,7 @@ class _OpponentDetailState extends State<OpponentDetail> {
                                   });
                                   Navigator.of(context).pop();
                                   Flushbar(
-                                    message: "Making sparring..",
+                                    message: I18n.of(context).makeSparringText,
                                     showProgressIndicator: true,
                                     margin: EdgeInsets.all(8),
                                     borderRadius: 8,
@@ -176,7 +178,7 @@ class _OpponentDetailState extends State<OpponentDetail> {
                   padding: EdgeInsets.symmetric(vertical: 15.0),
                   color: Theme.of(context).primaryColor,
                   child: Text(
-                    "Pick opponent",
+                    I18n.of(context).pickOpponentText,
                     style: TextStyle(color: Colors.white, fontSize: 20.0),
                   ),
                 );
@@ -328,7 +330,7 @@ class _OpponentDetailState extends State<OpponentDetail> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16.0, 14.0, 16.0, 4.0),
                   child: Text(
-                    'Opponents',
+                    I18n.of(context).opponent,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,
@@ -344,7 +346,7 @@ class _OpponentDetailState extends State<OpponentDetail> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text("Team name"),
+                          Text(I18n.of(context).teamNameText),
                           Text(
                             team['name'],
                             style: TextStyle(fontWeight: FontWeight.w600),
@@ -357,7 +359,7 @@ class _OpponentDetailState extends State<OpponentDetail> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text("Team base location"),
+                          Text(I18n.of(context).teamLocationText),
                           Text(
                             team['address'],
                             style: TextStyle(fontWeight: FontWeight.w600),
@@ -370,7 +372,7 @@ class _OpponentDetailState extends State<OpponentDetail> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text("Team captain"),
+                          Text(I18n.of(context).teamCaptainText),
                           Text(
                             user['name'],
                             style: TextStyle(fontWeight: FontWeight.w600),
@@ -381,7 +383,7 @@ class _OpponentDetailState extends State<OpponentDetail> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16.0, 14.0, 16.0, 0.0),
                       child: Text(
-                        'Captain',
+                        I18n.of(context).captainText,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
@@ -438,7 +440,7 @@ class _OpponentDetailState extends State<OpponentDetail> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
                       child: Text(
-                        'Court',
+                        I18n.of(context).court,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
@@ -511,7 +513,7 @@ class _OpponentDetailState extends State<OpponentDetail> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 4.0),
                               child: Text(
-                                "See location",
+                                I18n.of(context).seeLocationText,
                                 style: TextStyle(color: Colors.blue),
                               ),
                             ),

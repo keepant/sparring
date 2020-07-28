@@ -8,6 +8,7 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/booking_card.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/bookings/booking_detail.dart';
 import 'package:sparring/pages/utils/utils.dart';
 
@@ -61,8 +62,8 @@ class _CancelledBookingState extends State<CancelledBooking> {
 
           if (result.data['bookings'].length == 0) {
             return EmptyListWidget(
-              title: 'No bookings',
-              subTitle: 'No cancelled bookings available yet',
+              title: I18n.of(context).noBookingsText,
+              subTitle: I18n.of(context).noCancelledBookingsText,
               image: null,
               packageImage: PackageImage.Image_4,
             );

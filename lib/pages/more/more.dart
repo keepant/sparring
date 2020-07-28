@@ -10,6 +10,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/text_style.dart';
 import 'package:sparring/graphql/users.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/more/about.dart';
 import 'package:sparring/pages/more/profile/profile.dart';
 import 'package:sparring/pages/more/team/team.dart';
@@ -45,7 +46,7 @@ class _MoreState extends State<More> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Profile",
+          I18n.of(context).profileText,
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 21.0,
@@ -142,7 +143,7 @@ class _MoreState extends State<More> {
                           ),
                           _profileItem(
                             icon: FontAwesomeIcons.userAlt,
-                            text: "My Informations",
+                            text: I18n.of(context).myInfoText,
                             onTap: () {
                               pushNewScreen(
                                 context,
@@ -157,7 +158,7 @@ class _MoreState extends State<More> {
                           ),
                           _profileItem(
                               icon: FontAwesomeIcons.userFriends,
-                              text: "My Team",
+                              text: I18n.of(context).myTeamText,
                               onTap: () {
                                 pushNewScreen(
                                   context,
@@ -170,7 +171,7 @@ class _MoreState extends State<More> {
                               }),
                           _profileItem(
                               icon: FontAwesomeIcons.infoCircle,
-                              text: "About Us ",
+                              text: I18n.of(context).aboutUsText,
                               onTap: () {
                                 pushNewScreen(
                                   context,
@@ -181,7 +182,7 @@ class _MoreState extends State<More> {
                               }),
                           _profileItem(
                             icon: FontAwesomeIcons.signOutAlt,
-                            text: "Logout",
+                            text: I18n.of(context).logoutText,
                             onTap: () async {
                               final auth = new Auth();
                               await auth.signOut();
@@ -194,7 +195,7 @@ class _MoreState extends State<More> {
                                   .popUntil(ModalRoute.withName("/"));
 
                               Flushbar(
-                                message: "Logout successfully!",
+                                message: I18n.of(context).logoutSuccessText,
                                 margin: EdgeInsets.all(8),
                                 borderRadius: 8,
                                 duration: Duration(seconds: 4),
@@ -354,7 +355,7 @@ class _MoreState extends State<More> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     BoldText(
-                      text: "Login / register",
+                      text: I18n.of(context).loginOrRegisterText,
                       size: 20.0,
                       color: Colors.black,
                     ),
@@ -369,7 +370,7 @@ class _MoreState extends State<More> {
                         );
                       },
                       child: Text(
-                        "Login",
+                        I18n.of(context).loginText,
                         style: TextStyle(color: Colors.white),
                       ),
                     )
@@ -389,14 +390,18 @@ class _MoreState extends State<More> {
           height: 5.0,
         ),
         _profileItem(
-            icon: FontAwesomeIcons.userAlt,
-            text: "My Informations",
-            onTap: null),
+          icon: FontAwesomeIcons.userAlt,
+          text: I18n.of(context).myInfoText,
+          onTap: null,
+        ),
         _profileItem(
-            icon: FontAwesomeIcons.userFriends, text: "My Team", onTap: null),
+          icon: FontAwesomeIcons.userFriends,
+          text: I18n.of(context).myTeamText,
+          onTap: null,
+        ),
         _profileItem(
             icon: FontAwesomeIcons.infoCircle,
-            text: "About Us ",
+            text: I18n.of(context).aboutUsText,
             onTap: () {
               pushNewScreen(
                 context,
@@ -407,7 +412,7 @@ class _MoreState extends State<More> {
             }),
         _profileItem(
           icon: FontAwesomeIcons.signInAlt,
-          text: "Login",
+          text: I18n.of(context).loginText,
           onTap: () async {
             pushNewScreen(
               context,

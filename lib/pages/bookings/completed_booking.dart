@@ -8,6 +8,7 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/booking_card.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/bookings/booking_detail.dart';
 import 'package:sparring/pages/utils/utils.dart';
 
@@ -59,8 +60,8 @@ class _CompletedBookingState extends State<CompletedBooking> {
 
           if (result.data['bookings'].length == 0) {
             return EmptyListWidget(
-              title: 'No bookings',
-              subTitle: 'No complete bookings available yet',
+              title: I18n.of(context).noBookingsText,
+              subTitle: I18n.of(context).noCompletedBookingsText,
               image: null,
               packageImage: PackageImage.Image_4,
             );

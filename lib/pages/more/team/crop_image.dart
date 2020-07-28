@@ -7,6 +7,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.widget.dart';
 import 'package:simple_image_crop/simple_image_crop.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/graphql/team.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/more/team/team.dart';
 import 'package:sparring/pages/utils/env.dart';
 
@@ -81,7 +82,7 @@ class _CropImageState extends State<CropImage> {
                 );
 
                 Flushbar(
-                  message: "Logo saved!",
+                  message: I18n.of(context).logoSavedText,
                   margin: EdgeInsets.all(8),
                   borderRadius: 8,
                   duration: Duration(seconds: 2),
@@ -99,7 +100,7 @@ class _CropImageState extends State<CropImage> {
                   color: Colors.white,
                 ),
                 label: Text(
-                  "Save",
+                  I18n.of(context).saveText,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -129,7 +130,7 @@ class _CropImageState extends State<CropImage> {
 
                   print("new logo: $imgTrim");
                   Flushbar(
-                    message: "Saving logo..",
+                    message: I18n.of(context).savingLogoText,
                     showProgressIndicator: true,
                     margin: EdgeInsets.all(8),
                     borderRadius: 8,

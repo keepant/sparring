@@ -10,6 +10,7 @@ import 'package:sparring/components/loading.dart';
 import 'package:sparring/components/sparring_card.dart';
 import 'package:sparring/graphql/sparring.dart';
 import 'package:sparring/graphql/users.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/sparring/sparring_detail.dart';
 import 'package:sparring/pages/utils/utils.dart';
 import 'package:sparring/services/auth.dart';
@@ -71,7 +72,7 @@ class _CancelledSparringState extends State<CancelledSparring> {
                       Navigator.of(context).popUntil(ModalRoute.withName("/"));
 
                       Flushbar(
-                        message: "Logout successfully!",
+                        message: I18n.of(context).logoutSuccessText,
                         margin: EdgeInsets.all(8),
                         borderRadius: 8,
                         duration: Duration(seconds: 4),
@@ -112,8 +113,8 @@ class _CancelledSparringState extends State<CancelledSparring> {
 
                     if (result.data['sparring'].length == 0) {
                       return EmptyListWidget(
-                        title: 'No sparring',
-                        subTitle: 'No upcoming sparring available yet',
+                        title: I18n.of(context).noSparringText,
+                        subTitle: I18n.of(context).noCancelledSparringText,
                         image: null,
                         packageImage: PackageImage.Image_4,
                       );

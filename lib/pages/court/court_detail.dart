@@ -9,6 +9,7 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/components/text_style.dart';
 import 'package:sparring/graphql/search_court.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/court/court_hero.dart';
 import 'package:sparring/pages/court/payment.dart';
 import 'package:sparring/pages/utils/env.dart';
@@ -213,8 +214,8 @@ class _CourtDetailState extends State<CourtDetail>
                               controller: tabController,
                               indicatorColor: Colors.blue,
                               tabs: <Widget>[
-                                Tab(text: "Overview"),
-                                Tab(text: "Location"),
+                                Tab(text: I18n.of(context).overviewText),
+                                Tab(text: I18n.of(context).locationText),
                               ],
                             ),
                             backgroundColor: Colors.white,
@@ -265,7 +266,8 @@ class _CourtDetailState extends State<CourtDetail>
                                         height: 10,
                                       ),
                                       BoldText(
-                                          text: "Description",
+                                          text:
+                                              I18n.of(context).descriptionText,
                                           size: 20.0,
                                           color: Colors.black),
                                       SizedBox(
@@ -283,7 +285,8 @@ class _CourtDetailState extends State<CourtDetail>
                                             children: <Widget>[
                                               Container(
                                                 child: NormalText(
-                                                  text: "Open day",
+                                                  text: I18n.of(context)
+                                                      .openDayText,
                                                   color: Colors.black,
                                                   size: 15.0,
                                                 ),
@@ -303,7 +306,8 @@ class _CourtDetailState extends State<CourtDetail>
                                             children: <Widget>[
                                               Container(
                                                 child: NormalText(
-                                                  text: "Open hours",
+                                                  text: I18n.of(context)
+                                                      .openHourText,
                                                   color: Colors.black,
                                                   size: 15.0,
                                                 ),
@@ -331,7 +335,7 @@ class _CourtDetailState extends State<CourtDetail>
                                         height: 10,
                                       ),
                                       BoldText(
-                                        text: "Facilities",
+                                        text: I18n.of(context).facilitiesText,
                                         size: 20.0,
                                         color: Colors.black,
                                       ),
@@ -365,7 +369,7 @@ class _CourtDetailState extends State<CourtDetail>
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         BoldText(
-                                          text: "Location",
+                                          text: I18n.of(context).locationText,
                                           size: 20.0,
                                           color: Colors.black,
                                         ),
@@ -424,94 +428,16 @@ class _CourtDetailState extends State<CourtDetail>
               padding: EdgeInsets.symmetric(vertical: 15.0),
               color: Theme.of(context).primaryColor,
               child: Text(
-                "Book now",
-                style: TextStyle(color: Colors.white, fontSize: 20.0),
+                I18n.of(context).bookText,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
+                ),
               ),
             ),
           );
         },
       ),
-    );
-  }
-
-  Widget reviewProfile(String name, String review, String date) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            Container(
-              width: 24,
-              height: 24,
-              child: CircleAvatar(
-                backgroundColor: Colors.grey,
-                child: Icon(
-                  Icons.person,
-                  size: 12,
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            BoldText(
-              text: name,
-              size: 16.0,
-              color: Colors.black,
-            )
-          ],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Row(
-          children: <Widget>[
-            Container(
-              width: 50.0,
-              decoration: BoxDecoration(
-                color: Colors.orange,
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.star,
-                    color: Colors.white,
-                    size: 15.0,
-                  ),
-                  BoldText(
-                    text: review,
-                    size: 15.0,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            NormalText(
-              text: date,
-              color: Colors.grey,
-              size: 12.0,
-            )
-          ],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        NormalText(
-          text:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-          color: Colors.black,
-          size: 12.0,
-        ),
-        SizedBox(
-          height: 10,
-        ),
-      ],
     );
   }
 }

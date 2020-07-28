@@ -13,6 +13,7 @@ import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
 import 'package:sparring/graphql/sparring.dart';
 import 'package:sparring/graphql/users.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/more/team/add_team.dart';
 import 'package:sparring/pages/utils/env.dart';
 import 'package:sparring/services/auth.dart';
@@ -87,7 +88,7 @@ class _PostSparringState extends State<PostSparring> {
                     Navigator.of(context).popUntil(ModalRoute.withName("/"));
 
                     Flushbar(
-                      message: "Logout successfully!",
+                      message: I18n.of(context).logoutSuccessText,
                       margin: EdgeInsets.all(8),
                       borderRadius: 8,
                       duration: Duration(seconds: 4),
@@ -131,8 +132,8 @@ class _PostSparringState extends State<PostSparring> {
                         if (result.data['bookings'].length == 0) {
                           return Center(
                             child: EmptyListWidget(
-                              title: 'No court avalilable',
-                              subTitle: 'Make booking court to post sparring!',
+                              title: I18n.of(context).noCourtAvailableText,
+                              subTitle: I18n.of(context).makeBookingAlertText,
                               image: null,
                               packageImage: PackageImage.Image_4,
                             ),
@@ -158,7 +159,7 @@ class _PostSparringState extends State<PostSparring> {
                                     onCompleted: (dynamic resultData) {
                                       print(resultData);
                                       Flushbar(
-                                        message: "Sparring successfully saved!",
+                                        message: I18n.of(context).sparringSuccessText,
                                         margin: EdgeInsets.all(8),
                                         borderRadius: 8,
                                         duration: Duration(seconds: 2),
@@ -191,13 +192,13 @@ class _PostSparringState extends State<PostSparring> {
                                               'court_id': court['id'],
                                             });
                                             Flushbar(
-                                              message: "Finishing...",
+                                              message: I18n.of(context).savingText,
                                               showProgressIndicator: true,
                                               margin: EdgeInsets.all(8),
                                               borderRadius: 8,
                                             )..show(context);
                                           },
-                                          btnOkText: "Yes, I pick this court",
+                                          btnOkText: I18n.of(context).confirmYesText,
                                           btnOkColor:
                                               Theme.of(context).primaryColor,
                                           body: Column(
@@ -210,7 +211,7 @@ class _PostSparringState extends State<PostSparring> {
                                                 padding: const EdgeInsets.only(
                                                     bottom: 20.0),
                                                 child: Text(
-                                                  "Choose this court?",
+                                                  I18n.of(context).chooseThisCourtText,
                                                   style: TextStyle(
                                                     color: Theme.of(context)
                                                         .primaryColor,
@@ -428,7 +429,7 @@ class _PostSparringState extends State<PostSparring> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "You don\'t have any team yet!",
+                        I18n.of(context).dontHaveTeamText,
                         style: TextStyle(
                           fontSize: 22.0,
                           fontWeight: FontWeight.bold,
@@ -449,7 +450,7 @@ class _PostSparringState extends State<PostSparring> {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 50.0),
                   child: Text(
-                    "Add your team to begin sparring",
+                    I18n.of(context).addYourTeamText,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16.0, height: 1.6),
                   ),
@@ -468,7 +469,7 @@ class _PostSparringState extends State<PostSparring> {
                             borderRadius: BorderRadius.circular(180.0),
                           ),
                           child: Text(
-                            "Add team now!",
+                            I18n.of(context).addTeamNowText,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 16.0,

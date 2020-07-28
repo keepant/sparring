@@ -1,6 +1,5 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -134,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
 
             FocusScope.of(context).unfocus();
             Flushbar(
-              message: "Login successfully!",
+              message: I18n.of(context).loginSuccessText,
               margin: EdgeInsets.all(8),
               borderRadius: 8,
               duration: Duration(seconds: 3),
@@ -205,63 +204,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget facebookButton() {
-    return Container(
-      height: 50,
-      margin: EdgeInsets.symmetric(vertical: 20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      child: InkWell(
-        onTap: () {
-          print("Login with facebook");
-        },
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color(0xff1959a9),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(5),
-                    topLeft: Radius.circular(5),
-                  ),
-                ),
-                alignment: Alignment.center,
-                child: Icon(
-                  FontAwesomeIcons.facebookF,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 5,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color(0xff2872ba),
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(5),
-                    topRight: Radius.circular(5),
-                  ),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  I18n.of(context).loginWithFacebookText,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _googleButton() {
     return InkWell(
       onTap: () async {
@@ -282,7 +224,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.of(context).popUntil(ModalRoute.withName("/"));
 
         Flushbar(
-          message: "Login successfully!",
+          message: I18n.of(context).loginSuccessText,
           margin: EdgeInsets.all(8),
           borderRadius: 8,
           duration: Duration(seconds: 3),
@@ -381,7 +323,6 @@ class _LoginPageState extends State<LoginPage> {
       text: TextSpan(
         text: I18n.of(context).title,
         style: GoogleFonts.portLligatSans(
-          //textStyle: Theme.of(context).textTheme.display1,
           fontSize: 30,
           fontWeight: FontWeight.w700,
           color: Color(0xffe46b10),
@@ -406,7 +347,7 @@ class _LoginPageState extends State<LoginPage> {
             I18n.of(context).passwordText,
             _passwdControl,
             isPassword: _isHidePassword,
-            warningText: "Password can\'t be empty!",
+            warningText: I18n.of(context).passwordEmptyWarningText,
             suffixIcon: GestureDetector(
               onTap: () {
                 _togglePasswordVisibility();

@@ -335,7 +335,7 @@ class _OpponentsPageState extends State<OpponentsPage> {
   }) {
     return Column(
       children: <Widget>[
-        _divider("Your current sparring post"),
+        _divider(I18n.of(context).currentSparringPostText),
         Container(
           padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
           width: MediaQuery.of(context).size.width,
@@ -387,7 +387,7 @@ class _OpponentsPageState extends State<OpponentsPage> {
               color: Colors.white,
             ),
             label: Text(
-              "Post sparring",
+              I18n.of(context).postSparringText,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20.0,

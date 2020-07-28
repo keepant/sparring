@@ -8,6 +8,7 @@ import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/components/opponent_card.dart';
 import 'package:sparring/graphql/sparring.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/opponents/edit_search.dart';
 import 'package:sparring/pages/opponents/opponent_detail.dart';
 import 'package:sparring/pages/utils/utils.dart';
@@ -122,8 +123,8 @@ class _OpponentsResultState extends State<OpponentsResult>
             if (result.data['sparring'].length == 0) {
               return Center(
                 child: EmptyListWidget(
-                  title: 'No opponents',
-                  subTitle: 'No opponent match with the search',
+                  title: I18n.of(context).noCourtText,
+                  subTitle: I18n.of(context).noCourtSearchText,
                   image: null,
                   packageImage: PackageImage.Image_4,
                 ),

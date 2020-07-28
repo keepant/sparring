@@ -10,6 +10,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/graphql/team.dart';
+import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/more/team/team.dart';
 import 'package:sparring/pages/utils/env.dart';
 import 'package:uuid/uuid.dart';
@@ -66,7 +67,7 @@ class _AddTeamState extends State<AddTeam> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Add team",
+          I18n.of(context).addTeamText,
           style: TextStyle(
             fontWeight: FontWeight.w600,
           ),
@@ -81,7 +82,7 @@ class _AddTeamState extends State<AddTeam> {
             children: <Widget>[
               FormBuilderTextField(
                 attribute: "name",
-                decoration: InputDecoration(labelText: "Team name"),
+                decoration: InputDecoration(labelText: I18n.of(context).teamNameText),
                 controller: _nameTxt,
                 validators: [
                   FormBuilderValidators.required(),
@@ -89,7 +90,7 @@ class _AddTeamState extends State<AddTeam> {
               ),
               FormBuilderTextField(
                 attribute: "address",
-                decoration: InputDecoration(labelText: "Team base location"),
+                decoration: InputDecoration(labelText: I18n.of(context).teamLocationText),
                 controller: _addressTxt,
                 validators: [
                   FormBuilderValidators.required(),
@@ -98,7 +99,7 @@ class _AddTeamState extends State<AddTeam> {
               SizedBox(
                 height: 10,
               ),
-              Text("Team logo"),
+              Text(I18n.of(context).teamLogoText),
               IconButton(
                 icon: Icon(
                   Icons.add_a_photo,
@@ -109,7 +110,7 @@ class _AddTeamState extends State<AddTeam> {
                 },
               ),
               _image == null
-                  ? Text('no image selected')
+                  ? Text(I18n.of(context).noImageSelectedText)
                   : Image.file(
                       _image,
                       width: 300,
@@ -135,7 +136,7 @@ class _AddTeamState extends State<AddTeam> {
                         withNavBar: true,
                       );
                       Flushbar(
-                        message: "Team saved!",
+                        message: I18n.of(context).teamSavedText,
                         margin: EdgeInsets.all(8),
                         borderRadius: 8,
                         duration: Duration(seconds: 2),
@@ -151,7 +152,7 @@ class _AddTeamState extends State<AddTeam> {
                       ),
                       color: Theme.of(context).primaryColor,
                       child: Text(
-                        "Save",
+                        I18n.of(context).saveText,
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.white,
@@ -182,7 +183,7 @@ class _AddTeamState extends State<AddTeam> {
                         if (_fbKey.currentState.validate()) {
                           FocusScope.of(context).unfocus();
                           Flushbar(
-                            message: "Saving team..",
+                            message: I18n.of(context).savingTeamText,
                             showProgressIndicator: true,
                             margin: EdgeInsets.all(8),
                             borderRadius: 8,
