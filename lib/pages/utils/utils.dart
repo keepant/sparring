@@ -21,3 +21,11 @@ String formatTime(String time) {
 
   return formatted;
 }
+
+String formatAddTime(String time, int add) {
+  final formatted = new DateFormat.Hm()
+      .format(DateTime.parse("2020-07-27 $time").add(Duration(hours: add)))
+      .toString();
+
+  return formatted;
+}

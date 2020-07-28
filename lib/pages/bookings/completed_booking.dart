@@ -9,7 +9,7 @@ import 'package:sparring/components/booking_card.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
 import 'package:sparring/pages/bookings/booking_detail.dart';
-import 'package:intl/intl.dart';
+import 'package:sparring/pages/utils/utils.dart';
 
 class CompletedBooking extends StatefulWidget {
   CompletedBooking({Key key}) : super(key: key);
@@ -78,17 +78,9 @@ class _CompletedBookingState extends State<CompletedBooking> {
                 imgUrl: img['name'],
                 title: court['name'],
                 location: court['address'],
-                date: new DateFormat.yMMMMd('en_US')
-                    .format(DateTime.parse(booking['date']))
-                    .toString(),
-                timeStart: new DateFormat.Hm()
-                    .format(DateTime.parse(
-                        booking['date'] + ' ' + booking['time_start']))
-                    .toString(),
-                timeEnd: new DateFormat.Hm()
-                    .format(DateTime.parse(
-                        booking['date'] + ' ' + booking['time_end']))
-                    .toString(),
+                date: formatDate(booking['date']),
+                timeStart: formatTime(booking['time_start']),
+                timeEnd: formatTime(booking['time_end']),
                 icon: FontAwesomeIcons.solidCalendarCheck,
                 status: booking['booking_status'].toUpperCase(),
                 color: Colors.green,

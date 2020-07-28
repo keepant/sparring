@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:intl/intl.dart';
 import 'package:sparring/api/api.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
@@ -91,7 +90,7 @@ class _PaymentState extends State<Payment> {
               shrinkWrap: true,
               itemCount: result.data['court'].length,
               itemBuilder: (context, index) {
-                int qty = 2;
+                int qty = widget.qty;
                 var court = result.data['court'][index];
                 var img = result.data['court'][index]['court_images'][0];
                 var totalPrice = qty * court['price_per_hour'];
@@ -166,9 +165,7 @@ class _PaymentState extends State<Payment> {
                               ),
                               Container(
                                 padding: EdgeInsets.only(left: 8.0),
-                                child: Text(new DateFormat.yMMMMd('en_US')
-                                    .format(DateTime.parse(widget.date))
-                                    .toString()),
+                                child: Text(formatDate(widget.date)),
                               ),
                             ],
                           ),
@@ -183,15 +180,7 @@ class _PaymentState extends State<Payment> {
                               ),
                               Container(
                                 padding: EdgeInsets.only(left: 8.0),
-                                child: Text(new DateFormat.Hm()
-                                        .format(DateTime.parse(
-                                            '2020-06-01' + ' ' + widget.time))
-                                        .toString() +
-                                    " - " +
-                                    new DateFormat.Hm()
-                                        .format(DateTime.parse(
-                                            '2020-06-01' + ' ' + widget.time))
-                                        .toString()),
+                                child: Text("${formatTime(widget.time)} - ${formatAddTime(widget.time, qty)}"),
                               ),
                             ],
                           )
@@ -282,7 +271,7 @@ class _PaymentState extends State<Payment> {
                     runMutation({
                       'date': widget.date,
                       'time_start': widget.time,
-                      'time_end': "15:00",
+                      'time_end': formatAddTime(widget.time, widget.qty),
                       'booking_status': "upcoming",
                       'total_price': totalPrice,
                       'user_id': await prefs.getUserId(),

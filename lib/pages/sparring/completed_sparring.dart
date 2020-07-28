@@ -11,9 +11,9 @@ import 'package:sparring/components/sparring_card.dart';
 import 'package:sparring/graphql/sparring.dart';
 import 'package:sparring/graphql/users.dart';
 import 'package:sparring/pages/sparring/sparring_detail.dart';
+import 'package:sparring/pages/utils/utils.dart';
 import 'package:sparring/services/auth.dart';
 import 'package:sparring/services/prefs.dart';
-import 'package:intl/intl.dart';
 
 class CompletedSparring extends StatefulWidget {
   @override
@@ -144,19 +144,9 @@ class _CompletedSparringState extends State<CompletedSparring> {
                           team1Logo: team1['logo'],
                           team2Name: team2['name'],
                           team2Logo: team2['logo'],
-                          date: new DateFormat.yMMMMd('en_US')
-                              .format(DateTime.parse(sparring['date']))
-                              .toString(),
-                          timeStart: new DateFormat.Hm()
-                              .format(DateTime.parse(sparring['date'] +
-                                  ' ' +
-                                  sparring['time_start']))
-                              .toString(),
-                          timeEnd: new DateFormat.Hm()
-                              .format(DateTime.parse(sparring['date'] +
-                                  ' ' +
-                                  sparring['time_end']))
-                              .toString(),
+                          date: formatDate(sparring['date']),
+                          timeStart: formatTime(sparring['time_start']),
+                          timeEnd: formatTime(sparring['time_end']),
                           court: court['name'],
                         );
                       },

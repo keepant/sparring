@@ -9,7 +9,7 @@ import 'package:sparring/components/booking_card.dart';
 import 'package:sparring/components/loading.dart';
 import 'package:sparring/graphql/bookings.dart';
 import 'package:sparring/pages/bookings/booking_detail.dart';
-import 'package:intl/intl.dart';
+import 'package:sparring/pages/utils/utils.dart';
 
 class CancelledBooking extends StatefulWidget {
   CancelledBooking({Key key}) : super(key: key);
@@ -73,7 +73,6 @@ class _CancelledBookingState extends State<CancelledBooking> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               var booking = result.data['bookings'][index];
-              //var user = result.data['bookings'][index]['user'];
               var court = result.data['bookings'][index]['court'];
               var img =
                   result.data['bookings'][index]['court']['court_images'][0];
@@ -81,17 +80,9 @@ class _CancelledBookingState extends State<CancelledBooking> {
                 imgUrl: img['name'],
                 title: court['name'],
                 location: court['address'],
-                date: new DateFormat.yMMMMd('en_US')
-                    .format(DateTime.parse(booking['date']))
-                    .toString(),
-                timeStart: new DateFormat.Hm()
-                    .format(DateTime.parse(
-                        booking['date'] + ' ' + booking['time_start']))
-                    .toString(),
-                timeEnd: new DateFormat.Hm()
-                    .format(DateTime.parse(
-                        booking['date'] + ' ' + booking['time_end']))
-                    .toString(),
+                date: formatDate(booking['date']),
+                timeStart: formatTime(booking['time_start']),
+                timeEnd: formatTime(booking['time_end']),
                 icon: FontAwesomeIcons.solidCalendarTimes,
                 status: booking['booking_status'].toUpperCase(),
                 color: Colors.red,

@@ -413,7 +413,7 @@ class _CourtDetailState extends State<CourtDetail>
                     courtId: widget.id,
                     date: widget.date,
                     time: widget.time,
-                    qty: 2,
+                    qty: 1,
                     name: widget.name,
                     price: widget.price,
                   ),

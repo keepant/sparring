@@ -6,7 +6,7 @@ final String getAllBookings = """
             {user_id: {_eq: \$id}}
             {booking_status: {_eq: \$status}}
           ]
-        } order_by: {created_at: asc}
+        } order_by: {created_at: desc}
       ){
         id
         date
