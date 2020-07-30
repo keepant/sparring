@@ -18,6 +18,7 @@ import 'package:sparring/pages/court/court_page.dart';
 import 'package:sparring/pages/opponents/opponents_result.dart';
 import 'package:sparring/pages/opponents/post_sparring.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:sparring/pages/utils/utils.dart';
 
 class OpponentsPage extends StatefulWidget {
   @override
@@ -345,15 +346,9 @@ class _OpponentsPageState extends State<OpponentsPage> {
             team1Logo: teamLogo,
             team2Name: "",
             team2Logo: "question.png",
-            date: new DateFormat.yMMMMd('en_US')
-                .format(DateTime.parse(date))
-                .toString(),
-            timeStart: new DateFormat.Hm()
-                .format(DateTime.parse(date + ' ' + timeStart))
-                .toString(),
-            timeEnd: new DateFormat.Hm()
-                .format(DateTime.parse(date + ' ' + timeEnd))
-                .toString(),
+            date: formatDate(date),
+            timeStart: formatTime(timeStart),
+            timeEnd: formatTime(timeEnd),
             court: court,
           ),
         ),

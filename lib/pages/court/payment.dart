@@ -214,7 +214,7 @@ class _PaymentState extends State<Payment> {
                             child: Row(
                               children: <Widget>[
                                 Text(
-                                  "${qty.toString()} ${I18n.of(context).hourText} x )",
+                                  "${qty.toString()} ${I18n.of(context).hourText} x ",
                                   style: TextStyle(fontWeight: FontWeight.w600),
                                 ),
                                 Text(
