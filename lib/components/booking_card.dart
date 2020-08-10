@@ -1,6 +1,8 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sparring/pages/utils/env.dart';
 
 class BookingCard extends StatelessWidget {
   final String imgUrl;
@@ -32,7 +34,7 @@ class BookingCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 180,
+        height: 185,
         child: Card(
           elevation: 1,
           child: Padding(
@@ -51,8 +53,11 @@ class BookingCard extends StatelessWidget {
                         width: 80,
                         height: 80,
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
                           image: DecorationImage(
-                            image: NetworkImage(imgUrl),
+                            image: FirebaseImage(
+                              fbCourtURI + imgUrl,
+                            ),
                             fit: BoxFit.cover,
                           ),
                         ),

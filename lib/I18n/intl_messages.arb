@@ -1,12 +1,12 @@
 {
-  "@@last_modified": "2020-04-25T22:05:36.213607",
+  "@@last_modified": "2020-07-28T15:47:06.558046",
   "hello": "Hello, World",
   "@hello": {
     "description": "Hello world text",
     "type": "text",
     "placeholders": {}
   },
-  "title": "Sparring",
+  "title": "sparring",
   "@title": {
     "description": "Title application",
     "type": "text",
@@ -123,6 +123,636 @@
   "searchText": "Search",
   "@searchText": {
     "description": "search text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginText": "Login",
+  "@loginText": {
+    "description": "login text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerText": "Register now",
+  "@registerText": {
+    "description": "register text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginDesc": "Login for faster booking and to easily access your booking details",
+  "@loginDesc": {
+    "description": "login page description",
+    "type": "text",
+    "placeholders": {}
+  },
+  "backText": "Back",
+  "@backText": {
+    "description": "back text button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailEmptyWarningText": "Email can't be empty!",
+  "@emailEmptyWarningText": {
+    "description": "email empty warning text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "orText": "or",
+  "@orText": {
+    "description": "or text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginWithFacebookText": "Login with Facebook",
+  "@loginWithFacebookText": {
+    "description": "login with facebook text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginWithGoogleText": "Login with Google",
+  "@loginWithGoogleText": {
+    "description": "login with google text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionAccountText": "Don't have an account?",
+  "@questionAccountText": {
+    "description": "question account text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailText": "Email",
+  "@emailText": {
+    "description": "email label text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "passwordText": "Password",
+  "@passwordText": {
+    "description": "password text text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionHaveAccountText": "Already have an account?",
+  "@questionHaveAccountText": {
+    "description": "question have account text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fullNameText": "Full name",
+  "@fullNameText": {
+    "description": "full name text label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hourText": "hour",
+  "@hourText": {
+    "description": "hour text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "paymentDetailsText": "Payment details",
+  "@paymentDetailsText": {
+    "description": "payment details text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "paymentMethodText": "Payment method",
+  "@paymentMethodText": {
+    "description": "payment method text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "youPayText": "You pay",
+  "@youPayText": {
+    "description": "you pay text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noBookingsText": "No bookings",
+  "@noBookingsText": {
+    "description": "no booking text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCancelledBookingsText": "No cancelled bookings available yet",
+  "@noCancelledBookingsText": {
+    "description": "no cancelled bookings text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCompletedBookingsText": "No completed bookings available yet",
+  "@noCompletedBookingsText": {
+    "description": "no completed bookings text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noUpcomingBookingsText": "No upcoming bookings available yet",
+  "@noUpcomingBookingsText": {
+    "description": "no upcoming bookings text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noSparringText": "No sparring",
+  "@noSparringText": {
+    "description": "no sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCancelledSparringText": "No cancelled sparring available yet",
+  "@noCancelledSparringText": {
+    "description": "no cancelled sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCompletedSparringText": "No completed sparring available yet",
+  "@noCompletedSparringText": {
+    "description": "no completed Sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noUpcomingSparringText": "No upcoming sparring available yet",
+  "@noUpcomingSparringText": {
+    "description": "no upcoming sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "logoutSuccessText": "Logout successfully!",
+  "@logoutSuccessText": {
+    "description": "logout success text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "logoutText": "Logout",
+  "@logoutText": {
+    "description": "logout text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCourtText": "No court",
+  "@noCourtText": {
+    "description": "no court text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCourtSearchText": "No court match with the search",
+  "@noCourtSearchText": {
+    "description": "no court search text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "overviewText": "Overview",
+  "@overviewText": {
+    "description": "overview text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "locationText": "Location",
+  "@locationText": {
+    "description": "location text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "descriptionText": "Description",
+  "@descriptionText": {
+    "description": "description text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "openDayText": "Open day",
+  "@openDayText": {
+    "description": "open day text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "openHourText": "Open hour",
+  "@openHourText": {
+    "description": "open hour text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "facilitiesText": "Facilities",
+  "@facilitiesText": {
+    "description": "facilities text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bookText": "Book now",
+  "@bookText": {
+    "description": "book now text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "editSearchText": "Edit search",
+  "@editSearchText": {
+    "description": "edit search text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "seeCourtDetailsText": "see court details",
+  "@seeCourtDetailsText": {
+    "description": "see court details Text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "invoiceText": "Invoice",
+  "@invoiceText": {
+    "description": "invoice text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "priceText": "Price",
+  "@priceText": {
+    "description": "price text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "totalPriceText": "Total price",
+  "@totalPriceText": {
+    "description": "total price text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "checkoutText": "Checkout",
+  "@checkoutText": {
+    "description": "checkout text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginSuccessText": "Login successfully!",
+  "@loginSuccessText": {
+    "description": "login success text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "passwordEmptyWarningText": "Password can't be empty!",
+  "@passwordEmptyWarningText": {
+    "description": "password empty warning text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fullNameEmptyWarningText": "Full name can't be empty!",
+  "@fullNameEmptyWarningText": {
+    "description": "fullName empty warning text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerSuccessText": "Register successfully!",
+  "@registerSuccessText": {
+    "description": "register success text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "descRegisterSuccessText": "Please login to access your account",
+  "@descRegisterSuccessText": {
+    "description": "desc register success text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "saveProfileText": "Profile picture saved!",
+  "@saveProfileText": {
+    "description": "save profile text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "saveText": "Save",
+  "@saveText": {
+    "description": "save text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "savePPText": "Saving profile picture..",
+  "@savePPText": {
+    "description": "save PP text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "profileText": "Profile",
+  "@profileText": {
+    "description": "profile text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "phoneNumberText": "Phone number",
+  "@phoneNumberText": {
+    "description": "phone number text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "phoneNumberEmptyWarningText": "Phone number can't be empty!",
+  "@phoneNumberEmptyWarningText": {
+    "description": "phoneNumber empty warning text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addressText": "Address",
+  "@addressText": {
+    "description": "address text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addressEmptyWarningText": "Address can't be empty!",
+  "@addressEmptyWarningText": {
+    "description": "address empty warning text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "joinedText": "Joined",
+  "@joinedText": {
+    "description": "joined text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dataSavedText": "Data saved!",
+  "@dataSavedText": {
+    "description": "data saved text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "savingChangesText": "Saving changes..",
+  "@savingChangesText": {
+    "description": "saving changes text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "genderText": "Gender",
+  "@genderText": {
+    "description": "gender text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addTeamText": "Add team",
+  "@addTeamText": {
+    "description": "add team text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "teamNameText": "Team name",
+  "@teamNameText": {
+    "description": "team name text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "teamLocationText": "Team base location",
+  "@teamLocationText": {
+    "description": "team location text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "teamLogoText": "Team logo",
+  "@teamLogoText": {
+    "description": "team logo text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noImageSelectedText": "No image selected",
+  "@noImageSelectedText": {
+    "description": "no image selected text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "teamSavedText": "Team saved!",
+  "@teamSavedText": {
+    "description": "team saved text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "savingTeamText": "Saving team..",
+  "@savingTeamText": {
+    "description": "saving team text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "savingLogoText": "Saving logo..",
+  "@savingLogoText": {
+    "description": "saving logo text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "logoSavedText": "Logo saved!",
+  "@logoSavedText": {
+    "description": "logo saved text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "myTeamText": "My Team",
+  "@myTeamText": {
+    "description": "my team text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "createdText": "Created",
+  "@createdText": {
+    "description": "created text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "updateText": "Update",
+  "@updateText": {
+    "description": "update text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "savingUpdateText": "Saving update..",
+  "@savingUpdateText": {
+    "description": "saving update text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutUsText": "About Us",
+  "@aboutUsText": {
+    "description": "about us text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "descAppText": "application for find futsal court and opponents",
+  "@descAppText": {
+    "description": "desc app text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "withText": "with",
+  "@withText": {
+    "description": "with text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "appVersionText": "App Version",
+  "@appVersionText": {
+    "description": "app version text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "myInfoText": "My Information",
+  "@myInfoText": {
+    "description": "my info text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginOrRegisterText": "Login / register",
+  "@loginOrRegisterText": {
+    "description": "login or register text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "opponentDetailText": "Opponent detail",
+  "@opponentDetailText": {
+    "description": "opponent detail text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "makeSparringText": "Success Success make sparring!",
+  "@makeSparringText": {
+    "description": "make sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "pickOpponentText": "Pick opponent",
+  "@pickOpponentText": {
+    "description": "pick opponent text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "pickOpponentConfirmText": "Are you sure to pick this opponent?",
+  "@pickOpponentConfirmText": {
+    "description": "pick opponent confirm text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancelText": "Cancel",
+  "@cancelText": {
+    "description": "cancel text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sureText": "Yes, sure",
+  "@sureText": {
+    "description": "sure text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "alertSelfSparringText": "You cannot sparring with your own team 😋",
+  "@alertSelfSparringText": {
+    "description": "alert self sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "makingSparringText": "Making sparring..",
+  "@makingSparringText": {
+    "description": "making sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "teamCaptainText": "Team captain",
+  "@teamCaptainText": {
+    "description": "team captain text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "captainText": "Captain",
+  "@captainText": {
+    "description": "captain text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "seeLocationText": "See location",
+  "@seeLocationText": {
+    "description": "see location text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "currentSparringPostText": "Your current sparring post",
+  "@currentSparringPostText": {
+    "description": "current sparring post text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "postSparringText": "Post sparring",
+  "@postSparringText": {
+    "description": "postSparringtext",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCourtAvailableText": "No court available",
+  "@noCourtAvailableText": {
+    "description": "noCourtAvailableText",
+    "type": "text",
+    "placeholders": {}
+  },
+  "makeBookingAlertText": "Make booking court to post sparring!",
+  "@makeBookingAlertText": {
+    "description": "makeBookingAlertText",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sparringSuccessText": "Sparring successfully saved",
+  "@sparringSuccessText": {
+    "description": "sparringSuccesText",
+    "type": "text",
+    "placeholders": {}
+  },
+  "savingText": "Saving..",
+  "@savingText": {
+    "description": "saving text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirmYesText": "Yes, I pick this court",
+  "@confirmYesText": {
+    "description": "confirm yes text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "chooseThisCourtText": "Choose this court?",
+  "@chooseThisCourtText": {
+    "description": "choose this court text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dontHaveTeamText": "You don't have any team yet!",
+  "@dontHaveTeamText": {
+    "description": "dontHaveTeam text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addYourTeamText": "Add your team to begin sparring",
+  "@addYourTeamText": {
+    "description": "addYourTeam text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addTeamNowText": "Add team now!",
+  "@addTeamNowText": {
+    "description": "addTeamNow text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addSparringText": "No sparring avalilable",
+  "@addSparringText": {
+    "description": "addSparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "oppInfoText": "Opponents information",
+  "@oppInfoText": {
+    "description": "oppInfo text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "capInfoText": "Caption information",
+  "@capInfoText": {
+    "description": "capInfo text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nameText": "Name",
+  "@nameText": {
+    "description": "name text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "oppDetailText": "Sparring detail",
+  "@oppDetailText": {
+    "description": "oppDetail text",
     "type": "text",
     "placeholders": {}
   }

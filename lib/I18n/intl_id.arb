@@ -7,7 +7,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "title": "Sparring",
+  "title": "sparring",
   "@title": {
     "description": "Title application",
     "type": "text",
@@ -124,6 +124,636 @@
   "searchText": "Cari",
   "@searchText": {
     "description": "search text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginText": "Masuk",
+  "@loginText": {
+    "description": "login text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerText": "Daftar sekarang",
+  "@registerText": {
+    "description": "register text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginDesc": "Masuk untuk mengakses pesananmu lebih cepat",
+  "@loginDesc": {
+    "description": "login page description",
+    "type": "text",
+    "placeholders": {}
+  },
+  "backText": "Kembali",
+  "@backText": {
+    "description": "back text button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailEmptyWarningText": "Email tidak boleh kosong!",
+  "@emailEmptyWarningText": {
+    "description": "email empty warning text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "orText": "atau",
+  "@orText": {
+    "description": "or text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginWithFacebookText": "Masuk dengan Facebook",
+  "@loginWithFacebookText": {
+    "description": "login with facebook text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginWithGoogleText": "Masuk dengan Google",
+  "@loginWithGoogleText": {
+    "description": "login with google text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionAccountText": "Belum punya akun?",
+  "@questionAccountText": {
+    "description": "question account text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailText": "Email",
+  "@emailText": {
+    "description": "email label text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "passwordText": "Password",
+  "@passwordText": {
+    "description": "password text text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionHaveAccountText": "Sudah punya akun?",
+  "@questionHaveAccountText": {
+    "description": "question have account text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fullNameText": "Nama lengkap",
+  "@fullNameText": {
+    "description": "full name text label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hourText": "jam",
+  "@hourText": {
+    "description": "hour text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "paymentDetailsText": "Detail pembayaran",
+  "@paymentDetailsText": {
+    "description": "payment details text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "paymentMethodText": "Metode pembayaran",
+  "@paymentMethodText": {
+    "description": "payment method text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "youPayText": "Kamu membayar",
+  "@youPayText": {
+    "description": "you pay text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noBookingsText": "Tidak ada pemesanan",
+  "@noBookingsText": {
+    "description": "no booking text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCancelledBookingsText": "Belum ada pemesanan dibatalkan",
+  "@noCancelledBookingsText": {
+    "description": "no cancelled bookings text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCompletedBookingsText": "Belum ada pemesanan selesai",
+  "@noCompletedBookingsText": {
+    "description": "no completed bookings text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noUpcomingBookingsText": "Belum ada pemesanan yang akan datang",
+  "@noUpcomingBookingsText": {
+    "description": "no upcoming bookings text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noSparringText": "Tidak ada sparring",
+  "@noSparringText": {
+    "description": "no sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCancelledSparringText": "Belum ada sparring dibatalkan",
+  "@noCancelledSparringText": {
+    "description": "no cancelled sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCompletedSparringText": "Belum ada sparring selesai",
+  "@noCompletedSparringText": {
+    "description": "no completed Sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noUpcomingSparringText": "Belum ada sparring yang akan datang",
+  "@noUpcomingSparringText": {
+    "description": "no upcoming sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "logoutSuccessText": "Berhasil keluar!",
+  "@logoutSuccessText": {
+    "description": "logout success text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "logoutText": "Keluar",
+  "@logoutText": {
+    "description": "logout text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCourtText": "Tidak ada lapangan",
+  "@noCourtText": {
+    "description": "no court text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCourtSearchText": "Tidak ada lapangan yang cocok dengan pencarian",
+  "@noCourtSearchText": {
+    "description": "no court search text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "overviewText": "Gambaran",
+  "@overviewText": {
+    "description": "overview text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "locationText": "Lokasi",
+  "@locationText": {
+    "description": "location text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "descriptionText": "Deskripsi",
+  "@descriptionText": {
+    "description": "description text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "openDayText": "Hari buka",
+  "@openDayText": {
+    "description": "open day text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "openHourText": "Jam buka",
+  "@openHourText": {
+    "description": "open hour text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "facilitiesText": "Fasilitas",
+  "@facilitiesText": {
+    "description": "facilities text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bookText": "Pesan sekarang",
+  "@bookText": {
+    "description": "book now text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "editSearchText": "Ubah pencarian",
+  "@editSearchText": {
+    "description": "edit search text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "seeCourtDetailsText": "lihat detail lapangan",
+  "@seeCourtDetailsText": {
+    "description": "see court details Text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "invoiceText": "Faktur",
+  "@invoiceText": {
+    "description": "invoice text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "priceText": "Harga",
+  "@priceText": {
+    "description": "price text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "totalPriceText": "Total harga",
+  "@totalPriceText": {
+    "description": "total price text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "checkoutText": "Checkout",
+  "@checkoutText": {
+    "description": "checkout text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginSuccessText": "Login berhasil!",
+  "@loginSuccessText": {
+    "description": "login success text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "passwordEmptyWarningText": "Password tidak boleh kosong!",
+  "@passwordEmptyWarningText": {
+    "description": "password empty warning text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fullNameEmptyWarningText": "Nama lengkap tidak boleh kosong!",
+  "@fullNameEmptyWarningText": {
+    "description": "fullName empty warning text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerSuccessText": "Berhasil mendaftar!",
+  "@registerSuccessText": {
+    "description": "register success text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "descRegisterSuccessText": "Login untuk dapat mengakses akunmu",
+  "@descRegisterSuccessText": {
+    "description": "desc register success text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "saveProfileText": "Foto profil tersimpan!",
+  "@saveProfileText": {
+    "description": "save profile text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "saveText": "Simpan",
+  "@saveText": {
+    "description": "save text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "savePPText": "Menyimpan foto profil..",
+  "@savePPText": {
+    "description": "save PP text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "profileText": "Profil",
+  "@profileText": {
+    "description": "profile text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "phoneNumberText": "Nomer HP",
+  "@phoneNumberText": {
+    "description": "phone number text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "phoneNumberEmptyWarningText": "Nomer HP tidak boleh kosong!",
+  "@phoneNumberEmptyWarningText": {
+    "description": "phoneNumber empty warning text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addressText": "Alamat",
+  "@addressText": {
+    "description": "address text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addressEmptyWarningText": "Alamat tidak boleh kosong!",
+  "@addressEmptyWarningText": {
+    "description": "address empty warning text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "joinedText": "Bergabung",
+  "@joinedText": {
+    "description": "joined text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dataSavedText": "Data tersimpan!",
+  "@dataSavedText": {
+    "description": "data saved text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "savingChangesText": "Menyimpan perubahan..",
+  "@savingChangesText": {
+    "description": "saving changes text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "genderText": "Jenis kelamin",
+  "@genderText": {
+    "description": "gender text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addTeamText": "Tambah tim",
+  "@addTeamText": {
+    "description": "add team text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "teamNameText": "Nama tim",
+  "@teamNameText": {
+    "description": "team name text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "teamLocationText": "Alamat tim",
+  "@teamLocationText": {
+    "description": "team location text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "teamLogoText": "Logo tim",
+  "@teamLogoText": {
+    "description": "team logo text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noImageSelectedText": "Tidak ada gambar",
+  "@noImageSelectedText": {
+    "description": "no image selected text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "teamSavedText": "Tim berhasil disimpan!",
+  "@teamSavedText": {
+    "description": "team saved text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "savingTeamText": "Menyimpan team..",
+  "@savingTeamText": {
+    "description": "saving team text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "savingLogoText": "Menyimpan logo..",
+  "@savingLogoText": {
+    "description": "saving logo text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "logoSavedText": "Logo berhasil tersimpan!",
+  "@logoSavedText": {
+    "description": "logo saved text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "myTeamText": "Team Saya",
+  "@myTeamText": {
+    "description": "my team text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "createdText": "Dibuat",
+  "@createdText": {
+    "description": "created text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "updateText": "Ubah",
+  "@updateText": {
+    "description": "update text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "savingUpdateText": "Menyimpan perubahan..",
+  "@savingUpdateText": {
+    "description": "saving update text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutUsText": "Tentang Kita",
+  "@aboutUsText": {
+    "description": "about us text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "descAppText": "aplikasi untuk mencari lapangan futsal dan lawan bermain",
+  "@descAppText": {
+    "description": "desc app text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "withText": "dengan",
+  "@withText": {
+    "description": "with text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "appVersionText": "Versi Aplikasi",
+  "@appVersionText": {
+    "description": "app version text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "myInfoText": "Informasi Saya",
+  "@myInfoText": {
+    "description": "my info text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginOrRegisterText": "Masuk / daftar",
+  "@loginOrRegisterText": {
+    "description": "login or register text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "opponentDetailText": "Detail lawan",
+  "@opponentDetailText": {
+    "description": "opponent detail text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "makeSparringText": "Berhasil membuat sparring!",
+  "@makeSparringText": {
+    "description": "make sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "pickOpponentText": "Pilih lawan",
+  "@pickOpponentText": {
+    "description": "pick opponent text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "pickOpponentConfirmText": "Apakah kamu yakin memilih lawan ini?",
+  "@pickOpponentConfirmText": {
+    "description": "pick opponent confirm text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancelText": "Batal",
+  "@cancelText": {
+    "description": "cancel text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sureText": "Iya, yakin",
+  "@sureText": {
+    "description": "sure text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "alertSelfSparringText": "Kamu tidak bisa sparring dengan tim kamu sendiri 😋",
+  "@alertSelfSparringText": {
+    "description": "alert self sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "makingSparringText": "Membuat sparring..",
+  "@makingSparringText": {
+    "description": "making sparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "teamCaptainText": "Kapten tim",
+  "@teamCaptainText": {
+    "description": "team captain text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "captainText": "Kapten",
+  "@captainText": {
+    "description": "captain text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "seeLocationText": "Lihat lokasi",
+  "@seeLocationText": {
+    "description": "see location text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "currentSparringPostText": "Pencarian lawan sparring-mu",
+  "@currentSparringPostText": {
+    "description": "current sparring post text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "postSparringText": "Buat sparring",
+  "@postSparringText": {
+    "description": "postSparringtext",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCourtAvailableText": "Tidak ada lapangan tersedia",
+  "@noCourtAvailableText": {
+    "description": "noCourtAvailableText",
+    "type": "text",
+    "placeholders": {}
+  },
+  "makeBookingAlertText": "Buat pemesanan lapangan untuk membuat sparring!",
+  "@makeBookingAlertText": {
+    "description": "makeBookingAlertText",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sparringSuccessText": "Sparring berhasil disimpan!",
+  "@sparringSuccessText": {
+    "description": "sparringSuccesText",
+    "type": "text",
+    "placeholders": {}
+  },
+  "savingText": "Menyimpan..",
+  "@savingText": {
+    "description": "saving text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirmYesText": "Iya, Saya pilih lapangan ini",
+  "@confirmYesText": {
+    "description": "confirm yes text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "chooseThisCourtText": "Pilih lapangan ini?",
+  "@chooseThisCourtText": {
+    "description": "choose this court text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dontHaveTeamText": "Kamu belum punya tim!",
+  "@dontHaveTeamText": {
+    "description": "dontHaveTeam text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addYourTeamText": "Tambah timmu untuk memulai sparring",
+  "@addYourTeamText": {
+    "description": "addYourTeam text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addTeamNowText": "Tambah tim sekarang!",
+  "@addTeamNowText": {
+    "description": "addTeamNow text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addSparringText": "Tidak ada sparring tersedia",
+  "@addSparringText": {
+    "description": "addSparring text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "oppInfoText": "Informasi lawan",
+  "@oppInfoText": {
+    "description": "oppInfo text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "capInfoText": "Informasi kapten",
+  "@capInfoText": {
+    "description": "capInfo text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nameText": "Nama",
+  "@nameText": {
+    "description": "name text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "oppDetailText": "Detail sparring",
+  "@oppDetailText": {
+    "description": "oppDetail text",
     "type": "text",
     "placeholders": {}
   }

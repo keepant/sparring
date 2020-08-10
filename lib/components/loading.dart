@@ -6,15 +6,11 @@ class Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          const SpinKitChasingDots(
-            color: Colors.red,
-            size: 40.0,
-          )
-        ],
+      child: Center(
+        child: SpinKitChasingDots(
+          color: Colors.red,
+          size: 40.0,
+        ),
       ),
     );
   }

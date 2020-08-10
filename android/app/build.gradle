@@ -1,3 +1,17 @@
+buildscript {
+    repositories {
+        // ...
+        maven { url 'https://plugins.gradle.org/m2/' } // Gradle Plugin Portal
+    }
+    dependencies {
+        // ...
+        // OneSignal-Gradle-Plugin
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.6, 0.99.99]'
+    }
+}
+
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -39,12 +53,31 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        multiDexEnabled true
         applicationId "com.keepant.sparring"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions "mode"
+    productFlavors {
+        sandbox {
+            dimension = "mode"
+            resValue "string", "app_name", "sparring SandBox"
+            buildConfigField "String", "MERCHANT_BASE_URL", "\"https://sparring-midtrans.herokuapp.com/index.php/\""
+            buildConfigField "String", "MERCHANT_CLIENT_KEY", "\"SB-Mid-client-9aJKBTOwDXlm0IkM\""
+        }
+
+//        production {
+//            dimension = "mode"
+//            applicationId "com.keepant.sparring"
+//            resValue "string", "app_name", "sparring Production "
+//            buildConfigField "String", "BASE_URL", "\"https://sparring-midtrans.herokuapp.com/index.php/\""
+//            buildConfigField "String", "CLIENT_KEY", "\"Mid-client-RSUEEN5L51rGlKsm\""
+//        }
     }
 
     buildTypes {
@@ -66,4 +99,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.midtrans:uikit:1.21.2-SANDBOX'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    //implementation 'com.midtrans:uikit:1.21.2'
 }

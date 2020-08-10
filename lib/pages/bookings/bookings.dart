@@ -1,29 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/fa_icon.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sparring/i18n.dart';
 import 'package:sparring/pages/bookings/cancelled_booking.dart';
 import 'package:sparring/pages/bookings/completed_booking.dart';
 import 'package:sparring/pages/bookings/upcoming_booking.dart';
+import 'package:sparring/pages/sparring/sparring.dart';
 
 class BookingsPage extends StatelessWidget {
+  BookingsPage({
+    Key key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        backgroundColor: Color(0xffdee4eb),
         appBar: AppBar(
-          title: Text(I18n.of(context).myBookingTitle),
+          automaticallyImplyLeading: false,
+          title: Text(
+            I18n.of(context).myBookingTitle,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 21.0,
+            ),
+          ),
           actions: <Widget>[
-            IconButton(
-              icon: FaIcon(
-                FontAwesomeIcons.running,
-                color: Colors.white,
+            FlatButton(
+              highlightColor: Colors.transparent,
+              splashColor: Colors.transparent,
+              child: Text(
+                "Sparring",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey[200],
+                  fontSize: 16.0,
+                ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                pushNewScreen(
+                  context,
+                  screen: Sparring(),
+                  withNavBar: false,
+                );
+              },
             )
           ],
           bottom: TabBar(
+            indicatorColor: Colors.white,
             tabs: [
               Tab(
                 text: I18n.of(context).upcomingText,
